@@ -1,0 +1,31 @@
+#logo {
+  height: 35px;
+}
+
+.navbar {
+  font-size: 18px;
+}
+
+#playground {
+  margin-top: 4em;
+  margin-bottom: 4em;
+}
+
+.card {
+  padding: 5px;
+  height: 99%;
+  width: 99%;
+  text-align: center;
+}
+
+.col-1 {
+  height: 92px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.card:hover {
+  cursor: pointer;
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
