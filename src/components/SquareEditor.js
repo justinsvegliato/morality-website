@@ -11,7 +11,8 @@ export default class SquareEditor extends React.Component {
         <Popover.Content>
           <Form>
             <Form.Group>
-              <Form.Control as="select" value={this.props.type} onChange={this.props.onGridWorldChange}>
+              <Form.Label>Grid World Domain</Form.Label>
+              <Form.Control as="select" value={this.props.value} onChange={this.props.onGridWorldChange}>
                 <option value='O'>Empty</option>
                 <option value='W'>Wall</option>
                 <option value='G'>Goal</option>
@@ -19,6 +20,7 @@ export default class SquareEditor extends React.Component {
             </Form.Group>
 
             <Form.Group>
+              <Form.Label>Ethical Framework</Form.Label>
               <Form.Check
                 type="checkbox"
                 label="Forbidden State"
@@ -37,7 +39,7 @@ SquareEditor.propTypes = {
   placement: PropTypes.string,
   arrowProps: PropTypes.object,
   style: PropTypes.object,
-  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
   isForbidden: PropTypes.bool.isRequired,
   onGridWorldChange: PropTypes.func.isRequired,
   onForbiddenStateChange: PropTypes.func.isRequired

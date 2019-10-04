@@ -17,14 +17,14 @@ export default class Square extends React.Component {
     overlay.hide();
   }
 
-  getColor(type, isForbidden) {
+  getColor(value, isForbidden) {
     if (isForbidden) {
       return 'danger';
     }
-    if (type === 'W') {
+    if (value === 'W') {
       return 'dark';
     }
-    if (type === 'G') {
+    if (value === 'G') {
       return 'success';
     }
     return 'secondary';
@@ -46,8 +46,8 @@ export default class Square extends React.Component {
     return <FaStopCircle />;
   }
 
-  getCardTitle(type, isForbidden, amoralAction, moralAction) {
-    if (type === 'W') {
+  getCardTitle(value, isForbidden, amoralAction, moralAction) {
+    if (value === 'W') {
       return null;
     }
 
@@ -84,14 +84,14 @@ export default class Square extends React.Component {
 
     const squareEditor = (
       <SquareEditor
-        type={this.props.type}
+        value={this.props.value}
         isForbidden={this.props.isForbidden}
         onGridWorldChange={onGridWorldChange}
         onForbiddenStateChange={onForbiddenStateChange}
       />
     );
-    const color = this.getColor(this.props.type, this.props.isForbidden);
-    const cardTitle = this.getCardTitle(this.props.type, this.props.isForbidden, this.props.amoralAction, this.props.moralAction);
+    const color = this.getColor(this.props.value, this.props.isForbidden);
+    const cardTitle = this.getCardTitle(this.props.value, this.props.isForbidden, this.props.amoralAction, this.props.moralAction);
 
     return this.getSquare(squareEditor, color, cardTitle);
   }
@@ -101,10 +101,10 @@ Square.propTypes = {
   id: PropTypes.number.isRequired,
   rowId: PropTypes.number.isRequired,
   columnId: PropTypes.number.isRequired,
-  type: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  isForbidden: PropTypes.bool.isRequired,
   amoralAction: PropTypes.string.isRequired,
   moralAction: PropTypes.string.isRequired,
-  isForbidden: PropTypes.bool.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired
 };

@@ -8,27 +8,28 @@ import * as GridWorldAgent from 'morality/src/agents/grid-world-agent.js';
 import * as ForbiddenStateEthics from 'morality/src/ethics/forbidden-state-ethics.js';
 import Square from './Square';
 
-export default class GridWorld extends React.Component {
+export default class Playground extends React.Component {
   render() {
-    const gridWorldMdp = new GridWorldAgent(this.props.gridWorld);
+    const agent = new GridWorldAgent(this.props.gridWorld);
     const ethics = new ForbiddenStateEthics(this.props.forbiddenStates);
 
-    const amoralPolicy = morality.solve(gridWorldMdp);
-    const moralPolicy = morality.solve(gridWorldMdp, ethics);
+    const amoralPolicy = morality.solve(agent);
+    const moralPolicy = morality.solve(agent, ethics);
 
-    const grid = this.props.gridWorld.grid.map((squares, rowId) => {
+    const playground = this.props.gridWorld.grid.map((squares, rowId) => {
       const row = squares.map((square, columnId) => {
         const id = this.props.gridWorld.width * rowId + columnId;
+        const isForbidden = this.props.forbiddenStates.includes(id);
         return (
           <Col key={columnId} xs={1}>
             <Square
               id={id}
               rowId={rowId}
               columnId={columnId}
-              type={square}
+              value={square}
+              isForbidden={isForbidden}
               amoralAction={amoralPolicy[id]}
               moralAction={moralPolicy[id]}
-              isForbidden={this.props.forbiddenStates.includes(id)}
               updateGridWorld={this.props.updateGridWorld}
               toggleForbiddenState={this.props.toggleForbiddenState}
             />
@@ -38,11 +39,11 @@ export default class GridWorld extends React.Component {
       return <Row key={rowId}>{row}</Row>;
     });
 
-    return <Container>{grid}</Container>;
+    return <Container>{playground}</Container>;
   }
 }
 
-GridWorld.propTypes = {
+Playground.propTypes = {
   gridWorld: PropTypes.object.isRequired,
   forbiddenStates: PropTypes.arrayOf(PropTypes.number).isRequired,
   updateGridWorld: PropTypes.func.isRequired,
