@@ -5,18 +5,13 @@ const INITIAL_FORBIDDEN_STATES = [31];
 export default function forbiddenStates(state = INITIAL_FORBIDDEN_STATES, action) {
   switch (action.type) {
     case TOGGLE_FORBIDDEN_STATE:
-      const newState = state.slice();
-
-      const index = newState.indexOf(action.id);
+      const index = state.indexOf(action.id);
       if (index === -1) {
-        newState.push(action.id);
+        return [...state, action.id];
       } else {
-        newState.splice(index, 1);
+        return [...state.slice(0, index), ...state.slice(index + 1)];
       }
-
-      return newState;
     default:
       return state;
   }
 }
-

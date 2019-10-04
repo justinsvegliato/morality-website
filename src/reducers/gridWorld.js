@@ -23,10 +23,12 @@ export default function gridWorld(state = INITIAL_GRID_WORLD, action) {
     case UPDATE_GRID_WORLD:
       return Object.assign({}, state, {
         grid: state.grid.map((row, rowId) => {
-          if (rowId === action.rowId) {
-            const newRow = row.slice();
-            newRow[action.columnId] = action.value;
-            return newRow;
+          if (action.rowId === rowId) {
+            return [
+              ...row.slice(0, action.columnId),
+              action.value,
+              ...row.slice(action.columnId + 1)
+            ];
           }
           return row;
         })
