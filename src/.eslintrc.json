@@ -1,25 +1,20 @@
 {
   "env": {
-      "commonjs": true,
-      "es6": true,
-      "node": true
+    "commonjs": true,
+    "es6": true,
+    "node": true
   },
   "extends": [
-      "google",
-      "react-app"
+    "google",
+    "react-app"
   ],
-  "globals": {
-      "Atomics": "readonly",
-      "SharedArrayBuffer": "readonly"
-  },
   "parserOptions": {
-      "ecmaVersion": 2018
+    "ecmaVersion": 2018
   },
   "rules": {
-      "require-jsdoc": 0,
-      "max-len": ["error", { "code": 120 }],
-      "new-cap": 0,
-      "comma-dangle": ["error", "never"],
-      "object-curly-spacing": 0
+    "comma-dangle": 0,
+    "new-cap": 0,
+    "object-curly-spacing": 0,
+    "require-jsdoc": 0
   }
 }
