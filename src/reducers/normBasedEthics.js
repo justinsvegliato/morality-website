@@ -1,17 +1,23 @@
-import { TOGGLE_NORM } from '../actions';
+import { CLEAR_NORMS, TOGGLE_NORM } from '../actions';
 
 const INITIAL_NORM_BASED_ETHICS = {
-  'norms': ['Be Nice', 'Do Not Lie'],
+  'norms': ['Do Not Yell', 'Do Not Lie'],
   'violationFunction': {
-    0: ['Be Nice', 'Do Not Lie'],
+    0: ['Do Not Yell', 'Do Not Lie'],
     1: ['Do Not Lie']
   },
   'penaltyFunction': {
-    'Be Nice': 5,
-    'Do Not Lie': 100
+    'Do Not Yell': 1,
+    'Do Not Lie': 5
   },
   'toleranceFunction': 10
 };
+
+function getEmptyState(state) {
+  return Object.assign({}, state, {
+    violationFunction: {}
+  });
+}
 
 function generateNewState(state, action, norms) {
   return Object.assign({}, state, {
@@ -35,6 +41,8 @@ function getNewState(state, action) {
 
 export default function normBasedEthics(state = INITIAL_NORM_BASED_ETHICS, action) {
   switch (action.type) {
+    case CLEAR_NORMS:
+      return getEmptyState(state);
     case TOGGLE_NORM:
       return getNewState(state, action);
     default:

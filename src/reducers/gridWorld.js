@@ -1,4 +1,4 @@
-import { UPDATE_GRID_WORLD } from '../actions';
+import { CLEAR_GRID_WORLD, UPDATE_GRID_WORLD } from '../actions';
 
 const INITIAL_GRID_WORLD = {
   'width': 12,
@@ -18,6 +18,14 @@ const INITIAL_GRID_WORLD = {
   ]
 };
 
+function getEmptyState(state) {
+  return Object.assign({}, state, {
+    grid: state.grid.map((row) => {
+      return Array(state.width).fill('O');
+    })
+  });
+}
+
 function getNewState(state, action) {
   return Object.assign({}, state, {
     grid: state.grid.map((row, rowId) => {
@@ -31,6 +39,8 @@ function getNewState(state, action) {
 
 export default function gridWorld(state = INITIAL_GRID_WORLD, action) {
   switch (action.type) {
+    case CLEAR_GRID_WORLD:
+      return getEmptyState(state);
     case UPDATE_GRID_WORLD:
       return getNewState(state, action);
     default:
