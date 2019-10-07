@@ -1,8 +1,12 @@
 import { combineReducers } from 'redux';
+import settings from './settings';
 import gridWorld from './gridWorld';
-import forbiddenStates from './forbiddenStates';
+import forbiddenStateEthics from './forbiddenStateEthics';
+import normBasedEthics from './normBasedEthics';
 
 export default combineReducers({
+  settings,
   gridWorld,
-  forbiddenStates
+  forbiddenStateEthics,
+  normBasedEthics,
 });

@@ -18,6 +18,16 @@
   text-align: center;
 }
 
+.card-body {
+  padding: 0px;
+}
+
+.badge-danger {
+  margin-bottom: 2px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 .col-1 {
   height: 92px;
   padding-left: 0px;

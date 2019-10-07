@@ -18,21 +18,21 @@ const INITIAL_GRID_WORLD = {
   ]
 };
 
+function getNewState(state, action) {
+  return Object.assign({}, state, {
+    grid: state.grid.map((row, rowId) => {
+      if (action.rowId === rowId) {
+        return [...row.slice(0, action.columnId), action.value, ...row.slice(action.columnId + 1)];
+      }
+      return row;
+    })
+  });
+}
+
 export default function gridWorld(state = INITIAL_GRID_WORLD, action) {
   switch (action.type) {
     case UPDATE_GRID_WORLD:
-      return Object.assign({}, state, {
-        grid: state.grid.map((row, rowId) => {
-          if (action.rowId === rowId) {
-            return [
-              ...row.slice(0, action.columnId),
-              action.value,
-              ...row.slice(action.columnId + 1)
-            ];
-          }
-          return row;
-        })
-      });
+      return getNewState(state, action);
     default:
       return state;
   }

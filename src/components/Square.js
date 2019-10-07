@@ -6,55 +6,53 @@ import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import { FaArrowUp, FaArrowRight, FaArrowDown, FaArrowLeft, FaStopCircle } from 'react-icons/fa';
 import SquareEditor from './SquareEditor';
 
+const COLOR_MAP = {
+  'W': 'dark',
+  'G': 'success',
+  'O': 'secondary'
+};
+
+const ICON_MAP = {
+  'NORTH': <FaArrowUp />,
+  'EAST': <FaArrowRight />,
+  'SOUTH': <FaArrowDown />,
+  'WEST': <FaArrowLeft />,
+  'STAY': <FaStopCircle />
+};
+
 export default class Square extends React.Component {
-  onGridWorldChange(rowId, columnId, value, onChange, overlay) {
+  onGridWorldChange(onChange, rowId, columnId, value, overlay) {
     onChange(rowId, columnId, value);
     overlay.hide();
   }
 
-  onForbiddenStateChange(id, onChange, overlay) {
+  onForbiddenStateChange(onChange, id, overlay) {
     onChange(id);
     overlay.hide();
   }
 
-  getColor(value, isForbidden) {
-    if (isForbidden) {
-      return 'danger';
-    }
-    if (value === 'W') {
-      return 'dark';
-    }
-    if (value === 'G') {
-      return 'success';
-    }
-    return 'secondary';
+  onNormChange(onChange, id, norm, overlay) {
+    onChange(id, norm);
+    overlay.hide();
   }
 
-  getIcon(action) {
-    if (action === 'NORTH') {
-      return <FaArrowUp />;
-    }
-    if (action === 'EAST') {
-      return <FaArrowRight />;
-    }
-    if (action === 'SOUTH') {
-      return <FaArrowDown />;
-    }
-    if (action === 'WEST') {
-      return <FaArrowLeft />;
-    }
-    return <FaStopCircle />;
-  }
-
-  getCardTitle(value, isForbidden, amoralAction, moralAction) {
+  getCardTitle(id, value, amoralAction, moralAction, ethics, forbiddenStateEthics) {
     if (value === 'W') {
       return null;
     }
 
-    const amoralActionIcon = this.getIcon(amoralAction);
-    const moralActionIcon = this.getIcon(moralAction);
+    const amoralActionIcon = ICON_MAP[amoralAction];
+    const moralActionIcon = ICON_MAP[moralAction];
 
-    if (amoralAction === moralAction || isForbidden) {
+    if (ethics === 'forbiddenStateEthics' && forbiddenStateEthics.includes(id)) {
+      return (
+        <Card.Title>
+          <Badge pill variant="info">{amoralActionIcon}</Badge>
+        </Card.Title>
+      );
+    }
+
+    if (amoralAction === moralAction) {
       return (
         <Card.Title>
           <Badge pill variant="info">{amoralActionIcon}</Badge>
@@ -70,41 +68,66 @@ export default class Square extends React.Component {
     );
   }
 
-  getSquare(squareEditor, color, cardTitle) {
+  getCardBody(id, ethics, forbiddenStateEthics, normBasedEthics) {
+    if (this.props.settings.ethics === 'forbiddenStateEthics' && forbiddenStateEthics.includes(id)) {
+      return <Badge variant="danger">Forbidden</Badge>;
+    }
+
+    if (this.props.settings.ethics === 'normBasedEthics' && id in normBasedEthics.violationFunction) {
+      return normBasedEthics.violationFunction[id].map((norm) => {
+        return <Badge variant="danger">{norm}</Badge>;
+      });
+    }
+  }
+
+  getSquare(cardColor, cardTitle, cardBody, squareEditor) {
     return (
       <OverlayTrigger ref="overlay" trigger="click" overlay={squareEditor}>
-        <Card bg={color} border={color}>{cardTitle}</Card>
+        <Card bg={cardColor} border={cardColor}>
+          {cardTitle}
+          {cardBody}
+        </Card>
       </OverlayTrigger>
     );
   }
 
   render() {
-    const onGridWorldChange = (event) => this.onGridWorldChange(this.props.rowId, this.props.columnId, event.target.value, this.props.updateGridWorld, this.refs.overlay);
-    const onForbiddenStateChange = () => this.onForbiddenStateChange(this.props.id, this.props.toggleForbiddenState, this.refs.overlay);
+    const onGridWorldChange = (event) => this.onGridWorldChange(this.props.updateGridWorld, this.props.rowId, this.props.columnId, event.target.value, this.refs.overlay);
+    const onForbiddenStateChange = () => this.onForbiddenStateChange(this.props.toggleForbiddenState, this.props.id, this.refs.overlay);
+    const onNormChange = (norm) => this.onNormChange(this.props.toggleNorm, this.props.id, norm, this.refs.overlay);
 
     const squareEditor = (
       <SquareEditor
+        settings={this.props.settings}
+        id={this.props.id}
         value={this.props.value}
-        isForbidden={this.props.isForbidden}
+        forbiddenStateEthics={this.props.forbiddenStateEthics}
+        normBasedEthics={this.props.normBasedEthics}
         onGridWorldChange={onGridWorldChange}
         onForbiddenStateChange={onForbiddenStateChange}
+        onNormChange={onNormChange}
       />
     );
-    const color = this.getColor(this.props.value, this.props.isForbidden);
-    const cardTitle = this.getCardTitle(this.props.value, this.props.isForbidden, this.props.amoralAction, this.props.moralAction);
 
-    return this.getSquare(squareEditor, color, cardTitle);
+    const cardColor = COLOR_MAP[this.props.value];
+    const cardTitle = this.getCardTitle(this.props.id, this.props.value, this.props.amoralAction, this.props.moralAction, this.props.settings.ethics, this.props.forbiddenStateEthics);
+    const cardBody = this.getCardBody(this.props.id, this.props.settings.ethics, this.props.forbiddenStateEthics, this.props.normBasedEthics);
+
+    return this.getSquare(cardColor, cardTitle, cardBody, squareEditor);
   }
 }
 
 Square.propTypes = {
+  settings: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   rowId: PropTypes.number.isRequired,
   columnId: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
-  isForbidden: PropTypes.bool.isRequired,
+  forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
+  normBasedEthics: PropTypes.object.isRequired,
   amoralAction: PropTypes.string.isRequired,
   moralAction: PropTypes.string.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
-  toggleForbiddenState: PropTypes.func.isRequired
+  toggleForbiddenState: PropTypes.func.isRequired,
+  toggleNorm: PropTypes.func.isRequired
 };
