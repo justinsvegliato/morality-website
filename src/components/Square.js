@@ -9,7 +9,8 @@ import SquareEditor from './SquareEditor';
 const COLOR_MAP = {
   'W': 'dark',
   'G': 'success',
-  'O': 'secondary'
+  'O': 'secondary',
+  'S': 'primary'
 };
 
 const ICON_MAP = {

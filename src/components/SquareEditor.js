@@ -11,6 +11,7 @@ export default class SquareEditor extends React.Component {
           <option value='O'>Empty</option>
           <option value='W'>Wall</option>
           <option value='G'>Goal</option>
+          <option value='S'>Start</option>
         </Form.Control>
       </Form.Group>
     );
