@@ -1,7 +1,7 @@
 import { UPDATE_ETHICS } from '../actions';
 
 const INITIAL_SETTINGS = {
-  'ethics': 'normBasedEthics'
+  'ethics': 'forbiddenStateEthics'
 };
 
 function getNewState(state, action) {
