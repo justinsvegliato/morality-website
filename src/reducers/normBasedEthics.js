@@ -1,4 +1,4 @@
-import { CLEAR_NORMS, TOGGLE_NORM } from '../actions';
+import { CLEAR_NORMS, TOGGLE_NORM, UPDATE_TOLERANCE } from '../actions';
 
 const INITIAL_NORM_BASED_ETHICS = {
   'norms': ['Do Not Yell', 'Do Not Lie'],
@@ -9,7 +9,7 @@ const INITIAL_NORM_BASED_ETHICS = {
     'Do Not Yell': 1,
     'Do Not Lie': 5
   },
-  'tolerance': 2
+  'tolerance': 3
 };
 
 function getEmptyState(state) {
@@ -44,6 +44,10 @@ export default function normBasedEthics(state = INITIAL_NORM_BASED_ETHICS, actio
       return getEmptyState(state);
     case TOGGLE_NORM:
       return getNewState(state, action);
+    case UPDATE_TOLERANCE:
+      return Object.assign({}, state, {
+        tolerance: action.tolerance
+      });
     default:
       return state;
   }
