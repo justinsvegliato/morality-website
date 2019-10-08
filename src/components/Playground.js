@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 import * as morality from 'morality';
 import * as GridWorldAgent from 'morality/src/agents/grid-world-agent.js';
 import * as ForbiddenStateEthics from 'morality/src/ethics/forbidden-state-ethics.js';
-import * as NormBasedEthics from 'morality/src/ethics/norm-based-ethics.js';
+import * as NonmyopicNormBasedEthics from 'morality/src/ethics/nonmyopic-norm-based-ethics.js';
 import ControlPane from './ControlPane';
 import Square from './Square';
 
@@ -30,11 +30,9 @@ export default class Playground extends React.Component {
     const penaltyFunction = (norm, state, action) => {
       return normBasedEthics.penaltyFunction[norm];
     };
-    const toleranceFunction = (state) => {
-      return normBasedEthics.toleranceFunction;
-    };
+    const tolerance = normBasedEthics.tolerance;
 
-    return new NormBasedEthics(norms, violationFunction, penaltyFunction, toleranceFunction);
+    return new NonmyopicNormBasedEthics(norms, violationFunction, penaltyFunction, tolerance);
   }
 
   getEthics(ethics, forbiddenStateEthics, normBasedEthics) {

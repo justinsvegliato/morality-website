@@ -3,14 +3,13 @@ import { CLEAR_NORMS, TOGGLE_NORM } from '../actions';
 const INITIAL_NORM_BASED_ETHICS = {
   'norms': ['Do Not Yell', 'Do Not Lie'],
   'violationFunction': {
-    0: ['Do Not Yell', 'Do Not Lie'],
-    1: ['Do Not Lie']
+    55: ['Do Not Yell', 'Do Not Lie']
   },
   'penaltyFunction': {
     'Do Not Yell': 1,
     'Do Not Lie': 5
   },
-  'toleranceFunction': 5
+  'tolerance': 3
 };
 
 function getEmptyState(state) {
