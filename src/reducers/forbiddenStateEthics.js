@@ -1,6 +1,6 @@
 import { CLEAR_FORBIDDEN_STATES, TOGGLE_FORBIDDEN_STATE } from '../actions';
 
-const INITIAL_FORBIDDEN_STATE_ETHICS = [31];
+const INITIAL_FORBIDDEN_STATE_ETHICS = [55];
 
 function getEmptyState(state) {
   return [];
