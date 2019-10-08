@@ -9,7 +9,7 @@ const INITIAL_NORM_BASED_ETHICS = {
     'Do Not Yell': 1,
     'Do Not Lie': 5
   },
-  'tolerance': 3
+  'tolerance': 2
 };
 
 function getEmptyState(state) {
