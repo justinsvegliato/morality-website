@@ -80,11 +80,14 @@ export default class Playground extends React.Component {
     return (
       <Container>
         <ControlPane
-          settings={this.props.settings} 
-          updateEthics={this.props.updateEthics} 
+          settings={this.props.settings}
+          forbiddenStateEthics={this.props.forbiddenStateEthics}
+          normBasedEthics={this.props.normBasedEthics}
+          updateEthics={this.props.updateEthics}
           clearGridWorld={this.props.clearGridWorld}
           clearForbiddenStates={this.props.clearForbiddenStates}
           clearNorms={this.props.clearNorms}
+          updateTolerance={this.props.updateTolerance}
         />
         <Container>{playground}</Container>
       </Container>
@@ -103,5 +106,6 @@ Playground.propTypes = {
   clearForbiddenStates: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired,
   clearNorms: PropTypes.func.isRequired,
-  toggleNorm: PropTypes.func.isRequired
+  toggleNorm: PropTypes.func.isRequired,
+  updateTolerance: PropTypes.func.isRequired
 };

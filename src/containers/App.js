@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Playground from '../components/Playground';
-import { updateEthics, clearGridWorld, updateGridWorld, clearForbiddenStates, toggleForbiddenState, clearNorms, toggleNorm } from '../actions';
+import { updateEthics, clearGridWorld, updateGridWorld, clearForbiddenStates, toggleForbiddenState, clearNorms, toggleNorm, updateTolerance } from '../actions';
 
 class App extends React.Component {
   render() {
@@ -12,13 +12,14 @@ class App extends React.Component {
         gridWorld={this.props.gridWorld}
         forbiddenStateEthics={this.props.forbiddenStateEthics}
         normBasedEthics={this.props.normBasedEthics}
+        updateEthics={this.props.updateEthics}
         clearGridWorld={this.props.clearGridWorld}
         updateGridWorld={this.props.updateGridWorld}
         clearForbiddenStates={this.props.clearForbiddenStates}
         toggleForbiddenState={this.props.toggleForbiddenState}
         clearNorms={this.props.clearNorms}
         toggleNorm={this.props.toggleNorm}
-        updateEthics={this.props.updateEthics}
+        updateTolerance={this.props.updateTolerance}
       />
     );
   }
@@ -35,7 +36,8 @@ App.propTypes = {
   clearForbiddenStates: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired,
   clearNorms: PropTypes.func.isRequired,
-  toggleNorm: PropTypes.func.isRequired
+  toggleNorm: PropTypes.func.isRequired,
+  updateTolerance: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {
@@ -55,7 +57,8 @@ function mapDispatchToProps(dispatch) {
     clearForbiddenStates: () => dispatch(clearForbiddenStates()),
     toggleForbiddenState: (id) => dispatch(toggleForbiddenState(id)),
     clearNorms: () => dispatch(clearNorms()),
-    toggleNorm: (id, norm) => dispatch(toggleNorm(id, norm))
+    toggleNorm: (id, norm) => dispatch(toggleNorm(id, norm)),
+    updateTolerance: (tolerance) => dispatch(updateTolerance(tolerance))
   };
 }
 
