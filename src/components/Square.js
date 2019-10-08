@@ -45,14 +45,6 @@ export default class Square extends React.Component {
     const amoralActionIcon = ICON_MAP[amoralAction];
     const moralActionIcon = ICON_MAP[moralAction];
 
-    if (ethics === 'forbiddenStateEthics' && forbiddenStateEthics.includes(id)) {
-      return (
-        <Card.Title>
-          <Badge pill variant="info">{amoralActionIcon}</Badge>
-        </Card.Title>
-      );
-    }
-
     if (amoralAction === moralAction) {
       return (
         <Card.Title>
