@@ -11,7 +11,6 @@ export default class SquareEditor extends React.Component {
           <option value='O'>Empty</option>
           <option value='W'>Wall</option>
           <option value='G'>Goal</option>
-          <option value='S'>Start</option>
         </Form.Control>
       </Form.Group>
     );
@@ -64,9 +63,8 @@ export default class SquareEditor extends React.Component {
   render() {
     const gridWorldEditor = this.getGridWorldEditor(this.props.value, this.props.onGridWorldChange);
     const ethicsEditor = this.getEthicsEditor(this.props.id, this.props.settings.ethics, this.props.forbiddenStateEthics, this.props.onForbiddenStateChange, this.props.normBasedEthics, this.props.onNormChange);
-
     return (
-      <Popover placement={this.props.placement} arrowProps={this.props.arrowProps} style={this.props.style}>
+      <Popover className={this.props.className} placement={this.props.placement} arrowProps={this.props.arrowProps} style={this.props.style}>
         <Popover.Title as="h3">Details</Popover.Title>
         <Popover.Content>
           <Form>
@@ -80,6 +78,7 @@ export default class SquareEditor extends React.Component {
 }
 
 SquareEditor.propTypes = {
+  className: PropTypes.string,
   placement: PropTypes.string,
   arrowProps: PropTypes.object,
   style: PropTypes.object,
