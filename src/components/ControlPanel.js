@@ -72,7 +72,7 @@ export default class ControlPanel extends React.Component {
     const moralValue = getTotalValue(moralValues);
     const priceOfMorality = amoralValue - moralValue;
 
-    const percentage = (moralValue / amoralValue) * 100;
+    const percentage = amoralValue === 0 ? 100 : (moralValue / amoralValue) * 100;
     const negatedPercentage = 100 - percentage;
 
     return (
@@ -108,8 +108,8 @@ ControlPanel.propTypes = {
   settings: PropTypes.object.isRequired,
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
-  amoralValues: PropTypes.number.isRequired,
-  moralValues: PropTypes.number.isRequired,
+  amoralValues: PropTypes.object.isRequired,
+  moralValues: PropTypes.object.isRequired,
   updateEthics: PropTypes.func.isRequired,
   clearGridWorld: PropTypes.func.isRequired,
   clearForbiddenStates: PropTypes.func.isRequired,
