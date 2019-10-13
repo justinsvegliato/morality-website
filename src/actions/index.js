@@ -1,4 +1,5 @@
 export const UPDATE_ETHICS = 'UPDATE_ETHICS';
+export const UPDATE_VIEW = 'UPDATE_VIEW';
 export const CLEAR_GRID_WORLD = 'CLEAR_GRID_WORLD';
 export const UPDATE_GRID_WORLD = 'UPDATE_GRID_WORLD';
 export const CLEAR_FORBIDDEN_STATES = 'CLEAR_FORBIDDEN_STATES';
@@ -11,6 +12,13 @@ export function updateEthics(ethics) {
   return {
     type: UPDATE_ETHICS,
     ethics
+  };
+}
+
+export function updateView(view) {
+  return {
+    type: UPDATE_VIEW,
+    view
   };
 }
 
