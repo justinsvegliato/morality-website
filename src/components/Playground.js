@@ -6,8 +6,8 @@ import Row from 'react-bootstrap/Row';
 import * as morality from 'morality';
 import * as GridWorldAgent from 'morality/src/agents/grid-world-agent.js';
 import * as ForbiddenStateEthics from 'morality/src/ethics/forbidden-state-ethics.js';
-import * as NonmyopicNormBasedEthics from 'morality/src/ethics/nonmyopic-norm-based-ethics.js';
-import ControlPane from './ControlPane';
+import * as NormBasedEthics from 'morality/src/ethics/norm-based-ethics.js';
+import ControlPanel from './ControlPanel';
 import Square from './Square';
 
 export default class Playground extends React.Component {
@@ -32,7 +32,7 @@ export default class Playground extends React.Component {
     };
     const tolerance = normBasedEthics.tolerance;
 
-    return new NonmyopicNormBasedEthics(norms, violationFunction, penaltyFunction, tolerance);
+    return new NormBasedEthics(norms, violationFunction, penaltyFunction, tolerance);
   }
 
   getEthics(ethics, forbiddenStateEthics, normBasedEthics) {
@@ -49,10 +49,10 @@ export default class Playground extends React.Component {
     const agent = this.getAgent(this.props.gridWorld);
     const ethics = this.getEthics(this.props.ethics, this.props.forbiddenStateEthics, this.props.normBasedEthics);
 
-    const amoralPolicy = morality.solve(agent);
-    const moralPolicy = morality.solve(agent, ethics);
+    const amoralSolution = morality.solve(agent);
+    const moralSolution = morality.solve(agent, ethics);
 
-    const playground = this.props.gridWorld.grid.map((squares, rowId) => {
+    const gridWorld = this.props.gridWorld.grid.map((squares, rowId) => {
       const row = squares.map((square, columnId) => {
         const id = this.props.gridWorld.width * rowId + columnId;
         return (
@@ -65,8 +65,10 @@ export default class Playground extends React.Component {
               value={square}
               forbiddenStateEthics={this.props.forbiddenStateEthics}
               normBasedEthics={this.props.normBasedEthics}
-              amoralAction={amoralPolicy[id]}
-              moralAction={moralPolicy[id]}
+              amoralAction={amoralSolution.policy[id]}
+              moralAction={moralSolution.policy[id]}
+              amoralValue ={amoralSolution.values[id]}
+              moralValue ={moralSolution.values[id]}
               updateGridWorld={this.props.updateGridWorld}
               toggleForbiddenState={this.props.toggleForbiddenState}
               toggleNorm={this.props.toggleNorm}
@@ -79,17 +81,20 @@ export default class Playground extends React.Component {
 
     return (
       <Container>
-        <ControlPane
+        <ControlPanel
           settings={this.props.settings}
           forbiddenStateEthics={this.props.forbiddenStateEthics}
           normBasedEthics={this.props.normBasedEthics}
+          amoralValues ={amoralSolution.values}
+          moralValues ={moralSolution.values}
           updateEthics={this.props.updateEthics}
+          updateView={this.props.updateView}
           clearGridWorld={this.props.clearGridWorld}
           clearForbiddenStates={this.props.clearForbiddenStates}
           clearNorms={this.props.clearNorms}
           updateTolerance={this.props.updateTolerance}
         />
-        <Container>{playground}</Container>
+        <Container id="grid-world">{gridWorld}</Container>
       </Container>
     );
   }
@@ -101,6 +106,7 @@ Playground.propTypes = {
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
   updateEthics: PropTypes.func.isRequired,
+  updateView: PropTypes.func.isRequired,
   clearGridWorld: PropTypes.func.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
   clearForbiddenStates: PropTypes.func.isRequired,

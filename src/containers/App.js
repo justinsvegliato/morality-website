@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Playground from '../components/Playground';
-import { updateEthics, clearGridWorld, updateGridWorld, clearForbiddenStates, toggleForbiddenState, clearNorms, toggleNorm, updateTolerance } from '../actions';
+import { updateEthics, updateView, clearGridWorld, updateGridWorld, clearForbiddenStates, toggleForbiddenState, clearNorms, toggleNorm, updateTolerance } from '../actions';
 
 class App extends React.Component {
   render() {
@@ -13,6 +13,7 @@ class App extends React.Component {
         forbiddenStateEthics={this.props.forbiddenStateEthics}
         normBasedEthics={this.props.normBasedEthics}
         updateEthics={this.props.updateEthics}
+        updateView={this.props.updateView}
         clearGridWorld={this.props.clearGridWorld}
         updateGridWorld={this.props.updateGridWorld}
         clearForbiddenStates={this.props.clearForbiddenStates}
@@ -31,6 +32,7 @@ App.propTypes = {
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
   updateEthics: PropTypes.func.isRequired,
+  updateView: PropTypes.func.isRequired,
   clearGridWorld: PropTypes.func.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
   clearForbiddenStates: PropTypes.func.isRequired,
@@ -52,6 +54,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     updateEthics: (ethics) => dispatch(updateEthics(ethics)),
+    updateView: (view) => dispatch(updateView(view)),
     clearGridWorld: () => dispatch(clearGridWorld()),
     updateGridWorld: (row, column, value) => dispatch(updateGridWorld(row, column, value)),
     clearForbiddenStates: () => dispatch(clearForbiddenStates()),

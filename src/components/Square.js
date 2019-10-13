@@ -9,8 +9,7 @@ import SquareEditor from './SquareEditor';
 const COLOR_MAP = {
   'W': 'dark',
   'G': 'success',
-  'O': 'secondary',
-  'S': 'primary'
+  'O': 'secondary'
 };
 
 const ICON_MAP = {
@@ -37,26 +36,26 @@ export default class Square extends React.Component {
     overlay.hide();
   }
 
-  getCardTitle(id, value, amoralAction, moralAction, ethics, forbiddenStateEthics) {
+  getCardTitle(id, value, amoralAction, moralAction, amoralValue, moralValue, settings) {
     if (value === 'W') {
       return null;
     }
 
-    const amoralActionIcon = ICON_MAP[amoralAction];
-    const moralActionIcon = ICON_MAP[moralAction];
+    const amoralResult = settings.view === 'values' ? amoralValue.toFixed(2) : ICON_MAP[amoralAction];
+    const moralResult = settings.view === 'values' ? moralValue.toFixed(2) : ICON_MAP[moralAction];
 
-    if (amoralAction === moralAction) {
+    if (amoralResult === moralResult) {
       return (
         <Card.Title>
-          <Badge pill variant="info">{amoralActionIcon}</Badge>
+          <Badge pill variant="info">{amoralResult}</Badge>
         </Card.Title>
       );
     }
 
     return (
       <Card.Title>
-        <Badge pill variant="info">{amoralActionIcon}</Badge>
-        <Badge pill variant="success">{moralActionIcon}</Badge>
+        <Badge pill variant="info">{amoralResult}</Badge>
+        <Badge pill variant="success">{moralResult}</Badge>
       </Card.Title>
     );
   }
@@ -75,7 +74,7 @@ export default class Square extends React.Component {
 
   getSquare(cardColor, cardTitle, cardBody, squareEditor) {
     return (
-      <OverlayTrigger ref="overlay" trigger="click" overlay={squareEditor}>
+      <OverlayTrigger ref="overlay" trigger="click" overlay={squareEditor} rootClose>
         <Card bg={cardColor} border={cardColor}>
           {cardTitle}
           {cardBody}
@@ -103,7 +102,7 @@ export default class Square extends React.Component {
     );
 
     const cardColor = COLOR_MAP[this.props.value];
-    const cardTitle = this.getCardTitle(this.props.id, this.props.value, this.props.amoralAction, this.props.moralAction, this.props.settings.ethics, this.props.forbiddenStateEthics);
+    const cardTitle = this.getCardTitle(this.props.id, this.props.value, this.props.amoralAction, this.props.moralAction, this.props.amoralValue, this.props.moralValue, this.props.settings);
     const cardBody = this.getCardBody(this.props.id, this.props.settings.ethics, this.props.forbiddenStateEthics, this.props.normBasedEthics);
 
     return this.getSquare(cardColor, cardTitle, cardBody, squareEditor);
@@ -120,6 +119,8 @@ Square.propTypes = {
   normBasedEthics: PropTypes.object.isRequired,
   amoralAction: PropTypes.string.isRequired,
   moralAction: PropTypes.string.isRequired,
+  amoralValue: PropTypes.number.isRequired,
+  moralValue: PropTypes.number.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired,
   toggleNorm: PropTypes.func.isRequired
