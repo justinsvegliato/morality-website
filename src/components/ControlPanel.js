@@ -96,8 +96,8 @@ export default class ControlPanel extends React.Component {
           <Col xs={1}>{clearButton}</Col>
           <Col xs={2}>{viewSelector}</Col>
           <Col xs={3}>{ethicsSelector}</Col>
-          <Col xs={4}>{priceOfMoralityProgressBar}</Col>
           <Col xs={2}>{toleranceSelector}</Col>
+          <Col xs={4}>{priceOfMoralityProgressBar}</Col>
         </Row>
       </Alert>
     );
