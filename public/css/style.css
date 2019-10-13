@@ -11,30 +11,39 @@
   margin-bottom: 4em;
 }
 
-.card {
+#control-panel .progress {
+  font-size: 16px;
+  height: 36px;
+}
+
+#grid-world .card {
   padding: 5px;
   height: 99%;
   width: 99%;
   text-align: center;
 }
 
-.card-body {
+#grid-world .card-title {
+  font-size: 13px;
+}
+
+#grid-world .card-body {
   padding: 0px;
 }
 
-.badge-danger {
+#grid-world .badge-danger {
   margin-bottom: 2px;
   padding-left: 0px;
   padding-right: 0px;
 }
 
-.col-1 {
+#grid-world .col-1 {
   height: 92px;
   padding-left: 0px;
   padding-right: 0px;
 }
 
-.card:hover {
+#grid-world .card:hover {
   cursor: pointer;
   background-color: #ffc107 !important;
   border-color: #ffc107 !important;
