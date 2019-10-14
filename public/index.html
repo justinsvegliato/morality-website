@@ -9,14 +9,19 @@
         
     <title>Morality.js</title>
 
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
   </head>
 
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-primary">
       <div class="container">
-        <a class="navbar-brand" href="/"><img id="logo" src="img/logo.png"/></a>
+        <a class="navbar-brand" href="/"><img id="icon" src="img/icon.png"/></a>
 
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
@@ -33,10 +38,11 @@
     </nav>
     
     <main role="main">
-      <div class="jumbotron">
+      <div id="banner" class="jumbotron bg-primary">
         <div class="container">
-          <h1 class="display-3">Morality.js</h1>
-          <p class="lead">A library for building autonomous agents that reason ethically</p>
+          <img id="logo" src="img/logo.png"/>
+          <p id="slogan" class="lead">A library for building autonomous agents that reason ethically</p>
+          <button type="button" class="btn btn-success btn-lg">Get Started</button>
         </div>
       </div>
     

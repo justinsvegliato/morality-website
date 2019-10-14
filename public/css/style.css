@@ -1,5 +1,25 @@
-#logo {
+#navigation {
+  background-color: #00546F !important;
+}
+
+#icon {
   height: 35px;
+}
+
+#banner {
+  text-align: center;
+  padding: 4em;
+}
+
+#logo {
+  height: 200px;
+}
+
+#slogan {
+  margin-top: 18px;
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 30px;
 }
 
 .navbar {
