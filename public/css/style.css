@@ -2,6 +2,7 @@ p {
   margin-top: 16px;
   font-weight: 300;
   font-size: 1rem;
+  text-align: justify;
 }
 
 select {
@@ -36,6 +37,7 @@ select:hover {
 #slogan {
   margin-top: 16px;
   color: #fff;
+  text-align: center;
 }
 
 #playground {
