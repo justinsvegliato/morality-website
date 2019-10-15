@@ -1,9 +1,23 @@
+p {
+  margin-top: 16px;
+  font-weight: 300;
+  font-size: 1rem;
+}
+
+select {
+  font-weight: 300 !important;
+}
+
+.navbar {
+  font-size: 18px;
+}
+
 #navigation {
   background-color: #00546F !important;
 }
 
 #icon {
-  height: 35px;
+  height: 40px;
 }
 
 #banner {
@@ -12,23 +26,21 @@
 }
 
 #logo {
-  height: 200px;
+  height: 225px;
 }
 
 #slogan {
-  margin-top: 18px;
+  margin-top: 16px;
   color: #fff;
-  font-size: 20px;
-  margin-bottom: 30px;
-}
-
-.navbar {
-  font-size: 18px;
 }
 
 #playground {
   margin-top: 4em;
   margin-bottom: 4em;
+}
+
+#root {
+  margin-top: 30px;
 }
 
 #control-panel .progress {
@@ -49,6 +61,14 @@
 
 #grid-world .card-body {
   padding: 0px;
+}
+
+#grid-world .badge-info:first-child {
+  margin-right: 3px;
+}
+
+#grid-world .badge-info:only-child {
+  margin-right: 0px;
 }
 
 #grid-world .badge-danger {

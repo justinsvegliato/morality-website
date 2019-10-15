@@ -7,7 +7,7 @@
     <meta name="author" content="Justin Svegliato">
     <meta name="generator" content="Jekyll v3.8.5">
         
-    <title>Morality.js</title>
+    <title>Morality.js – A library for building autonomous agents that reason ethically</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -25,17 +25,17 @@
 
         <div class="collapse navbar-collapse">
           <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
+            <li class="nav-item">
               <a class="nav-link" href="#">Home</a>
             </li>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="#overview">Overview</a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#overview">Overview</a>
+            </li>
 
-            <li class="nav-item active">
-                <a class="nav-link" href="#playground">Playground</a>
-              </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#playground">Playground</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -43,38 +43,36 @@
     
     <main role="main">
       <div id="banner" class="jumbotron bg-primary">
-        <div class="container">
-          <img id="logo" src="img/logo.png"/>
-          <p id="slogan" class="lead">A library for building autonomous agents that reason ethically</p>
-        </div>
+        <img id="logo" src="img/logo.png"/>
+        <p id="slogan" class="lead">A library for building autonomous agents that reason ethically</p>
       </div>
     
       <div id="overview" class="container">
         <div class="row">
           <div class="col-md-4">
-            <h2 class="text-danger">Build an agent</h2>
+            <h3 class="text-danger">Build an agent</h3>
             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
             <code>const agent = new GridWorldAgent(...)</code>
           </div>
 
           <div class="col-md-4">
-            <h2 class="text-warning">Select an ethical theory</h2>
+            <h3 class="text-warning">Select an ethical theory</h3>
             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
             <code>const ethics = new ForbiddenStateEthics(...)</code>
           </div>
 
           <div class="col-md-4">
-            <h2 class="text-success">Bring them together</h2>
+            <h3 class="text-success">Bring them together</h3>
             <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
             <code>const policy = morality.solve(agent, ethics)</code>
           </div>
         </div>
+      </div>
 
-        <div id="playground">
-          <h2 class="text-center">Playground</h2>
-          <p class="text-center">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
-          <div id="root"></div>
-        </div>
+      <div id="playground" class="container">
+        <h2 class="text-center">Playground</h2>
+        <p class="text-center">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
+        <div id="root"></div>
       </div>
     </main>
 
