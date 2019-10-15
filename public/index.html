@@ -51,19 +51,19 @@
         <div class="row">
           <div class="col-md-4">
             <h3 class="text-danger">Build an agent</h3>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
+            <p>Define your agent and how it interacts with the world by specifying a state space, an action space, and a transition function. The example below uses the classic Grid World agent.</p>
             <code>const agent = new GridWorldAgent(...)</code>
           </div>
 
           <div class="col-md-4">
             <h3 class="text-warning">Select an ethical theory</h3>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
+            <p>Give your agent the context and knowledge to reason about the ethical implications of its actions. Select an ethical theory that aligns with the relevant risks and responsibilities. </p>
             <code>const ethics = new ForbiddenStateEthics(...)</code>
           </div>
 
           <div class="col-md-4">
             <h3 class="text-success">Bring them together</h3>
-            <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
+            <p>Generate an ethical policy for your agent that allows it to complete tasks as efficiently as possible while complying with the given ethical theory. Say goodbye to reward hacking.</p>
             <code>const policy = morality.solve(agent, ethics)</code>
           </div>
         </div>
@@ -71,7 +71,7 @@
 
       <div id="playground" class="container">
         <h2 class="text-center">Playground</h2>
-        <p class="text-center">Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum.</p>
+        <p class="text-center">Curious? Try it out! You can edit the properties (goal, empty, wall, ethical import) of any state by clicking on it and selecting from the pop-up menu. The clear button sets every state to empty. The solver automatically calculates and displays an updated policy whenever the world is changed. You can change the ethical context by selecting from the rightmost drop-down menu, and you can choose whether to see the value of each state or the most likely action using the left drop-down menu. The amoral policy, computed using the goal alone, is displayed in blue, and the policy which reasons about ethics is shown in green when it differs from the amoral policy. The difference in value of the amoral and moral policies, which we call the price of morality, is shown in red on the right. The green portion of the bar is the value still achieved by the moral policy.</p>
         <div id="root"></div>
       </div>
     </main>
