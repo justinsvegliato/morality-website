@@ -8,6 +8,10 @@ select {
   font-weight: 300 !important;
 }
 
+select:hover {
+  cursor: pointer;
+}
+
 .navbar {
   font-size: 18px;
 }
