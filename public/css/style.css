@@ -17,6 +17,11 @@ select:hover {
   font-size: 18px;
 }
 
+.tooltip-inner {
+  padding-top: 1px;
+  max-width: 300px;
+}
+
 #navigation {
   background-color: #00546F !important;
 }

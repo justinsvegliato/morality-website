@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Alert from 'react-bootstrap/Alert';
+import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
+import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Row from 'react-bootstrap/Row';
+import Tooltip from 'react-bootstrap/Tooltip';
 
 export default class ControlPanel extends React.Component {
   getClearButton(clearGridWorld, clearForbiddenStates, clearNorms) {
@@ -63,11 +66,27 @@ export default class ControlPanel extends React.Component {
     const percentage = amoralObjective === 0 ? 100 : (moralObjective / amoralObjective) * 100;
     const negatedPercentage = 100 - percentage;
 
+    const amoralObjectiveText = amoralObjective.toFixed(2);
+    const moralObjectiveText = moralObjective.toFixed(2);
+    const priceOfMoralityText = priceOfMorality.toFixed(2);
+
+    const tooltip = (
+      <Tooltip>
+        <Badge variant="success">{moralObjectiveText}</Badge>
+        <Badge variant="secondary">+</Badge>
+        <Badge variant="danger">{priceOfMoralityText}</Badge>
+        <Badge variant="secondary">=</Badge>
+        <Badge variant="info">{amoralObjectiveText}</Badge>
+      </Tooltip>
+    );
+
     return (
-      <ProgressBar>
-        <ProgressBar striped variant="success" label={moralObjective.toFixed(2)} now={percentage} key={1} />
-        <ProgressBar striped variant="danger" label={priceOfMorality.toFixed(2)} now={negatedPercentage} key={2} />
-      </ProgressBar>
+      <OverlayTrigger placement="top" overlay={tooltip}>
+        <ProgressBar>
+          <ProgressBar striped variant="success" label={moralObjectiveText} now={percentage} key={1} />
+          <ProgressBar striped variant="danger" label={priceOfMoralityText} now={negatedPercentage} key={2} />
+        </ProgressBar>
+      </OverlayTrigger>
     );
   }
 
