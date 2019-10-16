@@ -7,16 +7,6 @@ import Form from 'react-bootstrap/Form';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Row from 'react-bootstrap/Row';
 
-function getTotalValue(values) {
-  let total = 0;
-
-  for (const value of Object.values(values)) {
-    total += value;
-  }
-
-  return total;
-}
-
 export default class ControlPanel extends React.Component {
   getClearButton(clearGridWorld, clearForbiddenStates, clearNorms) {
     const onClick = () => {
@@ -67,17 +57,15 @@ export default class ControlPanel extends React.Component {
     );
   }
 
-  getPriceOfMoralityProgressBar(amoralValues, moralValues) {
-    const amoralValue = getTotalValue(amoralValues);
-    const moralValue = getTotalValue(moralValues);
-    const priceOfMorality = amoralValue - moralValue;
+  getPriceOfMoralityProgressBar(amoralObjective, moralObjective) {
+    const priceOfMorality = amoralObjective - moralObjective;
 
-    const percentage = amoralValue === 0 ? 100 : (moralValue / amoralValue) * 100;
+    const percentage = amoralObjective === 0 ? 100 : (moralObjective / amoralObjective) * 100;
     const negatedPercentage = 100 - percentage;
 
     return (
       <ProgressBar>
-        <ProgressBar striped variant="success" label={moralValue.toFixed(1)} now={percentage} key={1} />
+        <ProgressBar striped variant="success" label={moralObjective.toFixed(1)} now={percentage} key={1} />
         <ProgressBar striped variant="danger" label={priceOfMorality.toFixed(1)} now={negatedPercentage} key={2} />
       </ProgressBar>
     );
@@ -88,7 +76,7 @@ export default class ControlPanel extends React.Component {
     const clearButton = this.getClearButton(this.props.clearGridWorld, this.props.clearForbiddenStates, this.props.clearNorms);
     const toleranceSelector = this.getToleranceSelector(this.props.settings.ethics, this.props.normBasedEthics, this.props.updateTolerance);
     const viewSelector = this.getViewSelector(this.props.settings.view, this.props.updateView);
-    const priceOfMoralityProgressBar = this.getPriceOfMoralityProgressBar(this.props.amoralValues, this.props.moralValues);
+    const priceOfMoralityProgressBar = this.getPriceOfMoralityProgressBar(this.props.amoralObjective, this.props.moralObjective);
 
     return (
       <Alert id="control-panel" variant={'light'}>
@@ -108,8 +96,8 @@ ControlPanel.propTypes = {
   settings: PropTypes.object.isRequired,
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
-  amoralValues: PropTypes.object.isRequired,
-  moralValues: PropTypes.object.isRequired,
+  amoralObjective: PropTypes.number.isRequired,
+  moralObjective: PropTypes.number.isRequired,
   updateEthics: PropTypes.func.isRequired,
   clearGridWorld: PropTypes.func.isRequired,
   clearForbiddenStates: PropTypes.func.isRequired,

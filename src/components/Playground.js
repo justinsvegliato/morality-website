@@ -85,8 +85,8 @@ export default class Playground extends React.Component {
           settings={this.props.settings}
           forbiddenStateEthics={this.props.forbiddenStateEthics}
           normBasedEthics={this.props.normBasedEthics}
-          amoralValues ={amoralSolution.values}
-          moralValues ={moralSolution.values}
+          amoralObjective ={amoralSolution.objective}
+          moralObjective ={moralSolution.objective}
           updateEthics={this.props.updateEthics}
           updateView={this.props.updateView}
           clearGridWorld={this.props.clearGridWorld}
