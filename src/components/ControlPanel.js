@@ -65,8 +65,8 @@ export default class ControlPanel extends React.Component {
 
     return (
       <ProgressBar>
-        <ProgressBar striped variant="success" label={moralObjective.toFixed(1)} now={percentage} key={1} />
-        <ProgressBar striped variant="danger" label={priceOfMorality.toFixed(1)} now={negatedPercentage} key={2} />
+        <ProgressBar striped variant="success" label={moralObjective.toFixed(2)} now={percentage} key={1} />
+        <ProgressBar striped variant="danger" label={priceOfMorality.toFixed(2)} now={negatedPercentage} key={2} />
       </ProgressBar>
     );
   }
