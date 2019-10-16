@@ -44,18 +44,12 @@ export default class Square extends React.Component {
     const amoralResult = settings.view === 'values' ? amoralValue.toFixed(2) : ICON_MAP[amoralAction];
     const moralResult = settings.view === 'values' ? moralValue.toFixed(2) : ICON_MAP[moralAction];
 
-    if (amoralResult === moralResult) {
-      return (
-        <Card.Title>
-          <Badge pill variant="info">{amoralResult}</Badge>
-        </Card.Title>
-      );
-    }
+    const className = amoralResult !== moralResult ? 'highlight' : 0;
 
     return (
       <Card.Title>
-        <Badge pill variant="info">{amoralResult}</Badge>
-        <Badge pill variant="success">{moralResult}</Badge>
+        <Badge pill variant="info" className={className}>{amoralResult}</Badge>
+        <Badge pill variant="success" className={className}>{moralResult}</Badge>
       </Card.Title>
     );
   }

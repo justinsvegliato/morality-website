@@ -74,12 +74,18 @@ select:hover {
   padding: 0px;
 }
 
-#grid-world .badge-info:first-child {
-  margin-right: 3px;
+#grid-world .highlight {
+  border-style: solid;
+  border-color: #e99002 !important;
+  border-width: 2px;
 }
 
-#grid-world .badge-info:only-child {
-  margin-right: 0px;
+#grid-world .badge {
+  border-radius: 0px;
+}
+
+#grid-world .badge-info:first-child {
+  margin-right: 3px;
 }
 
 #grid-world .badge-danger {
