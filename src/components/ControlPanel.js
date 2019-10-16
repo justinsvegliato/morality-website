@@ -4,6 +4,7 @@ import Alert from 'react-bootstrap/Alert';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
+import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import ProgressBar from 'react-bootstrap/ProgressBar';
@@ -66,12 +67,26 @@ export default class ControlPanel extends React.Component {
     const percentage = amoralObjective === 0 ? 100 : (moralObjective / amoralObjective) * 100;
     const negatedPercentage = 100 - percentage;
 
+    const percentageText = percentage.toFixed(2);
+    const negatedPercentageText = negatedPercentage.toFixed(2);
     const amoralObjectiveText = amoralObjective.toFixed(2);
     const moralObjectiveText = moralObjective.toFixed(2);
     const priceOfMoralityText = priceOfMorality.toFixed(2);
 
     const tooltip = (
       <Tooltip>
+        <Container>
+          <Row noGutters className="text-success">
+            <Col xs={6}>Moral Policy</Col> <Col xs={3}>{moralObjectiveText}</Col> <Col xs={3}>{percentageText}%</Col>
+          </Row>
+          <Row noGutters className="text-danger">
+            <Col xs={6}>Price of Morality</Col> <Col xs={3}>{priceOfMoralityText}</Col> <Col xs={3}>{negatedPercentageText}%</Col>
+          </Row>
+          <Row noGutters className="text-info">
+            <Col xs={6}>Amoral Policy</Col> <Col xs={3}>{amoralObjectiveText}</Col> <Col xs={3}>100%</Col>
+          </Row>
+        </Container>
+
         <Badge variant="success">{moralObjectiveText}</Badge>
         <Badge variant="secondary">+</Badge>
         <Badge variant="danger">{priceOfMoralityText}</Badge>
