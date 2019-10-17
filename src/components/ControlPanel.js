@@ -108,7 +108,7 @@ export default class ControlPanel extends React.Component {
     const tooltip = (
       <Tooltip>
         <Row noGutters className="text-success">
-          <Col xs={7} className="text-left">Moral Policy</Col>
+          <Col xs={7} className="text-left">Moral Policy Value</Col>
           <Col xs={2} className="text-right">{moralObjectiveText}</Col>
           <Col xs={3} className="text-right">{percentageText}%</Col>
         </Row>
@@ -118,7 +118,7 @@ export default class ControlPanel extends React.Component {
           <Col xs={3} className="text-right">{negatedPercentageText}%</Col>
         </Row>
         <Row noGutters className="text-info">
-          <Col xs={7} className="text-left">Amoral Policy</Col>
+          <Col xs={7} className="text-left">Amoral Policy Value</Col>
           <Col xs={2} className="text-right">{amoralObjectiveText}</Col>
           <Col xs={3} className="text-right">100%</Col>
         </Row>
@@ -132,7 +132,7 @@ export default class ControlPanel extends React.Component {
     );
 
     return (
-      <OverlayTrigger placement="top" overlay={tooltip}>
+      <OverlayTrigger placement="bottom" overlay={tooltip}>
         <ProgressBar>
           <ProgressBar striped variant="success" label={moralObjectiveText} now={percentage} key={1} />
           <ProgressBar striped variant="danger" label={priceOfMoralityText} now={negatedPercentage} key={2} />
@@ -225,7 +225,7 @@ export default class ControlPanel extends React.Component {
     );
 
     return (
-      <OverlayTrigger placement="top" overlay={tooltip}>
+      <OverlayTrigger placement="bottom" overlay={tooltip}>
         <Badge variant="primary"><FaInfo /></Badge>
       </OverlayTrigger>
     );
