@@ -4,13 +4,13 @@ import Alert from 'react-bootstrap/Alert';
 import Badge from 'react-bootstrap/Badge';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import ProgressBar from 'react-bootstrap/ProgressBar';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Tooltip from 'react-bootstrap/Tooltip';
+import { FaInfo } from 'react-icons/fa';
 
 export default class ControlPanel extends React.Component {
   constructor(props) {
@@ -107,23 +107,21 @@ export default class ControlPanel extends React.Component {
 
     const tooltip = (
       <Tooltip>
-        <Container>
-          <Row noGutters className="text-success">
-            <Col xs={7}>Moral Policy</Col>
-            <Col xs={2}>{moralObjectiveText}</Col>
-            <Col xs={3}>{percentageText}%</Col>
-          </Row>
-          <Row noGutters className="text-danger">
-            <Col xs={7}>Price of Morality</Col>
-            <Col xs={2}>{priceOfMoralityText}</Col>
-            <Col xs={3}>{negatedPercentageText}%</Col>
-          </Row>
-          <Row noGutters className="text-info">
-            <Col xs={7}>Amoral Policy</Col>
-            <Col xs={2}>{amoralObjectiveText}</Col>
-            <Col xs={3}>100%</Col>
-          </Row>
-        </Container>
+        <Row noGutters className="text-success">
+          <Col xs={7} className="text-left">Moral Policy</Col>
+          <Col xs={2} className="text-right">{moralObjectiveText}</Col>
+          <Col xs={3} className="text-right">{percentageText}%</Col>
+        </Row>
+        <Row noGutters className="text-danger">
+          <Col xs={7} className="text-left">Price of Morality</Col>
+          <Col xs={2} className="text-right">{priceOfMoralityText}</Col>
+          <Col xs={3} className="text-right">{negatedPercentageText}%</Col>
+        </Row>
+        <Row noGutters className="text-info">
+          <Col xs={7} className="text-left">Amoral Policy</Col>
+          <Col xs={2} className="text-right">{amoralObjectiveText}</Col>
+          <Col xs={3} className="text-right">100%</Col>
+        </Row>
 
         <Badge variant="success">{moralObjectiveText}</Badge>
         <Badge variant="secondary">+</Badge>
@@ -143,12 +141,103 @@ export default class ControlPanel extends React.Component {
     );
   }
 
+  getGridWorldInformation(gridWorld) {
+    let emptyCount = 0;
+    let wallCount = 0;
+    let goalCount = 0;
+
+    for (const row of gridWorld.grid) {
+      for (const square of row) {
+        if (square === 'O') {
+          emptyCount++;
+        } else if (square === 'W') {
+          wallCount++;
+        } else {
+          goalCount++;
+        }
+      }
+    }
+
+    return (
+      <>
+        <Row noGutters className="text-primary"><strong>Grid World</strong></Row>
+        <Row noGutters>
+          <Col xs={10} className="text-left">Empty Squares</Col>
+          <Col xs={2} className="text-right">{emptyCount}</Col>
+        </Row>
+        <Row noGutters>
+          <Col xs={10} className="text-left">Wall Squares</Col>
+          <Col xs={2} className="text-right">{wallCount}</Col>
+        </Row>
+        <Row noGutters>
+          <Col xs={10} className="text-left">Goal Squares</Col>
+          <Col xs={2} className="text-right">{goalCount}</Col>
+        </Row>
+      </>
+    );
+  }
+
+  getForbiddenStateEthicsInformation(forbiddenStateEthics) {
+    return (
+      <>
+        <Row noGutters className="text-primary"><strong>Forbidden State Ethics</strong></Row>
+        <Row noGutters>
+          <Col xs={10} className="text-left">Forbidden States</Col>
+          <Col xs={2} className="text-right">{this.props.forbiddenStateEthics.length}</Col>
+        </Row>
+      </>
+    );
+  }
+
+  getNormBasedEthicsInformation(normBasedEthics) {
+    const normPenaltyRows = this.props.normBasedEthics.norms.map((norm) => {
+      return (
+        <Row noGutters>
+          <Col xs={10} className="text-left">{norm} Penalty</Col>
+          <Col xs={2} className="text-right">{this.props.normBasedEthics.penaltyFunction[norm]}</Col>
+        </Row>
+      );
+    });
+
+    return (
+      <>
+        <Row noGutters className="text-primary"><strong>Norm-Based Ethics</strong></Row>
+        {normPenaltyRows}
+        <Row noGutters>
+          <Col xs={10} className="text-left">Tolerance</Col>
+          <Col xs={2} className="text-right">{this.props.normBasedEthics.tolerance}</Col>
+        </Row>
+      </>
+    );
+  }
+
+  getInformationWindow(settings, gridWorld, forbiddenStateEthics, normBasedEthics) {
+    const gridWorldInformation = this.getGridWorldInformation(gridWorld);
+    const forbiddenStateEthicsInformation = this.getForbiddenStateEthicsInformation(forbiddenStateEthics);
+    const normBasedEthicsInformation = this.getNormBasedEthicsInformation(normBasedEthics);
+
+    const tooltip = (
+      <Tooltip>
+        {gridWorldInformation}
+        {forbiddenStateEthicsInformation}
+        {normBasedEthicsInformation}
+      </Tooltip>
+    );
+
+    return (
+      <OverlayTrigger placement="top" overlay={tooltip}>
+        <Badge variant="primary"><FaInfo /></Badge>
+      </OverlayTrigger>
+    );
+  }
+
   render() {
     const ethicsSelector = this.getEthicsSelector(this.props.updateEthics);
     const clearButton = this.getClearButton(this.props.clearGridWorld, this.props.clearForbiddenStates, this.props.clearNorms);
     const toleranceSelector = this.getToleranceSelector(this.props.settings.ethics, this.props.normBasedEthics, this.props.updateTolerance);
     const viewSelector = this.getViewSelector(this.props.settings.view, this.props.updateView);
     const priceOfMoralityProgressBar = this.getPriceOfMoralityProgressBar(this.props.amoralObjective, this.props.moralObjective);
+    const informationWindow = this.getInformationWindow(this.props.settings, this.props.gridWorld, this.props.forbiddenStateEthics, this.props.normBasedEthics);
 
     return (
       <Alert id="control-panel" variant={'light'}>
@@ -157,7 +246,8 @@ export default class ControlPanel extends React.Component {
           <Col xs={2}>{viewSelector}</Col>
           <Col xs={3}>{ethicsSelector}</Col>
           <Col xs={2}>{toleranceSelector}</Col>
-          <Col xs={4}>{priceOfMoralityProgressBar}</Col>
+          <Col xs={3}>{priceOfMoralityProgressBar}</Col>
+          <Col xs={1}>{informationWindow}</Col>
         </Row>
       </Alert>
     );
@@ -166,6 +256,7 @@ export default class ControlPanel extends React.Component {
 
 ControlPanel.propTypes = {
   settings: PropTypes.object.isRequired,
+  gridWorld: PropTypes.object.isRequired,
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
   amoralObjective: PropTypes.number.isRequired,

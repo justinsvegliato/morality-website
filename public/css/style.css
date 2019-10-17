@@ -26,7 +26,8 @@ footer {
 }
 
 .tooltip-inner {
-  max-width: 300px;
+  max-width: 270px;
+  /* width: 270px; */
 }
 
 #navigation {
@@ -65,6 +66,21 @@ footer {
 #control-panel .progress {
   font-size: 16px;
   height: 36px;
+}
+
+#control-panel .progress:hover {
+  cursor: pointer;
+}
+
+#control-panel .badge {
+  height: 100%;
+  width: 100%;
+  font-size: 18px;
+  padding-top: 5px;
+}
+
+#control-panel .badge:hover {
+  cursor: pointer;
 }
 
 #grid-world .card {

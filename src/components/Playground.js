@@ -83,6 +83,7 @@ export default class Playground extends React.Component {
       <>
         <ControlPanel
           settings={this.props.settings}
+          gridWorld={this.props.gridWorld}
           forbiddenStateEthics={this.props.forbiddenStateEthics}
           normBasedEthics={this.props.normBasedEthics}
           amoralObjective ={amoralSolution.objective}
