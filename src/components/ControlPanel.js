@@ -8,18 +8,50 @@ import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import ProgressBar from 'react-bootstrap/ProgressBar';
+import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Tooltip from 'react-bootstrap/Tooltip';
 
 export default class ControlPanel extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isConfirmationWindowOpen: false
+    };
+  }
+
   getClearButton(clearGridWorld, clearForbiddenStates, clearNorms) {
-    const onClick = () => {
+    const openConfirmationModal = () => {
+      this.setState({isConfirmationWindowOpen: true});
+    };
+
+    const onCancel = () => {
+      this.setState({isConfirmationWindowOpen: false});
+    };
+
+    const onConfirm = () => {
       this.props.clearGridWorld();
       this.props.clearForbiddenStates();
       this.props.clearNorms();
+      this.setState({isConfirmationWindowOpen: false});
     };
 
-    return <Button variant="danger" onClick={onClick}>Clear</Button>;
+    return (
+      <>
+        <Button variant="danger" onClick={openConfirmationModal}>Clear</Button>
+
+        <Modal show={this.state.isConfirmationWindowOpen}>
+          <Modal.Header>
+            <Modal.Title>Confirmation</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>Are you sure you want to clear the grid world?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={onConfirm}>OK</Button>
+            <Button variant="secondary" onClick={onCancel}>Cancel</Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
   }
 
   getEthicsSelector(updateEthics) {
