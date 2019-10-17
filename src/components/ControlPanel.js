@@ -67,23 +67,29 @@ export default class ControlPanel extends React.Component {
     const percentage = amoralObjective === 0 ? 100 : (moralObjective / amoralObjective) * 100;
     const negatedPercentage = 100 - percentage;
 
-    const percentageText = percentage.toFixed(2);
-    const negatedPercentageText = negatedPercentage.toFixed(2);
-    const amoralObjectiveText = amoralObjective.toFixed(2);
-    const moralObjectiveText = moralObjective.toFixed(2);
-    const priceOfMoralityText = priceOfMorality.toFixed(2);
+    const percentageText = percentage.toFixed(1);
+    const negatedPercentageText = negatedPercentage.toFixed(1);
+    const amoralObjectiveText = amoralObjective.toFixed(1);
+    const moralObjectiveText = moralObjective.toFixed(1);
+    const priceOfMoralityText = priceOfMorality.toFixed(1);
 
     const tooltip = (
       <Tooltip>
         <Container>
           <Row noGutters className="text-success">
-            <Col xs={6}>Moral Policy</Col> <Col xs={3}>{moralObjectiveText}</Col> <Col xs={3}>{percentageText}%</Col>
+            <Col xs={7}>Moral Policy</Col>
+            <Col xs={2}>{moralObjectiveText}</Col>
+            <Col xs={3}>{percentageText}%</Col>
           </Row>
           <Row noGutters className="text-danger">
-            <Col xs={6}>Price of Morality</Col> <Col xs={3}>{priceOfMoralityText}</Col> <Col xs={3}>{negatedPercentageText}%</Col>
+            <Col xs={7}>Price of Morality</Col>
+            <Col xs={2}>{priceOfMoralityText}</Col>
+            <Col xs={3}>{negatedPercentageText}%</Col>
           </Row>
           <Row noGutters className="text-info">
-            <Col xs={6}>Amoral Policy</Col> <Col xs={3}>{amoralObjectiveText}</Col> <Col xs={3}>100%</Col>
+            <Col xs={7}>Amoral Policy</Col>
+            <Col xs={2}>{amoralObjectiveText}</Col>
+            <Col xs={3}>100%</Col>
           </Row>
         </Container>
 

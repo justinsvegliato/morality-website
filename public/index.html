@@ -70,9 +70,26 @@
       </div>
 
       <div id="playground" class="container">
-        <h2 class="text-center">Playground</h2>
-        <p>Curious? Try it out! Our solver automatically calculates the agent's best possible behavior whenever you change the grid world. You can edit the grid world by clicking on a square and selecting from its popover menu. You can choose whether to see the action or value of each square by selecting from the left dropdown or change the ethical context by selecting from the rightmost dropdown. The amoral policy that ignores ethics is blue while the moral policy that reasons about ethics is green when it differs from the amoral policy. The red part of the bar is the difference in value between the amoral policy and the moral policy, which we call the price of morality, whereas the green part of the bar is the value still achieved by the moral policy. If you want to clear the whole grid world, you can just click the clear button.</p>
+        <h2>Playground</h2>
+
+        <p>Suppose we have a robot searching for money hidden in a grid world. The robot can stay in its current location or move to another square by going north, east, south, or west. When the robot moves to another square, it has a small chance of slipping into a square to the left or right of its current square because one of its wheels can get stuck sometimes. More importantly, because we want our robot to be moral, we have to specify an ethical framework. While there are many ethical frameworks out there, we use two simple choices here: forbidden state ethics and norm-based ethics. Simply put, in forbidden state ethics, the robot has to avoid forbidden squares at all costs. In norm-based ethics, however, the robot has to avoid squares that break specific rules but is allowed some slack. The goal of the robot is not only to get as much money as possible while also being moral.</p>
+
         <div id="root"></div>
+
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+          <h3 class="alert-heading">Help</h3>
+          <p>Click the Clear button to reset the grid world and start over.</p>
+          <hr/>
+          <p>Select from the dropdown on the left to change whether to see the action or value of each square.</p>
+          <hr/>
+          <p>Select from the dropdown on the right to change the ethical context.</p>
+          <hr/>
+          <p>Click on a square and select from its popover menu to edit the grid world.</p>
+          <hr/>
+          <p>Each square shows the amoral policy that ignores ethics in blue and the moral policy that reasons about ethics in green. They're outlined in red when they disagree.</p>
+          <hr/>
+          <p>The bar on the top right has a green part and a red part. The red part is the difference in value between the amoral policy and the moral policy, which we call the price of morality. The green part is the value achieved by only the moral policy.</p>
+        </div>
       </div>
     </main>
 

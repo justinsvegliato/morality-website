@@ -80,7 +80,7 @@ export default class Playground extends React.Component {
     });
 
     return (
-      <Container>
+      <>
         <ControlPanel
           settings={this.props.settings}
           forbiddenStateEthics={this.props.forbiddenStateEthics}
@@ -95,7 +95,7 @@ export default class Playground extends React.Component {
           updateTolerance={this.props.updateTolerance}
         />
         <Container id="grid-world">{gridWorld}</Container>
-      </Container>
+      </>
     );
   }
 }
