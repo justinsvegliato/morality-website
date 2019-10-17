@@ -13,6 +13,14 @@ select:hover {
   cursor: pointer;
 }
 
+footer {
+  background-color: #18546f;
+  height: 150px;
+  color: #fff;
+  text-align: center;
+  padding: 30px;
+}
+
 .navbar {
   font-size: 18px;
 }
