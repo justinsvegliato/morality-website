@@ -69,7 +69,7 @@ export default class ControlPanel extends React.Component {
   getToleranceSelector() {
     const onChange = (event) => this.props.updateTolerance(event.target.value);
 
-    if (this.props.ethics === 'normBasedEthics') {
+    if (this.props.settings.ethics === 'normBasedEthics') {
       return (
         <Form.Control as="select" value={this.props.normBasedEthics.tolerance} onChange={onChange}>
           <option value="0">No Tolerance</option>
