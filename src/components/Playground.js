@@ -13,36 +13,36 @@ import Square from './Square';
 
 export default class Playground extends React.Component {
   getAgent(gridWorld) {
-    return new GridWorldAgent(gridWorld);
+    return new GridWorldAgent(this.props.gridWorld);
   }
 
-  getForbiddenStateEthics(forbiddenStateEthics) {
-    return new ForbiddenStateEthics(forbiddenStateEthics);
+  getForbiddenStateEthics() {
+    return new ForbiddenStateEthics(this.props.forbiddenStateEthics);
   }
 
-  getNormBasedEthics(normBasedEthics) {
-    const norms = normBasedEthics.norms;
+  getNormBasedEthics() {
+    const norms = this.props.normBasedEthics.norms;
     const violationFunction = (state) => {
-      if (state in normBasedEthics.violationFunction) {
-        return normBasedEthics.violationFunction[state];
+      if (state in this.props.normBasedEthics.violationFunction) {
+        return this.props.normBasedEthics.violationFunction[state];
       }
       return [];
     };
     const penaltyFunction = (norm, state, action) => {
-      return normBasedEthics.penaltyFunction[norm];
+      return this.props.normBasedEthics.penaltyFunction[norm];
     };
-    const tolerance = normBasedEthics.tolerance;
+    const tolerance = this.props.normBasedEthics.tolerance;
 
     return new NormBasedEthics(norms, violationFunction, penaltyFunction, tolerance);
   }
 
-  getMoralExemplarEthics(moralExemplarEthics) {
+  getMoralExemplarEthics() {
     const exemplarTrajectories = [
       [[], []]
     ];
 
-    for (const state in moralExemplarEthics) {
-      for (const action of moralExemplarEthics[state]) {
+    for (const state in this.props.moralExemplarEthics) {
+      for (const action of this.props.moralExemplarEthics[state]) {
         exemplarTrajectories[0][0].push(state);
         exemplarTrajectories[0][1].push(action);
       }
@@ -51,23 +51,23 @@ export default class Playground extends React.Component {
     return new MoralExemplarEthics(exemplarTrajectories);
   }
 
-  getEthics(ethics, forbiddenStateEthics, normBasedEthics, moralExemplarEthics) {
+  getEthics() {
     if (this.props.settings.ethics === 'forbiddenStateEthics') {
-      return this.getForbiddenStateEthics(forbiddenStateEthics);
+      return this.getForbiddenStateEthics(this.props.forbiddenStateEthics);
     }
 
     if (this.props.settings.ethics === 'normBasedEthics') {
-      return this.getNormBasedEthics(normBasedEthics);
+      return this.getNormBasedEthics(this.props.normBasedEthics);
     }
 
     if (this.props.settings.ethics === 'moralExemplarEthics') {
-      return this.getMoralExemplarEthics(moralExemplarEthics);
+      return this.getMoralExemplarEthics(this.props.moralExemplarEthics);
     }
   }
 
   render() {
-    const agent = this.getAgent(this.props.gridWorld);
-    const ethics = this.getEthics(this.props.ethics, this.props.forbiddenStateEthics, this.props.normBasedEthics, this.props.moralExemplarEthics);
+    const agent = this.getAgent();
+    const ethics = this.getEthics();
 
     const amoralSolution = morality.solve(agent);
     const moralSolution = morality.solve(agent, ethics);

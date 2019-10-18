@@ -52,8 +52,8 @@ export default class ControlPanel extends React.Component {
     );
   }
 
-  getEthicsSelector(updateEthics) {
-    const onChange = (event) => updateEthics(event.target.value);
+  getEthicsSelector() {
+    const onChange = (event) => this.props.updateEthics(event.target.value);
 
     return (
       <Form>
@@ -66,12 +66,12 @@ export default class ControlPanel extends React.Component {
     );
   }
 
-  getToleranceSelector(ethics, normBasedEthics, updateTolerance) {
-    const onChange = (event) => updateTolerance(event.target.value);
+  getToleranceSelector() {
+    const onChange = (event) => this.props.updateTolerance(event.target.value);
 
-    if (ethics === 'normBasedEthics') {
+    if (this.props.ethics === 'normBasedEthics') {
       return (
-        <Form.Control as="select" value={normBasedEthics.tolerance} onChange={onChange}>
+        <Form.Control as="select" value={this.props.normBasedEthics.tolerance} onChange={onChange}>
           <option value="0">No Tolerance</option>
           <option value="0.3">Low Tolerance</option>
           <option value="0.7">Medium Tolerance</option>
@@ -81,27 +81,27 @@ export default class ControlPanel extends React.Component {
     }
   }
 
-  getViewSelector(view, updateView) {
-    const onChange = (event) => updateView(event.target.value);
+  getViewSelector() {
+    const onChange = (event) => this.props.updateView(event.target.value);
 
     return (
-      <Form.Control as="select" value={view} onChange={onChange}>
+      <Form.Control as="select" value={this.props.view} onChange={onChange}>
         <option value="actions">Actions</option>
         <option value="values">Values</option>
       </Form.Control>
     );
   }
 
-  getPriceOfMoralityProgressBar(amoralObjective, moralObjective) {
-    const priceOfMorality = amoralObjective - moralObjective;
+  getPriceOfMoralityProgressBar() {
+    const priceOfMorality = this.props.amoralObjective - this.props.moralObjective;
 
-    const percentage = amoralObjective === 0 ? 100 : (moralObjective / amoralObjective) * 100;
+    const percentage = this.props.amoralObjective === 0 ? 100 : (this.props.moralObjective / this.props.amoralObjective) * 100;
     const negatedPercentage = 100 - percentage;
 
     const percentageText = percentage.toFixed(1);
     const negatedPercentageText = negatedPercentage.toFixed(1);
-    const amoralObjectiveText = amoralObjective.toFixed(1);
-    const moralObjectiveText = moralObjective.toFixed(1);
+    const amoralObjectiveText = this.props.amoralObjective.toFixed(1);
+    const moralObjectiveText = this.props.moralObjective.toFixed(1);
     const priceOfMoralityText = priceOfMorality.toFixed(1);
 
     const tooltip = (
@@ -140,12 +140,12 @@ export default class ControlPanel extends React.Component {
     );
   }
 
-  getGridWorldInformation(gridWorld) {
+  getGridWorldInformation() {
     let emptyCount = 0;
     let wallCount = 0;
     let goalCount = 0;
 
-    for (const row of gridWorld.grid) {
+    for (const row of this.props.gridWorld.grid) {
       for (const square of row) {
         if (square === 'O') {
           emptyCount++;
@@ -176,7 +176,7 @@ export default class ControlPanel extends React.Component {
     );
   }
 
-  getForbiddenStateEthicsInformation(forbiddenStateEthics) {
+  getForbiddenStateEthicsInformation() {
     return (
       <>
         <Row noGutters className="text-primary"><strong>Forbidden State Ethics</strong></Row>
@@ -188,7 +188,7 @@ export default class ControlPanel extends React.Component {
     );
   }
 
-  getNormBasedEthicsInformation(normBasedEthics) {
+  getNormBasedEthicsInformation() {
     const normPenaltyRows = this.props.normBasedEthics.norms.map((norm) => {
       return (
         <Row noGutters>
@@ -211,9 +211,9 @@ export default class ControlPanel extends React.Component {
   }
 
   getInformationWindow(settings, gridWorld, forbiddenStateEthics, normBasedEthics) {
-    const gridWorldInformation = this.getGridWorldInformation(gridWorld);
-    const forbiddenStateEthicsInformation = this.getForbiddenStateEthicsInformation(forbiddenStateEthics);
-    const normBasedEthicsInformation = this.getNormBasedEthicsInformation(normBasedEthics);
+    const gridWorldInformation = this.getGridWorldInformation();
+    const forbiddenStateEthicsInformation = this.getForbiddenStateEthicsInformation();
+    const normBasedEthicsInformation = this.getNormBasedEthicsInformation();
 
     const tooltip = (
       <Tooltip>
@@ -231,12 +231,12 @@ export default class ControlPanel extends React.Component {
   }
 
   render() {
-    const ethicsSelector = this.getEthicsSelector(this.props.updateEthics);
+    const ethicsSelector = this.getEthicsSelector();
     const clearButton = this.getClearButton();
-    const toleranceSelector = this.getToleranceSelector(this.props.settings.ethics, this.props.normBasedEthics, this.props.updateTolerance);
-    const viewSelector = this.getViewSelector(this.props.settings.view, this.props.updateView);
-    const priceOfMoralityProgressBar = this.getPriceOfMoralityProgressBar(this.props.amoralObjective, this.props.moralObjective);
-    const informationWindow = this.getInformationWindow(this.props.settings, this.props.gridWorld, this.props.forbiddenStateEthics, this.props.normBasedEthics);
+    const toleranceSelector = this.getToleranceSelector();
+    const viewSelector = this.getViewSelector();
+    const priceOfMoralityProgressBar = this.getPriceOfMoralityProgressBar();
+    const informationWindow = this.getInformationWindow();
 
     return (
       <Alert id="control-panel" variant={'light'}>

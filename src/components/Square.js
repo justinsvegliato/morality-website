@@ -43,13 +43,13 @@ export default class Square extends React.Component {
     overlay.hide();
   }
 
-  getCardTitle(id, value, amoralAction, moralAction, amoralValue, moralValue, settings) {
-    if (value === 'W') {
+  getCardTitle() {
+    if (this.props.value === 'W') {
       return null;
     }
 
-    const amoralResult = settings.view === 'values' ? amoralValue.toFixed(1) : ICON_MAP[amoralAction];
-    const moralResult = settings.view === 'values' ? moralValue.toFixed(1) : ICON_MAP[moralAction];
+    const amoralResult = this.props.settings.view === 'values' ? this.props.amoralValue.toFixed(1) : ICON_MAP[this.props.amoralAction];
+    const moralResult = this.props.settings.view === 'values' ? this.props.moralValue.toFixed(1) : ICON_MAP[this.props.moralAction];
 
     const className = amoralResult !== moralResult ? 'highlight' : 0;
 
@@ -61,23 +61,23 @@ export default class Square extends React.Component {
     );
   }
 
-  getCardBody(id, ethics, forbiddenStateEthics, normBasedEthics, moralExemplarEthics) {
-    if (this.props.settings.ethics === 'forbiddenStateEthics' && forbiddenStateEthics.includes(id)) {
+  getCardBody() {
+    if (this.props.settings.ethics === 'forbiddenStateEthics' && this.props.forbiddenStateEthics.includes(this.props.id)) {
       return <Badge variant="danger">Forbidden</Badge>;
     }
 
-    if (this.props.settings.ethics === 'normBasedEthics' && id in normBasedEthics.violationFunction) {
-      return normBasedEthics.violationFunction[id].map((norm) => {
+    if (this.props.settings.ethics === 'normBasedEthics' && this.props.id in this.props.normBasedEthics.violationFunction) {
+      return this.props.normBasedEthics.violationFunction[this.props.id].map((norm) => {
         return <Badge variant="danger">{norm}</Badge>;
       });
     }
 
-    if (this.props.settings.ethics === 'moralExemplarEthics' && id in moralExemplarEthics && moralExemplarEthics[id].length > 0) {
-      const northVariant = moralExemplarEthics[id].includes('NORTH') ? 'primary' : 'info';
-      const eastVariant = moralExemplarEthics[id].includes('EAST') ? 'primary' : 'info';
-      const southVariant = moralExemplarEthics[id].includes('SOUTH') ? 'primary' : 'info';
-      const westVariant = moralExemplarEthics[id].includes('WEST') ? 'primary' : 'info';
-      const stayVariant = moralExemplarEthics[id].includes('STAY') ? 'primary' : 'info';
+    if (this.props.settings.ethics === 'moralExemplarEthics' && this.props.id in this.props.moralExemplarEthics && this.props.moralExemplarEthics[this.props.id].length > 0) {
+      const northVariant = this.props.moralExemplarEthics[this.props.id].includes('NORTH') ? 'primary' : 'info';
+      const eastVariant = this.props.moralExemplarEthics[this.props.id].includes('EAST') ? 'primary' : 'info';
+      const southVariant = this.props.moralExemplarEthics[this.props.id].includes('SOUTH') ? 'primary' : 'info';
+      const westVariant = this.props.moralExemplarEthics[this.props.id].includes('WEST') ? 'primary' : 'info';
+      const stayVariant = this.props.moralExemplarEthics[this.props.id].includes('STAY') ? 'primary' : 'info';
       return (
         <Card.Body>
           <Row noGutters>
@@ -129,8 +129,8 @@ export default class Square extends React.Component {
     );
 
     const cardColor = COLOR_MAP[this.props.value];
-    const cardTitle = this.getCardTitle(this.props.id, this.props.value, this.props.amoralAction, this.props.moralAction, this.props.amoralValue, this.props.moralValue, this.props.settings);
-    const cardBody = this.getCardBody(this.props.id, this.props.settings.ethics, this.props.forbiddenStateEthics, this.props.normBasedEthics, this.props.moralExemplarEthics);
+    const cardTitle = this.getCardTitle();
+    const cardBody = this.getCardBody();
 
     return this.getSquare(cardColor, cardTitle, cardBody, squareEditor);
   }
