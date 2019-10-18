@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Playground from '../components/Playground';
-import { updateEthics, updateView, clearGridWorld, updateGridWorld, clearForbiddenStates, toggleForbiddenState, clearNorms, toggleNorm, clearMoralExemplarActions, toggleMoralExemplarAction, updateTolerance } from '../actions';
+import { updateEthics, updateView, clear, updateGridWorld, toggleForbiddenState, toggleNorm, toggleMoralExemplarAction, updateTolerance } from '../actions';
 
 class App extends React.Component {
   render() {
@@ -15,13 +15,10 @@ class App extends React.Component {
         moralExemplarEthics={this.props.moralExemplarEthics}
         updateEthics={this.props.updateEthics}
         updateView={this.props.updateView}
-        clearGridWorld={this.props.clearGridWorld}
+        clear={this.props.clear}
         updateGridWorld={this.props.updateGridWorld}
-        clearForbiddenStates={this.props.clearForbiddenStates}
         toggleForbiddenState={this.props.toggleForbiddenState}
-        clearNorms={this.props.clearNorms}
         toggleNorm={this.props.toggleNorm}
-        clearMoralExemplarActions={this.props.clearMoralExemplarActions}
         toggleMoralExemplarAction={this.props.toggleMoralExemplarAction}
         updateTolerance={this.props.updateTolerance}
       />
@@ -37,13 +34,10 @@ App.propTypes = {
   moralExemplarEthics: PropTypes.object.isRequired,
   updateEthics: PropTypes.func.isRequired,
   updateView: PropTypes.func.isRequired,
-  clearGridWorld: PropTypes.func.isRequired,
+  clear: PropTypes.func.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
-  clearForbiddenStates: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired,
-  clearNorms: PropTypes.func.isRequired,
   toggleNorm: PropTypes.func.isRequired,
-  clearMoralExemplarActions: PropTypes.func.isRequired,
   toggleMoralExemplarAction: PropTypes.func.isRequired,
   updateTolerance: PropTypes.func.isRequired
 };
@@ -62,13 +56,10 @@ function mapDispatchToProps(dispatch) {
   return {
     updateEthics: (ethics) => dispatch(updateEthics(ethics)),
     updateView: (view) => dispatch(updateView(view)),
-    clearGridWorld: () => dispatch(clearGridWorld()),
+    clear: () => dispatch(clear()),
     updateGridWorld: (row, column, value) => dispatch(updateGridWorld(row, column, value)),
-    clearForbiddenStates: () => dispatch(clearForbiddenStates()),
     toggleForbiddenState: (id) => dispatch(toggleForbiddenState(id)),
-    clearNorms: () => dispatch(clearNorms()),
     toggleNorm: (id, norm) => dispatch(toggleNorm(id, norm)),
-    clearMoralExemplarActions: () => dispatch(clearMoralExemplarActions()),
     toggleMoralExemplarAction: (id, norm) => dispatch(toggleMoralExemplarAction(id, norm)),
     updateTolerance: (tolerance) => dispatch(updateTolerance(tolerance))
   };

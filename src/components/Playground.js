@@ -112,9 +112,7 @@ export default class Playground extends React.Component {
           moralObjective ={moralSolution.objective}
           updateEthics={this.props.updateEthics}
           updateView={this.props.updateView}
-          clearGridWorld={this.props.clearGridWorld}
-          clearForbiddenStates={this.props.clearForbiddenStates}
-          clearNorms={this.props.clearNorms}
+          clear={this.props.clear}
           updateTolerance={this.props.updateTolerance}
         />
         <Container id="grid-world">{gridWorld}</Container>
@@ -131,13 +129,10 @@ Playground.propTypes = {
   moralExemplarEthics: PropTypes.object.isRequired,
   updateEthics: PropTypes.func.isRequired,
   updateView: PropTypes.func.isRequired,
-  clearGridWorld: PropTypes.func.isRequired,
+  clear: PropTypes.func.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
-  clearForbiddenStates: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired,
-  clearNorms: PropTypes.func.isRequired,
   toggleNorm: PropTypes.func.isRequired,
-  clearMoralExemplarActions: PropTypes.func.isRequired,
   toggleMoralExemplarAction: PropTypes.func.isRequired,
   updateTolerance: PropTypes.func.isRequired
 };

@@ -1,4 +1,4 @@
-import { CLEAR_FORBIDDEN_STATES, TOGGLE_FORBIDDEN_STATE } from '../actions';
+import { CLEAR, TOGGLE_FORBIDDEN_STATE } from '../actions';
 
 const INITIAL_FORBIDDEN_STATE_ETHICS = [55];
 
@@ -17,7 +17,7 @@ function getNewState(state, action) {
 
 export default function forbiddenStateEthics(state = INITIAL_FORBIDDEN_STATE_ETHICS, action) {
   switch (action.type) {
-    case CLEAR_FORBIDDEN_STATES:
+    case CLEAR:
       return getEmptyState(state);
     case TOGGLE_FORBIDDEN_STATE:
       return getNewState(state, action);

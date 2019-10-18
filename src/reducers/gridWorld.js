@@ -1,4 +1,4 @@
-import { CLEAR_GRID_WORLD, UPDATE_GRID_WORLD } from '../actions';
+import { CLEAR, UPDATE_GRID_WORLD } from '../actions';
 
 const INITIAL_GRID_WORLD = {
   'width': 12,
@@ -34,7 +34,7 @@ function getNewState(state, action) {
 
 export default function gridWorld(state = INITIAL_GRID_WORLD, action) {
   switch (action.type) {
-    case CLEAR_GRID_WORLD:
+    case CLEAR:
       return getEmptyState(state);
     case UPDATE_GRID_WORLD:
       return getNewState(state, action);

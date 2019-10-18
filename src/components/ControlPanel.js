@@ -20,7 +20,7 @@ export default class ControlPanel extends React.Component {
     };
   }
 
-  getClearButton(clearGridWorld, clearForbiddenStates, clearNorms) {
+  getClearButton() {
     const openConfirmationModal = () => {
       this.setState({isConfirmationWindowOpen: true});
     };
@@ -30,9 +30,7 @@ export default class ControlPanel extends React.Component {
     };
 
     const onConfirm = () => {
-      this.props.clearGridWorld();
-      this.props.clearForbiddenStates();
-      this.props.clearNorms();
+      this.props.clear();
       this.setState({isConfirmationWindowOpen: false});
     };
 
@@ -234,7 +232,7 @@ export default class ControlPanel extends React.Component {
 
   render() {
     const ethicsSelector = this.getEthicsSelector(this.props.updateEthics);
-    const clearButton = this.getClearButton(this.props.clearGridWorld, this.props.clearForbiddenStates, this.props.clearNorms);
+    const clearButton = this.getClearButton();
     const toleranceSelector = this.getToleranceSelector(this.props.settings.ethics, this.props.normBasedEthics, this.props.updateTolerance);
     const viewSelector = this.getViewSelector(this.props.settings.view, this.props.updateView);
     const priceOfMoralityProgressBar = this.getPriceOfMoralityProgressBar(this.props.amoralObjective, this.props.moralObjective);
@@ -263,8 +261,7 @@ ControlPanel.propTypes = {
   amoralObjective: PropTypes.number.isRequired,
   moralObjective: PropTypes.number.isRequired,
   updateEthics: PropTypes.func.isRequired,
-  clearGridWorld: PropTypes.func.isRequired,
-  clearForbiddenStates: PropTypes.func.isRequired,
-  clearNorms: PropTypes.func.isRequired,
+  updateView: PropTypes.func.isRequired,
+  clear: PropTypes.func.isRequired,
   updateTolerance: PropTypes.func.isRequired
 };
