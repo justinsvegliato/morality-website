@@ -44,9 +44,7 @@ export default class SquareEditor extends React.Component {
   }
 
   getMoralExemplarEthicsEditor() {
-    const actions = ['North', 'East', 'South', 'West', 'Stay'];
-
-    const checkboxes = actions.map((action) => {
+    const checkboxes = ['North', 'East', 'South', 'West', 'Stay'].map((action) => {
       const moralExample = action.toUpperCase();
 
       const isActive = this.props.id in this.props.moralExemplarEthics;

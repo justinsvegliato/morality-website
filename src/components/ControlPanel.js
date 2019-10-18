@@ -144,47 +144,44 @@ export default class ControlPanel extends React.Component {
   }
 
   getGridWorldInformation() {
-    let emptySquareCount = 0;
-    let wallSquareCount = 0;
-    let goalSquareCount = 0;
-
+    const squareCounts = {};
     for (const row of this.props.gridWorld.grid) {
-      for (const square of row) {
-        if (square === 'O') {
-          emptySquareCount++;
-        } else if (square === 'W') {
-          wallSquareCount++;
-        } else {
-          goalSquareCount++;
+      for (const value of row) {
+        if (!(value in squareCounts)) {
+          squareCounts[value] = 0;
         }
+        squareCounts[value]++;
       }
     }
 
+    const squareCountRows = [['Empty', 'O'], ['Wall', 'W'], ['Goal', 'G']].map((pair) => {
+      const content = pair[1] in squareCounts ? squareCounts[pair[1]] : 0;
+      return (
+        <Row noGutters>
+          <Col xs={10} className="text-left">{pair[0]} Squares</Col>
+          <Col xs={2} className="text-right">{content}</Col>
+        </Row>
+      );
+    });
+
     return (
       <>
-        <Row noGutters className="text-primary"><strong>Grid World</strong></Row>
-        <Row noGutters>
-          <Col xs={10} className="text-left">Empty Squares</Col>
-          <Col xs={2} className="text-right">{emptySquareCount}</Col>
-        </Row>
-        <Row noGutters>
-          <Col xs={10} className="text-left">Wall Squares</Col>
-          <Col xs={2} className="text-right">{wallSquareCount}</Col>
-        </Row>
-        <Row noGutters>
-          <Col xs={10} className="text-left">Goal Squares</Col>
-          <Col xs={2} className="text-right">{goalSquareCount}</Col>
-        </Row>
+        <Row noGutters className="text-primary"><strong>Grid World Information</strong></Row>
+        {squareCountRows}
       </>
     );
   }
 
   getForbiddenStateEthicsInformation() {
+    if (this.props.settings.ethics !== 'forbiddenStateEthics') {
+      return null;
+    }
+
     return (
       <>
         <Row noGutters className="text-primary"><strong>Forbidden State Ethics</strong></Row>
         <Row noGutters>
-          <Col xs={10} className="text-left">Forbidden States</Col>
+          <Col xs={10} className="text-left">Forbidden Squares</Col>
           <Col xs={2} className="text-right">{this.props.forbiddenStateEthics.length}</Col>
         </Row>
       </>
@@ -192,6 +189,30 @@ export default class ControlPanel extends React.Component {
   }
 
   getNormBasedEthicsInformation() {
+    if (this.props.settings.ethics !== 'normBasedEthics') {
+      return null;
+    }
+
+    const normSquareCounts = {};
+    for (const state in this.props.normBasedEthics.violationFunction) {
+      for (const norm of this.props.normBasedEthics.violationFunction[state]) {
+        if (!(norm in normSquareCounts)) {
+          normSquareCounts[norm] = 0;
+        }
+        normSquareCounts[norm]++;
+      }
+    }
+
+    const normSquareCountRows = this.props.normBasedEthics.norms.map((norm) => {
+      const content = norm in normSquareCounts ? normSquareCounts[norm] : 0;
+      return (
+        <Row key={norm} noGutters>
+          <Col xs={10} className="text-left">{norm} Squares</Col>
+          <Col xs={2} className="text-right">{content}</Col>
+        </Row>
+      );
+    });
+
     const normPenaltyRows = this.props.normBasedEthics.norms.map((norm) => {
       return (
         <Row key={norm} noGutters>
@@ -204,6 +225,7 @@ export default class ControlPanel extends React.Component {
     return (
       <>
         <Row noGutters className="text-primary"><strong>Norm-Based Ethics</strong></Row>
+        {normSquareCountRows}
         {normPenaltyRows}
         <Row noGutters>
           <Col xs={10} className="text-left">Tolerance</Col>
@@ -213,16 +235,52 @@ export default class ControlPanel extends React.Component {
     );
   }
 
-  getInformationWindow(settings, gridWorld, forbiddenStateEthics, normBasedEthics) {
+  getMoralExemplarEthicsInformation() {
+    if (this.props.settings.ethics !== 'moralExemplarEthics') {
+      return null;
+    }
+
+    const moralExampleSquareCounts = {};
+    for (const state in this.props.moralExemplarEthics) {
+      for (const moralExample of this.props.moralExemplarEthics[state]) {
+        if (!(moralExample in moralExampleSquareCounts)) {
+          moralExampleSquareCounts[moralExample] = 0;
+        }
+        moralExampleSquareCounts[moralExample]++;
+      }
+    }
+
+    const moralExampleSquareCountRows = ['North', 'East', 'South', 'West', 'Stay'].map((moralExample) => {
+      const key = moralExample.toUpperCase();
+      const content = key in moralExampleSquareCounts ? moralExampleSquareCounts[key] : 0;
+      return (
+        <Row key={moralExample} noGutters>
+          <Col xs={10} className="text-left">{moralExample} Squares</Col>
+          <Col xs={2} className="text-right">{content}</Col>
+        </Row>
+      );
+    });
+
+    return (
+      <>
+        <Row noGutters className="text-primary"><strong>Moral Exemplar Ethics</strong></Row>
+        {moralExampleSquareCountRows}
+      </>
+    );
+  }
+
+  getInformationWindow() {
     const gridWorldInformation = this.getGridWorldInformation();
     const forbiddenStateEthicsInformation = this.getForbiddenStateEthicsInformation();
     const normBasedEthicsInformation = this.getNormBasedEthicsInformation();
+    const moralExemplarEthicsInformation = this.getMoralExemplarEthicsInformation();
 
     const tooltip = (
       <Tooltip>
         {gridWorldInformation}
         {forbiddenStateEthicsInformation}
         {normBasedEthicsInformation}
+        {moralExemplarEthicsInformation}
       </Tooltip>
     );
 
@@ -254,6 +312,7 @@ ControlPanel.propTypes = {
   gridWorld: PropTypes.object.isRequired,
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
+  moralExemplarEthics: PropTypes.object.isRequired,
   amoralObjective: PropTypes.number.isRequired,
   moralObjective: PropTypes.number.isRequired,
   clear: PropTypes.func.isRequired,
