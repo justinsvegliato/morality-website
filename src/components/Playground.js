@@ -12,7 +12,7 @@ import ControlPanel from './ControlPanel';
 import Square from './Square';
 
 export default class Playground extends React.Component {
-  getAgent(gridWorld) {
+  getAgent() {
     return new GridWorldAgent(this.props.gridWorld);
   }
 
@@ -65,14 +65,25 @@ export default class Playground extends React.Component {
     }
   }
 
-  render() {
-    const agent = this.getAgent();
-    const ethics = this.getEthics();
+  getControlPanel(amoralSolution, moralSolution) {
+    return (
+      <ControlPanel
+        settings={this.props.settings}
+        gridWorld={this.props.gridWorld}
+        forbiddenStateEthics={this.props.forbiddenStateEthics}
+        normBasedEthics={this.props.normBasedEthics}
+        amoralObjective ={amoralSolution.objective}
+        moralObjective ={moralSolution.objective}
+        updateEthics={this.props.updateEthics}
+        updateView={this.props.updateView}
+        clear={this.props.clear}
+        updateTolerance={this.props.updateTolerance}
+      />
+    );
+  }
 
-    const amoralSolution = morality.solve(agent);
-    const moralSolution = morality.solve(agent, ethics);
-
-    const gridWorld = this.props.gridWorld.grid.map((squares, rowId) => {
+  getGridWorld(amoralSolution, moralSolution) {
+    const content = this.props.gridWorld.grid.map((squares, rowId) => {
       const row = squares.map((square, columnId) => {
         const id = this.props.gridWorld.width * rowId + columnId;
         return (
@@ -101,21 +112,20 @@ export default class Playground extends React.Component {
       return <Row key={rowId}>{row}</Row>;
     });
 
+    return <Container id="grid-world">{content}</Container>;
+  }
+
+  render() {
+    const agent = this.getAgent();
+    const ethics = this.getEthics();
+
+    const amoralSolution = morality.solve(agent);
+    const moralSolution = morality.solve(agent, ethics);
+
     return (
       <>
-        <ControlPanel
-          settings={this.props.settings}
-          gridWorld={this.props.gridWorld}
-          forbiddenStateEthics={this.props.forbiddenStateEthics}
-          normBasedEthics={this.props.normBasedEthics}
-          amoralObjective ={amoralSolution.objective}
-          moralObjective ={moralSolution.objective}
-          updateEthics={this.props.updateEthics}
-          updateView={this.props.updateView}
-          clear={this.props.clear}
-          updateTolerance={this.props.updateTolerance}
-        />
-        <Container id="grid-world">{gridWorld}</Container>
+        {this.getControlPanel(amoralSolution, moralSolution)}
+        {this.getGridWorld(amoralSolution, moralSolution)}
       </>
     );
   }

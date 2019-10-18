@@ -1,6 +1,6 @@
 {
   "name": "morality-website",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "devDependencies": {
     "eslint": "^6.4.0",
     "eslint-config-google": "^0.14.0",

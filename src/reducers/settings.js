@@ -1,7 +1,7 @@
 import { UPDATE_ETHICS, UPDATE_VIEW } from '../actions';
 
 const INITIAL_SETTINGS = {
-  'ethics': 'moralExemplarEthics',
+  'ethics': 'forbiddenStateEthics',
   'view': 'actions'
 };
 

@@ -17,29 +17,22 @@ export default class SquareEditor extends React.Component {
   }
 
   getForbiddenStateEthicsEditor() {
+    const checked = this.props.forbiddenStateEthics.includes(this.props.id);
+
     return (
       <Form.Group>
         <Form.Label>Forbidden Static Ethics</Form.Label>
-        <Form.Check
-          type="checkbox"
-          label="Forbidden"
-          checked={this.props.forbiddenStateEthics.includes(this.props.id)}
-          onChange={this.props.onForbiddenStateChange}
-        />
+        <Form.Check type="checkbox" label="Forbidden" checked={checked} onChange={this.props.onForbiddenStateChange} />
       </Form.Group>
     );
   }
 
   getNormBasedEthicsEditor() {
     const checkboxes = this.props.normBasedEthics.norms.map((norm) => {
-      return (
-        <Form.Check
-          type="checkbox"
-          label={norm}
-          checked={this.props.id in this.props.normBasedEthics.violationFunction && this.props.normBasedEthics.violationFunction[this.props.id].includes(norm)}
-          onChange={() => this.props.onNormChange(norm)}
-        />
-      );
+      const isActive = this.props.id in this.props.normBasedEthics.violationFunction;
+      const checked = isActive && this.props.normBasedEthics.violationFunction[this.props.id].includes(norm);
+
+      return <Form.Check type="checkbox" label={norm} checked={checked} onChange={() => this.props.onNormChange(norm)} />;
     });
 
     return (
@@ -55,14 +48,11 @@ export default class SquareEditor extends React.Component {
 
     const checkboxes = actions.map((action) => {
       const normalizedAction = action.toUpperCase();
-      return (
-        <Form.Check
-          type="checkbox"
-          label={action}
-          checked={this.props.id in this.props.moralExemplarEthics && this.props.moralExemplarEthics[this.props.id].includes(normalizedAction)}
-          onChange={() => this.props.onMoralExemplarActionChange(normalizedAction)}
-        />
-      );
+
+      const isActive = this.props.id in this.props.moralExemplarEthics;
+      const checked = isActive && this.props.moralExemplarEthics[this.props.id].includes(normalizedAction);
+
+      return <Form.Check type="checkbox" label={action} checked={checked} onChange={() => this.props.onMoralExemplarActionChange(normalizedAction)} />;
     });
 
     return (
@@ -88,16 +78,13 @@ export default class SquareEditor extends React.Component {
   }
 
   render() {
-    const gridWorldEditor = this.getGridWorldEditor();
-    const ethicsEditor = this.getEthicsEditor();
-
     return (
       <Popover className={this.props.className} placement={this.props.placement} arrowProps={this.props.arrowProps} style={this.props.style}>
         <Popover.Title as="h3">Details</Popover.Title>
         <Popover.Content>
           <Form>
-            {gridWorldEditor}
-            {ethicsEditor}
+            {this.getGridWorldEditor()}
+            {this.getEthicsEditor()}
           </Form>
         </Popover.Content>
       </Popover>

@@ -48,8 +48,13 @@ export default class Square extends React.Component {
       return null;
     }
 
-    const amoralResult = this.props.settings.view === 'values' ? this.props.amoralValue.toFixed(1) : ICON_MAP[this.props.amoralAction];
-    const moralResult = this.props.settings.view === 'values' ? this.props.moralValue.toFixed(1) : ICON_MAP[this.props.moralAction];
+    const amoralResult = this.props.settings.view === 'values'
+      ? this.props.amoralValue.toFixed(1)
+      : ICON_MAP[this.props.amoralAction];
+
+    const moralResult = this.props.settings.view === 'values'
+      ? this.props.moralValue.toFixed(1)
+      : ICON_MAP[this.props.moralAction];
 
     const className = amoralResult !== moralResult ? 'highlight' : 0;
 
@@ -78,6 +83,7 @@ export default class Square extends React.Component {
       const southVariant = this.props.moralExemplarEthics[this.props.id].includes('SOUTH') ? 'primary' : 'info';
       const westVariant = this.props.moralExemplarEthics[this.props.id].includes('WEST') ? 'primary' : 'info';
       const stayVariant = this.props.moralExemplarEthics[this.props.id].includes('STAY') ? 'primary' : 'info';
+
       return (
         <Card.Body>
           <Row noGutters>
@@ -96,24 +102,13 @@ export default class Square extends React.Component {
     }
   }
 
-  getSquare(cardColor, cardTitle, cardBody, squareEditor) {
-    return (
-      <OverlayTrigger ref="overlay" trigger="click" overlay={squareEditor} rootClose>
-        <Card bg={cardColor} border={cardColor}>
-          {cardTitle}
-          {cardBody}
-        </Card>
-      </OverlayTrigger>
-    );
-  }
-
-  render() {
+  getSquareEditor() {
     const onGridWorldChange = (event) => this.onGridWorldChange(this.props.updateGridWorld, this.props.rowId, this.props.columnId, event.target.value, this.refs.overlay);
     const onForbiddenStateChange = () => this.onForbiddenStateChange(this.props.toggleForbiddenState, this.props.id, this.refs.overlay);
     const onNormChange = (norm) => this.onNormChange(this.props.toggleNorm, this.props.id, norm, this.refs.overlay);
     const onMoralExemplarActionChange = (action) => this.onMoralExemplarActionChange(this.props.toggleMoralExemplarAction, this.props.id, action, this.refs.overlay);
 
-    const squareEditor = (
+    return (
       <SquareEditor
         settings={this.props.settings}
         id={this.props.id}
@@ -127,12 +122,17 @@ export default class Square extends React.Component {
         onMoralExemplarActionChange={onMoralExemplarActionChange}
       />
     );
+  }
 
-    const cardColor = COLOR_MAP[this.props.value];
-    const cardTitle = this.getCardTitle();
-    const cardBody = this.getCardBody();
-
-    return this.getSquare(cardColor, cardTitle, cardBody, squareEditor);
+  render() {
+    return (
+      <OverlayTrigger ref="overlay" trigger="click" overlay={this.getSquareEditor()} rootClose>
+        <Card bg={COLOR_MAP[this.props.value]} border={COLOR_MAP[this.props.value]}>
+          {this.getCardTitle()}
+          {this.getCardBody()}
+        </Card>
+      </OverlayTrigger>
+    );
   }
 }
 
