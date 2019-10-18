@@ -133,9 +133,13 @@ footer {
   padding: 0px;
 }
 
+#grid-world .bg-dark .card-body {
+  margin-top: 6px;
+}
+
 #grid-world .card-body {
   margin-top: -12px;
-  margin-left: 2px;
+  margin-left: 1px;
 }
 
 #grid-world .card-body .row {

@@ -74,10 +74,6 @@ export default class SquareEditor extends React.Component {
   }
 
   getEthicsEditor() {
-    if (this.props.value === 'W') {
-      return null;
-    }
-
     if (this.props.settings.ethics === 'forbiddenStateEthics') {
       return this.getForbiddenStateEthicsEditor();
     }

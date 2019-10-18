@@ -62,10 +62,6 @@ export default class Square extends React.Component {
   }
 
   getCardBody() {
-    if (this.props.value === 'W') {
-      return null;
-    }
-
     if (this.props.settings.ethics === 'forbiddenStateEthics' && this.props.forbiddenStateEthics.includes(this.props.id)) {
       return <Badge variant="danger">Forbidden</Badge>;
     }
