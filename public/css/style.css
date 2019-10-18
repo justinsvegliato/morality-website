@@ -134,8 +134,8 @@ footer {
 }
 
 #grid-world .card-body {
-  margin-top: -11px;
-  margin-right: 0px;
+  margin-top: -12px;
+  margin-left: 2px;
 }
 
 #grid-world .card-body .row {

@@ -62,6 +62,10 @@ export default class Square extends React.Component {
   }
 
   getCardBody() {
+    if (this.props.value === 'W') {
+      return null;
+    }
+
     if (this.props.settings.ethics === 'forbiddenStateEthics' && this.props.forbiddenStateEthics.includes(this.props.id)) {
       return <Badge variant="danger">Forbidden</Badge>;
     }
@@ -81,15 +85,15 @@ export default class Square extends React.Component {
       return (
         <Card.Body>
           <Row noGutters>
-            <Col xs={{span: 4, offset: 4}}><Badge pill variant={northVariant}><FaArrowUp /></Badge></Col>
+            <Col xs={{span: 3, offset: 4}}><Badge pill variant={northVariant}><FaArrowUp /></Badge></Col>
           </Row>
           <Row noGutters>
-            <Col xs={4}><Badge pill variant={westVariant}><FaArrowLeft /></Badge></Col>
-            <Col xs={4}><Badge pill variant={stayVariant}><FaStopCircle /></Badge></Col>
-            <Col xs={4}><Badge pill variant={eastVariant}><FaArrowRight /></Badge></Col>
+            <Col xs={{span: 3}}><Badge pill variant={westVariant}><FaArrowLeft /></Badge></Col>
+            <Col xs={{span: 3, offset: 1}}><Badge pill variant={stayVariant}><FaStopCircle /></Badge></Col>
+            <Col xs={{span: 3, offset: 1}}><Badge pill variant={eastVariant}><FaArrowRight /></Badge></Col>
           </Row>
           <Row noGutters>
-            <Col xs={{span: 4, offset: 4}}><Badge pill variant={southVariant}><FaArrowDown /></Badge></Col>
+            <Col xs={{span: 3, offset: 4}}><Badge pill variant={southVariant}><FaArrowDown /></Badge></Col>
           </Row>
         </Card.Body>
       );
