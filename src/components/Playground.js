@@ -74,9 +74,9 @@ export default class Playground extends React.Component {
         normBasedEthics={this.props.normBasedEthics}
         amoralObjective ={amoralSolution.objective}
         moralObjective ={moralSolution.objective}
+        clear={this.props.clear}
         updateEthics={this.props.updateEthics}
         updateView={this.props.updateView}
-        clear={this.props.clear}
         updateTolerance={this.props.updateTolerance}
       />
     );
@@ -137,12 +137,12 @@ Playground.propTypes = {
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
   moralExemplarEthics: PropTypes.object.isRequired,
+  clear: PropTypes.func.isRequired,
   updateEthics: PropTypes.func.isRequired,
   updateView: PropTypes.func.isRequired,
-  clear: PropTypes.func.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired,
   toggleNorm: PropTypes.func.isRequired,
-  toggleMoralExemplarAction: PropTypes.func.isRequired,
-  updateTolerance: PropTypes.func.isRequired
+  updateTolerance: PropTypes.func.isRequired,
+  toggleMoralExemplarAction: PropTypes.func.isRequired
 };

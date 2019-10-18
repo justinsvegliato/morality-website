@@ -256,8 +256,8 @@ ControlPanel.propTypes = {
   normBasedEthics: PropTypes.object.isRequired,
   amoralObjective: PropTypes.number.isRequired,
   moralObjective: PropTypes.number.isRequired,
+  clear: PropTypes.func.isRequired,
   updateEthics: PropTypes.func.isRequired,
   updateView: PropTypes.func.isRequired,
-  clear: PropTypes.func.isRequired,
   updateTolerance: PropTypes.func.isRequired
 };
