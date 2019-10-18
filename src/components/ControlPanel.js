@@ -194,7 +194,7 @@ export default class ControlPanel extends React.Component {
   getNormBasedEthicsInformation() {
     const normPenaltyRows = this.props.normBasedEthics.norms.map((norm) => {
       return (
-        <Row noGutters>
+        <Row key={norm} noGutters>
           <Col xs={10} className="text-left">{norm} Penalty</Col>
           <Col xs={2} className="text-right">{this.props.normBasedEthics.penaltyFunction[norm]}</Col>
         </Row>

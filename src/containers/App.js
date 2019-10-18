@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Playground from '../components/Playground';
-import { updateEthics, updateView, clear, updateGridWorld, toggleForbiddenState, toggleNorm, toggleMoralExemplarAction, updateTolerance } from '../actions';
+import { updateEthics, updateView, clear, updateGridWorld, toggleForbiddenState, toggleNorm, toggleMoralExample, updateTolerance } from '../actions';
 
 class App extends React.Component {
   render() {
@@ -20,7 +20,7 @@ class App extends React.Component {
         toggleForbiddenState={this.props.toggleForbiddenState}
         toggleNorm={this.props.toggleNorm}
         updateTolerance={this.props.updateTolerance}
-        toggleMoralExemplarAction={this.props.toggleMoralExemplarAction}
+        toggleMoralExample={this.props.toggleMoralExample}
       />
     );
   }
@@ -39,7 +39,7 @@ App.propTypes = {
   toggleForbiddenState: PropTypes.func.isRequired,
   toggleNorm: PropTypes.func.isRequired,
   updateTolerance: PropTypes.func.isRequired,
-  toggleMoralExemplarAction: PropTypes.func.isRequired
+  toggleMoralExample: PropTypes.func.isRequired
 };
 
 function mapStateToProps(state) {
@@ -61,7 +61,7 @@ function mapDispatchToProps(dispatch) {
     toggleForbiddenState: (id) => dispatch(toggleForbiddenState(id)),
     toggleNorm: (id, norm) => dispatch(toggleNorm(id, norm)),
     updateTolerance: (tolerance) => dispatch(updateTolerance(tolerance)),
-    toggleMoralExemplarAction: (id, norm) => dispatch(toggleMoralExemplarAction(id, norm))
+    toggleMoralExample: (id, moralExample) => dispatch(toggleMoralExample(id, moralExample))
   };
 }
 

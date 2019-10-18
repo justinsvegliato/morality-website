@@ -5,7 +5,7 @@ export const UPDATE_GRID_WORLD = 'UPDATE_GRID_WORLD';
 export const TOGGLE_FORBIDDEN_STATE = 'TOGGLE_FORBIDDEN_STATE';
 export const TOGGLE_NORM = 'TOGGLE_NORM';
 export const UPDATE_TOLERANCE = 'UPDATE_TOLERANCE';
-export const TOGGLE_MORAL_EXEMPLAR_ACTION = 'TOGGLE_MORAL_EXEMPLAR_ACTION';
+export const TOGGLE_MORAL_EXAMPLE = 'TOGGLE_MORAL_EXAMPLE';
 
 export function clear() {
   return {
@@ -58,10 +58,10 @@ export function updateTolerance(tolerance) {
   };
 }
 
-export function toggleMoralExemplarAction(id, action) {
+export function toggleMoralExample(id, moralExample) {
   return {
-    type: TOGGLE_MORAL_EXEMPLAR_ACTION,
+    type: TOGGLE_MORAL_EXAMPLE,
     id,
-    action
+    moralExample
   };
 }

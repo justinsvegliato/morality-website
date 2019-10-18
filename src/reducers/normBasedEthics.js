@@ -18,11 +18,11 @@ function getEmptyState(state) {
   });
 }
 
-function generateNewState(state, action, norms) {
+function generateNewState(state, id, norms) {
   return Object.assign({}, state, {
     violationFunction: {
       ...state.violationFunction,
-      [action.id]: norms
+      [id]: norms
     }
   });
 }
@@ -31,11 +31,11 @@ function getNewState(state, action) {
   if (action.id in state.violationFunction) {
     const index = state.violationFunction[action.id].indexOf(action.norm);
     if (index === -1) {
-      return generateNewState(state, action, [...state.violationFunction[action.id], action.norm]);
+      return generateNewState(state, action.id, [...state.violationFunction[action.id], action.norm]);
     }
-    return generateNewState(state, action, [...state.violationFunction[action.id].slice(0, index), ...state.violationFunction[action.id].slice(index + 1)]);
+    return generateNewState(state, action.id, [...state.violationFunction[action.id].slice(0, index), ...state.violationFunction[action.id].slice(index + 1)]);
   }
-  return generateNewState(state, action, [action.norm]);
+  return generateNewState(state, action.id, [action.norm]);
 }
 
 export default function normBasedEthics(state = INITIAL_NORM_BASED_ETHICS, action) {

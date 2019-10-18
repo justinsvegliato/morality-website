@@ -104,7 +104,7 @@ export default class Playground extends React.Component {
               updateGridWorld={this.props.updateGridWorld}
               toggleForbiddenState={this.props.toggleForbiddenState}
               toggleNorm={this.props.toggleNorm}
-              toggleMoralExemplarAction={this.props.toggleMoralExemplarAction}
+              toggleMoralExample={this.props.toggleMoralExample}
             />
           </Col>
         );
@@ -144,5 +144,5 @@ Playground.propTypes = {
   toggleForbiddenState: PropTypes.func.isRequired,
   toggleNorm: PropTypes.func.isRequired,
   updateTolerance: PropTypes.func.isRequired,
-  toggleMoralExemplarAction: PropTypes.func.isRequired
+  toggleMoralExample: PropTypes.func.isRequired
 };

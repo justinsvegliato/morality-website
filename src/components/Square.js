@@ -38,8 +38,8 @@ export default class Square extends React.Component {
     overlay.hide();
   }
 
-  onMoralExemplarActionChange(onChange, id, action, overlay) {
-    onChange(id, action);
+  onMoralExampleChange(onChange, id, moralExample, overlay) {
+    onChange(id, moralExample);
     overlay.hide();
   }
 
@@ -73,7 +73,7 @@ export default class Square extends React.Component {
 
     if (this.props.settings.ethics === 'normBasedEthics' && this.props.id in this.props.normBasedEthics.violationFunction) {
       return this.props.normBasedEthics.violationFunction[this.props.id].map((norm) => {
-        return <Badge variant="danger">{norm}</Badge>;
+        return <Badge key={norm} variant="danger">{norm}</Badge>;
       });
     }
 
@@ -106,7 +106,7 @@ export default class Square extends React.Component {
     const onGridWorldChange = (event) => this.onGridWorldChange(this.props.updateGridWorld, this.props.rowId, this.props.columnId, event.target.value, this.refs.overlay);
     const onForbiddenStateChange = () => this.onForbiddenStateChange(this.props.toggleForbiddenState, this.props.id, this.refs.overlay);
     const onNormChange = (norm) => this.onNormChange(this.props.toggleNorm, this.props.id, norm, this.refs.overlay);
-    const onMoralExemplarActionChange = (action) => this.onMoralExemplarActionChange(this.props.toggleMoralExemplarAction, this.props.id, action, this.refs.overlay);
+    const onMoralExampleChange = (moralExample) => this.onMoralExampleChange(this.props.toggleMoralExample, this.props.id, moralExample, this.refs.overlay);
 
     return (
       <SquareEditor
@@ -119,7 +119,7 @@ export default class Square extends React.Component {
         onGridWorldChange={onGridWorldChange}
         onForbiddenStateChange={onForbiddenStateChange}
         onNormChange={onNormChange}
-        onMoralExemplarActionChange={onMoralExemplarActionChange}
+        onMoralExampleChange={onMoralExampleChange}
       />
     );
   }
@@ -152,5 +152,5 @@ Square.propTypes = {
   updateGridWorld: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired,
   toggleNorm: PropTypes.func.isRequired,
-  toggleMoralExemplarAction: PropTypes.func.isRequired
+  toggleMoralExample: PropTypes.func.isRequired
 };

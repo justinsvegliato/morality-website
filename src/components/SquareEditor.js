@@ -32,7 +32,7 @@ export default class SquareEditor extends React.Component {
       const isActive = this.props.id in this.props.normBasedEthics.violationFunction;
       const checked = isActive && this.props.normBasedEthics.violationFunction[this.props.id].includes(norm);
 
-      return <Form.Check type="checkbox" label={norm} checked={checked} onChange={() => this.props.onNormChange(norm)} />;
+      return <Form.Check key={norm} type="checkbox" label={norm} checked={checked} onChange={() => this.props.onNormChange(norm)} />;
     });
 
     return (
@@ -47,12 +47,12 @@ export default class SquareEditor extends React.Component {
     const actions = ['North', 'East', 'South', 'West', 'Stay'];
 
     const checkboxes = actions.map((action) => {
-      const normalizedAction = action.toUpperCase();
+      const moralExample = action.toUpperCase();
 
       const isActive = this.props.id in this.props.moralExemplarEthics;
-      const checked = isActive && this.props.moralExemplarEthics[this.props.id].includes(normalizedAction);
+      const checked = isActive && this.props.moralExemplarEthics[this.props.id].includes(moralExample);
 
-      return <Form.Check type="checkbox" label={action} checked={checked} onChange={() => this.props.onMoralExemplarActionChange(normalizedAction)} />;
+      return <Form.Check key={moralExample} type="checkbox" label={action} checked={checked} onChange={() => this.props.onMoralExampleChange(moralExample)} />;
     });
 
     return (
@@ -106,5 +106,5 @@ SquareEditor.propTypes = {
   onGridWorldChange: PropTypes.func.isRequired,
   onForbiddenStateChange: PropTypes.func.isRequired,
   onNormChange: PropTypes.func.isRequired,
-  onMoralExemplarActionChange: PropTypes.func.isRequired
+  onMoralExampleChange: PropTypes.func.isRequired
 };
