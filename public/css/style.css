@@ -29,6 +29,10 @@ footer {
   max-width: 270px;
 }
 
+.badge {
+  border-radius: 0px;
+}
+
 #navigation {
   background-color: #00546F !important;
 }
@@ -82,6 +86,12 @@ footer {
   cursor: pointer;
 }
 
+#grid-world .col-1 {
+  height: 92px;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
 #grid-world .card {
   padding: 5px;
   height: 99%;
@@ -89,42 +99,51 @@ footer {
   text-align: center;
 }
 
+#grid-world .card:hover {
+  cursor: pointer;
+  background-color: #ffc107 !important;
+  border-color: #ffc107 !important;
+}
+
 #grid-world .card-title {
   font-size: 13px;
+}
+
+#grid-world .card-title .highlight {
+  border-style: solid;
+  border-color: #f04124 !important;
+  border-width: 2px;
+  border-top: 0px;
+  border-bottom: 0px;
+}
+
+#grid-world .card-title .badge-info.highlight {
+  border-right: 0px;
+}
+
+#grid-world .card-title .badge-success.highlight {
+  border-left: 0px;
+}
+
+#grid-world .card-title .badge-info:first-child {
+  margin-right: 3px;
 }
 
 #grid-world .card-body {
   padding: 0px;
 }
 
-#grid-world .highlight {
-  border-style: solid;
-  border-color: #f04124 !important;
-  border-width: 2px;
+#grid-world .card-body {
+  margin-top: -11px;
+  margin-right: 0px;
 }
 
-#grid-world .badge {
-  border-radius: 0px;
-}
-
-#grid-world .badge-info:first-child {
-  margin-right: 3px;
+#grid-world .card-body .row {
+  height: 20px;
 }
 
 #grid-world .badge-danger {
   margin-bottom: 2px;
   padding-left: 0px;
   padding-right: 0px;
-}
-
-#grid-world .col-1 {
-  height: 92px;
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-#grid-world .card:hover {
-  cursor: pointer;
-  background-color: #ffc107 !important;
-  border-color: #ffc107 !important;
 }

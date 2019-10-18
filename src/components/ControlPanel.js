@@ -62,6 +62,7 @@ export default class ControlPanel extends React.Component {
         <Form.Control as="select" value={this.props.settings.ethics} onChange={onChange}>
           <option value="forbiddenStateEthics">Forbidden State Ethics</option>
           <option value="normBasedEthics">Norm-Based Ethics</option>
+          <option value="moralExemplarEthics">Moral Exemplar Ethics</option>
         </Form.Control>
       </Form>
     );

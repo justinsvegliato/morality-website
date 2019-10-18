@@ -50,7 +50,30 @@ export default class SquareEditor extends React.Component {
     );
   }
 
-  getEthicsEditor(id, ethics, forbiddenStateEthics, onForbiddenStateChange, normBasedEthics, onNormChange) {
+  getMoralExemplarEthicsEditor(id, moralExemplarEthics, onMoralExemplarActionChange) {
+    const actions = ['North', 'East', 'South', 'West', 'Stay'];
+
+    const checkboxes = actions.map((action) => {
+      const normalizedAction = action.toUpperCase();
+      return (
+        <Form.Check
+          type="checkbox"
+          label={action}
+          checked={id in moralExemplarEthics && moralExemplarEthics[id].includes(normalizedAction)}
+          onChange={() => onMoralExemplarActionChange(normalizedAction)}
+        />
+      );
+    });
+
+    return (
+      <Form.Group>
+        <Form.Label>Moral Exemplar Ethics</Form.Label>
+        {checkboxes}
+      </Form.Group>
+    );
+  }
+
+  getEthicsEditor(id, ethics, forbiddenStateEthics, onForbiddenStateChange, normBasedEthics, onNormChange, moralExemplarEthics, onMoralExemplarActionChange) {
     if (ethics === 'forbiddenStateEthics') {
       return this.getForbiddenStateEthicsEditor(id, forbiddenStateEthics, onForbiddenStateChange);
     }
@@ -58,11 +81,15 @@ export default class SquareEditor extends React.Component {
     if (ethics === 'normBasedEthics') {
       return this.getNormBasedEthicsEditor(id, normBasedEthics, onNormChange);
     }
+
+    if (ethics === 'moralExemplarEthics') {
+      return this.getMoralExemplarEthicsEditor(id, moralExemplarEthics, onMoralExemplarActionChange);
+    }
   }
 
   render() {
     const gridWorldEditor = this.getGridWorldEditor(this.props.value, this.props.onGridWorldChange);
-    const ethicsEditor = this.getEthicsEditor(this.props.id, this.props.settings.ethics, this.props.forbiddenStateEthics, this.props.onForbiddenStateChange, this.props.normBasedEthics, this.props.onNormChange);
+    const ethicsEditor = this.getEthicsEditor(this.props.id, this.props.settings.ethics, this.props.forbiddenStateEthics, this.props.onForbiddenStateChange, this.props.normBasedEthics, this.props.onNormChange, this.props.moralExemplarEthics, this.props.onMoralExemplarActionChange);
     return (
       <Popover className={this.props.className} placement={this.props.placement} arrowProps={this.props.arrowProps} style={this.props.style}>
         <Popover.Title as="h3">Details</Popover.Title>
@@ -87,7 +114,9 @@ SquareEditor.propTypes = {
   value: PropTypes.string.isRequired,
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
+  moralExemplarEthics: PropTypes.object.isRequired,
   onGridWorldChange: PropTypes.func.isRequired,
   onForbiddenStateChange: PropTypes.func.isRequired,
-  onNormChange: PropTypes.func.isRequired
+  onNormChange: PropTypes.func.isRequired,
+  onMoralExemplarActionChange: PropTypes.func.isRequired
 };

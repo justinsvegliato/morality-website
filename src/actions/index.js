@@ -6,6 +6,8 @@ export const CLEAR_FORBIDDEN_STATES = 'CLEAR_FORBIDDEN_STATES';
 export const TOGGLE_FORBIDDEN_STATE = 'TOGGLE_FORBIDDEN_STATE';
 export const CLEAR_NORMS = 'CLEAR_NORMS';
 export const TOGGLE_NORM = 'TOGGLE_NORM';
+export const CLEAR_MORAL_EXEMPLAR_ACTIONS = 'CLEAR_MORAL_EXEMPLAR_ACTIONS';
+export const TOGGLE_MORAL_EXEMPLAR_ACTION = 'TOGGLE_MORAL_EXEMPLAR_ACTION';
 export const UPDATE_TOLERANCE = 'UPDATE_TOLERANCE';
 
 export function updateEthics(ethics) {
@@ -61,6 +63,20 @@ export function toggleNorm(id, norm) {
     type: TOGGLE_NORM,
     id,
     norm
+  };
+}
+
+export function clearMoralExemplarActions() {
+  return {
+    type: CLEAR_MORAL_EXEMPLAR_ACTIONS
+  };
+}
+
+export function toggleMoralExemplarAction(id, action) {
+  return {
+    type: TOGGLE_MORAL_EXEMPLAR_ACTION,
+    id,
+    action
   };
 }
 
