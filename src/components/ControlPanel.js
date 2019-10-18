@@ -93,15 +93,16 @@ export default class ControlPanel extends React.Component {
   }
 
   getPriceOfMoralityProgressBar() {
-    const priceOfMorality = this.props.amoralObjective - this.props.moralObjective;
-
     const percentage = this.props.amoralObjective === 0 ? 100 : (this.props.moralObjective / this.props.amoralObjective) * 100;
     const negatedPercentage = 100 - percentage;
 
     const percentageText = percentage.toFixed(1);
     const negatedPercentageText = negatedPercentage.toFixed(1);
+
     const amoralObjectiveText = this.props.amoralObjective.toFixed(1);
     const moralObjectiveText = this.props.moralObjective.toFixed(1);
+
+    const priceOfMorality = this.props.amoralObjective - this.props.moralObjective;
     const priceOfMoralityText = priceOfMorality.toFixed(1);
 
     const tooltip = (
@@ -111,11 +112,13 @@ export default class ControlPanel extends React.Component {
           <Col xs={2} className="text-right">{moralObjectiveText}</Col>
           <Col xs={3} className="text-right">{percentageText}%</Col>
         </Row>
+
         <Row noGutters className="text-danger">
           <Col xs={7} className="text-left">Price of Morality</Col>
           <Col xs={2} className="text-right">{priceOfMoralityText}</Col>
           <Col xs={3} className="text-right">{negatedPercentageText}%</Col>
         </Row>
+
         <Row noGutters className="text-info">
           <Col xs={7} className="text-left">Amoral Policy Value</Col>
           <Col xs={2} className="text-right">{amoralObjectiveText}</Col>
@@ -141,18 +144,18 @@ export default class ControlPanel extends React.Component {
   }
 
   getGridWorldInformation() {
-    let emptyCount = 0;
-    let wallCount = 0;
-    let goalCount = 0;
+    let emptySquareCount = 0;
+    let wallSquareCount = 0;
+    let goalSquareCount = 0;
 
     for (const row of this.props.gridWorld.grid) {
       for (const square of row) {
         if (square === 'O') {
-          emptyCount++;
+          emptySquareCount++;
         } else if (square === 'W') {
-          wallCount++;
+          wallSquareCount++;
         } else {
-          goalCount++;
+          goalSquareCount++;
         }
       }
     }
@@ -162,15 +165,15 @@ export default class ControlPanel extends React.Component {
         <Row noGutters className="text-primary"><strong>Grid World</strong></Row>
         <Row noGutters>
           <Col xs={10} className="text-left">Empty Squares</Col>
-          <Col xs={2} className="text-right">{emptyCount}</Col>
+          <Col xs={2} className="text-right">{emptySquareCount}</Col>
         </Row>
         <Row noGutters>
           <Col xs={10} className="text-left">Wall Squares</Col>
-          <Col xs={2} className="text-right">{wallCount}</Col>
+          <Col xs={2} className="text-right">{wallSquareCount}</Col>
         </Row>
         <Row noGutters>
           <Col xs={10} className="text-left">Goal Squares</Col>
-          <Col xs={2} className="text-right">{goalCount}</Col>
+          <Col xs={2} className="text-right">{goalSquareCount}</Col>
         </Row>
       </>
     );
@@ -231,22 +234,15 @@ export default class ControlPanel extends React.Component {
   }
 
   render() {
-    const ethicsSelector = this.getEthicsSelector();
-    const clearButton = this.getClearButton();
-    const toleranceSelector = this.getToleranceSelector();
-    const viewSelector = this.getViewSelector();
-    const priceOfMoralityProgressBar = this.getPriceOfMoralityProgressBar();
-    const informationWindow = this.getInformationWindow();
-
     return (
-      <Alert id="control-panel" variant={'light'}>
+      <Alert id="control-panel" variant="light">
         <Row>
-          <Col xs={1}>{clearButton}</Col>
-          <Col xs={2}>{viewSelector}</Col>
-          <Col xs={3}>{ethicsSelector}</Col>
-          <Col xs={2}>{toleranceSelector}</Col>
-          <Col xs={3}>{priceOfMoralityProgressBar}</Col>
-          <Col xs={1}>{informationWindow}</Col>
+          <Col xs={1}>{this.getClearButton()}</Col>
+          <Col xs={2}>{this.getViewSelector()}</Col>
+          <Col xs={3}>{this.getEthicsSelector()}</Col>
+          <Col xs={2}>{this.getToleranceSelector()}</Col>
+          <Col xs={3}>{this.getPriceOfMoralityProgressBar()}</Col>
+          <Col xs={1}>{this.getInformationWindow()}</Col>
         </Row>
       </Alert>
     );
