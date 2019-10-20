@@ -33,6 +33,14 @@ footer {
   border-radius: 0px;
 }
 
+.bg-success {
+  background-color: #63b980 !important;
+}
+
+.border-success {
+  border-color: #63b980 !important;
+}
+
 #navigation {
   background-color: #00546F !important;
 }
@@ -56,9 +64,12 @@ footer {
   text-align: center;
 }
 
-#playground {
-  margin-top: 4em;
+#overview, #tutorial, #playground {
   margin-bottom: 4em;
+}
+
+#tutorial {
+  background-color: #eee;
 }
 
 #root {
@@ -84,6 +95,21 @@ footer {
 
 #control-panel .badge:hover {
   cursor: pointer;
+}
+
+#view-selector {
+  background-color: #008cba;
+  color: #fff
+}
+
+#ethics-selector {
+  background-color: #43ac6a;
+  color: #fff
+}
+
+#tolerance-selector {
+  background-color: #43ac6a;
+  color: #fff
 }
 
 #grid-world .col-1 {

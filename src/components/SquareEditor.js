@@ -8,9 +8,9 @@ export default class SquareEditor extends React.Component {
     return (
       <Form.Group>
         <Form.Control as="select" value={this.props.value} onChange={this.props.onGridWorldChange}>
-          <option value='O'>Empty</option>
-          <option value='W'>Wall</option>
-          <option value='G'>Goal</option>
+          <option value='O'>Empty Square</option>
+          <option value='W'>Wall Square</option>
+          <option value='G'>Goal Square</option>
         </Form.Control>
       </Form.Group>
     );

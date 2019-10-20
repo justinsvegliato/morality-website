@@ -57,7 +57,7 @@ export default class ControlPanel extends React.Component {
 
     return (
       <Form>
-        <Form.Control as="select" value={this.props.settings.ethics} onChange={onChange}>
+        <Form.Control id="ethics-selector" as="select" value={this.props.settings.ethics} onChange={onChange}>
           <option value="forbiddenStateEthics">Forbidden State Ethics</option>
           <option value="normBasedEthics">Norm-Based Ethics</option>
           <option value="moralExemplarEthics">Moral Exemplar Ethics</option>
@@ -71,12 +71,14 @@ export default class ControlPanel extends React.Component {
 
     if (this.props.settings.ethics === 'normBasedEthics') {
       return (
-        <Form.Control as="select" value={this.props.normBasedEthics.tolerance} onChange={onChange}>
-          <option value="0">No Tolerance</option>
-          <option value="0.3">Low Tolerance</option>
-          <option value="0.7">Medium Tolerance</option>
-          <option value="1">High Tolerance</option>
-        </Form.Control>
+        <Form>
+          <Form.Control id="tolerance-selector" as="select" value={this.props.normBasedEthics.tolerance} onChange={onChange}>
+            <option value="0">No Tolerance</option>
+            <option value="0.3">Low Tolerance</option>
+            <option value="0.7">Medium Tolerance</option>
+            <option value="1">High Tolerance</option>
+          </Form.Control>
+        </Form>
       );
     }
   }
@@ -85,10 +87,12 @@ export default class ControlPanel extends React.Component {
     const onChange = (event) => this.props.updateView(event.target.value);
 
     return (
-      <Form.Control as="select" value={this.props.view} onChange={onChange}>
-        <option value="actions">Actions</option>
-        <option value="values">Values</option>
-      </Form.Control>
+      <Form>
+        <Form.Control id="view-selector" as="select" value={this.props.view} onChange={onChange}>
+          <option value="actions">Actions</option>
+          <option value="values">Values</option>
+        </Form.Control>
+      </Form>
     );
   }
 
