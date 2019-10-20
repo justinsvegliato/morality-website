@@ -99,17 +99,20 @@ footer {
 
 #view-selector {
   background-color: #008cba;
-  color: #fff
+  border-color: #008cba;
+  color: #fff;
 }
 
 #ethics-selector {
   background-color: #43ac6a;
-  color: #fff
+  border-color: #43ac6a;
+  color: #fff;
 }
 
 #tolerance-selector {
   background-color: #43ac6a;
-  color: #fff
+  border-color: #43ac6a;
+  color: #fff;
 }
 
 #grid-world .col-1 {
