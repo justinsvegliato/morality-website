@@ -316,13 +316,13 @@ export default class ControlPanel extends React.Component {
           <Modal.Body>
             <h5>Control Panel</h5>
             <ul>
-              <li>Click the <Badge pill variant="danger">red</Badge> button to clear the grid world.</li>
+              <li>Click the <Badge pill variant="danger">red</Badge> trash can button to clear the grid world.</li>
               <li>Select from the <Badge pill variant="primary">blue</Badge> dropdown to change whether to see the action or value of each square.</li>
               <li>Select from the <Badge pill variant="danger">red</Badge> dropdown to change the ethical context.</li>
               <li>The <Badge pill variant="success">green</Badge> part of the bar is the value of the moral policy.</li>
               <li>The <Badge pill variant="danger">red</Badge> part of the bar is the price of morality.</li>
-              <li>Click on the <Badge pill variant="primary">blue</Badge> information icon to see extra information about the playground.</li>
-              <li>Click on the <Badge pill variant="primary">blue</Badge> help icon to see how to use the playground.</li>
+              <li>Click on the <Badge pill variant="primary">blue</Badge> information button to see extra information about the playground.</li>
+              <li>Click on the <Badge pill variant="primary">blue</Badge> help button to see how to use the playground.</li>
             </ul>
 
             <h5>Grid World</h5>
