@@ -10,7 +10,7 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { FaInfoCircle, FaQuestionCircle } from 'react-icons/fa';
+import { FaTrash, FaInfoCircle, FaQuestionCircle } from 'react-icons/fa';
 
 export default class ControlPanel extends React.Component {
   constructor(props) {
@@ -37,7 +37,7 @@ export default class ControlPanel extends React.Component {
 
     return (
       <>
-        <Button variant="danger" onClick={openConfirmationWindow}>Clear</Button>
+        <Button variant="danger" onClick={openConfirmationWindow}><FaTrash /></Button>
 
         <Modal show={this.state.isConfirmationWindowOpen}>
           <Modal.Header>
@@ -317,10 +317,10 @@ export default class ControlPanel extends React.Component {
             <h5>Control Panel</h5>
             <ul>
               <li>Click the <Badge pill variant="danger">red</Badge> button to clear the grid world.</li>
+              <li>Select from the <Badge pill variant="primary">blue</Badge> dropdown to change whether to see the action or value of each square.</li>
               <li>Select from the <Badge pill variant="danger">red</Badge> dropdown to change the ethical context.</li>
               <li>The <Badge pill variant="success">green</Badge> part of the bar is the value of the moral policy.</li>
               <li>The <Badge pill variant="danger">red</Badge> part of the bar is the price of morality.</li>
-              <li>Select from the <Badge pill variant="primary">blue</Badge> dropdown to change whether to see the action or value of each square.</li>
               <li>Click on the <Badge pill variant="primary">blue</Badge> information icon to see extra information about the playground.</li>
               <li>Click on the <Badge pill variant="primary">blue</Badge> help icon to see how to use the playground.</li>
             </ul>
@@ -345,10 +345,10 @@ export default class ControlPanel extends React.Component {
       <Alert id="control-panel" variant="light">
         <Row>
           <Col xs={1}>{this.getClearButton()}</Col>
+          <Col xs={2}>{this.getViewSelector()}</Col>
           <Col xs={3}>{this.getEthicsSelector()}</Col>
           <Col xs={2}>{this.getToleranceSelector()}</Col>
           <Col xs={2}>{this.getPriceOfMoralityProgressBar()}</Col>
-          <Col xs={2}>{this.getViewSelector()}</Col>
           <Col xs={1}>{this.getInformationWindow()}</Col>
           <Col xs={1}>{this.getHelpButton()}</Col>
         </Row>
