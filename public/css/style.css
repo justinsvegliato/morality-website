@@ -5,6 +5,10 @@ p {
   text-align: justify;
 }
 
+li {
+  font-weight: 300;
+}
+
 select {
   font-weight: 300 !important;
 }
@@ -89,12 +93,26 @@ footer {
 #control-panel .badge {
   height: 100%;
   width: 100%;
-  font-size: 18px;
-  padding-top: 5px;
+  font-size: 21px;
+}
+
+#control-panel button {
+  width: 100%;
+  height: 100%;
 }
 
 #control-panel .badge:hover {
   cursor: pointer;
+}
+
+#help-button, #info-button {
+  padding-top: 0px;
+  padding-bottom: 0px;
+  font-size: 21px;
+}
+
+#help-window .badge {
+  font-size: 0.8em;
 }
 
 #view-selector {

@@ -10,18 +10,19 @@ import ProgressBar from 'react-bootstrap/ProgressBar';
 import Modal from 'react-bootstrap/Modal';
 import Row from 'react-bootstrap/Row';
 import Tooltip from 'react-bootstrap/Tooltip';
-import { FaInfo } from 'react-icons/fa';
+import { FaInfoCircle, FaQuestionCircle } from 'react-icons/fa';
 
 export default class ControlPanel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isConfirmationWindowOpen: false
+      isConfirmationWindowOpen: false,
+      isHelpWindowOpen: false
     };
   }
 
   getClearButton() {
-    const openConfirmationModal = () => {
+    const openConfirmationWindow = () => {
       this.setState({isConfirmationWindowOpen: true});
     };
 
@@ -36,7 +37,7 @@ export default class ControlPanel extends React.Component {
 
     return (
       <>
-        <Button variant="danger" onClick={openConfirmationModal}>Clear</Button>
+        <Button variant="danger" onClick={openConfirmationWindow}>Clear</Button>
 
         <Modal show={this.state.isConfirmationWindowOpen}>
           <Modal.Header>
@@ -289,9 +290,53 @@ export default class ControlPanel extends React.Component {
     );
 
     return (
-      <OverlayTrigger placement="bottom" overlay={tooltip}>
-        <Badge variant="primary"><FaInfo /></Badge>
+      <OverlayTrigger placement="bottom" trigger="click" overlay={tooltip} rootClose>
+        <Button id="info-button" variant="primary"><FaInfoCircle /></Button>
       </OverlayTrigger>
+    );
+  }
+
+  getHelpButton() {
+    const openHelpWindow = () => {
+      this.setState({isHelpWindowOpen: true});
+    };
+
+    const onConfirm = () => {
+      this.setState({isHelpWindowOpen: false});
+    };
+
+    return (
+      <>
+        <Button id="help-button" variant="primary" onClick={openHelpWindow}><FaQuestionCircle /></Button>
+
+        <Modal id="help-window" size="lg" show={this.state.isHelpWindowOpen} scrollable>
+          <Modal.Header>
+            <Modal.Title>Help</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h5>Control Panel</h5>
+            <ul>
+              <li>Click the <Badge pill variant="danger">red</Badge> button to clear the grid world.</li>
+              <li>Select from the <Badge pill variant="danger">red</Badge> dropdown to change the ethical context.</li>
+              <li>The <Badge pill variant="success">green</Badge> part of the bar is the value of the moral policy.</li>
+              <li>The <Badge pill variant="danger">red</Badge> part of the bar is the price of morality.</li>
+              <li>Select from the <Badge pill variant="primary">blue</Badge> dropdown to change whether to see the action or value of each square.</li>
+              <li>Click on the <Badge pill variant="primary">blue</Badge> information icon to see extra information about the playground.</li>
+              <li>Click on the <Badge pill variant="primary">blue</Badge> help icon to see how to use the playground.</li>
+            </ul>
+
+            <h5>Grid World</h5>
+            <ul>
+              <li>Click on a <Badge pill variant="secondary">square</Badge> to edit it.</li>
+              <li>Each square shows the amoral policy in <Badge pill variant="info">light blue</Badge> and the moral policy in <Badge pill variant="success">green</Badge>.</li>
+              <li>If the amoral policy and the moral policy are different, they're highlighted in <Badge pill variant="danger">red</Badge>.</li>
+            </ul>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="primary" onClick={onConfirm}>OK</Button>
+          </Modal.Footer>
+        </Modal>
+      </>
     );
   }
 
@@ -300,11 +345,12 @@ export default class ControlPanel extends React.Component {
       <Alert id="control-panel" variant="light">
         <Row>
           <Col xs={1}>{this.getClearButton()}</Col>
-          <Col xs={2}>{this.getViewSelector()}</Col>
           <Col xs={3}>{this.getEthicsSelector()}</Col>
           <Col xs={2}>{this.getToleranceSelector()}</Col>
-          <Col xs={3}>{this.getPriceOfMoralityProgressBar()}</Col>
+          <Col xs={2}>{this.getPriceOfMoralityProgressBar()}</Col>
+          <Col xs={2}>{this.getViewSelector()}</Col>
           <Col xs={1}>{this.getInformationWindow()}</Col>
+          <Col xs={1}>{this.getHelpButton()}</Col>
         </Row>
       </Alert>
     );
