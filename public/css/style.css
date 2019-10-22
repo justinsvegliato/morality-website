@@ -29,6 +29,10 @@ footer {
   font-size: 18px;
 }
 
+.jumbotron {
+  margin-bottom: 0px;
+}
+
 .tooltip-inner {
   max-width: 270px;
 }
@@ -56,6 +60,7 @@ footer {
 #banner {
   text-align: center;
   padding: 5em;
+  padding-top: 10em;
 }
 
 #logo {
@@ -68,11 +73,17 @@ footer {
   text-align: center;
 }
 
-#overview, #tutorial, #playground {
-  margin-bottom: 4em;
+#overview {
+  padding-top: 4em;
+  padding-bottom: 4em;
 }
 
-#tutorial {
+#getting-started, #playground {
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+#getting-started {
   background-color: #eee;
 }
 

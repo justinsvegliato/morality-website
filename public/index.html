@@ -15,11 +15,12 @@
     <link rel="manifest" href="/site.webmanifest">
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/hljs.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
   </head>
 
   <body>
-    <nav id="navigation" class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav id="navigation" class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div class="container">
         <a class="navbar-brand" href="/"><img id="icon" src="img/icon.png"/></a>
 
@@ -28,6 +29,10 @@
             <li class="nav-item">
               <a class="nav-link" href="#">Home</a>
             </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#getting-started">Getting Started</a>
+              </li>
 
             <li class="nav-item">
               <a class="nav-link" href="#playground">Playground</a>
@@ -47,23 +52,110 @@
         <div class="container">
           <div class="row">
             <div class="col-md-4">
-              <h3 class="text-danger">Build an agent</h3>
+              <h3 class="text-danger">Build an autonomous agent</h3>
               <p>Define how your agent interacts with the world by specifying its states, actions, transition function, and reward function. Select the classic grid world agent or make your own.</p>
-              <code>const agent = new GridWorldAgent(...)</code>
+              <code>const agent = new Agent(...)</code>
             </div>
 
             <div class="col-md-4">
-              <h3 class="text-warning">Choose an ethical theory</h3>
-              <p>Give your agent the context needed to reason about the ethical implications of its actions. Select an ethical theory that aligns with important values, risks, and responsibilities.</p>
-              <code>const ethics = new ForbiddenStateEthics(...)</code>
+              <h3 class="text-warning">Choose an ethical system</h3>
+              <p>Give your agent the context needed to reason about the ethical implications of its actions. Select an ethical system that aligns with important values, risks, and responsibilities.</p>
+              <code>const ethics = new Ethics(...)</code>
             </div>
 
             <div class="col-md-4">
               <h3 class="text-success">Bring them together</h3>
-              <p>Generate a policy for your agent that allows it to complete tasks as efficiently as possible while still complying with the given ethical theory. Say goodbye to reward hacking.</p>
+              <p>Generate a policy for your agent that allows it to complete tasks as efficiently as possible while still complying with an ethical system. Say goodbye to reward hacking.</p>
               <code>const solution = morality.solve(...)</code>
             </div>
           </div>
+        </div>
+      </div>
+      
+      <div id="getting-started">
+        <div class="container">
+          <h2>Getting Started</h2>
+
+          <p>Morality.js is a library for building autonomous agents that reason ethically. To get started, let's go through a simple example on how to build a grid world agent that follows an ethical system. However, before we get started, you can add Morality.js to your node project like any other npm package like this:</p>
+
+  <pre><code>
+  npm install --save morality
+  </code></pre>
+
+          <p>Suppose we have a robot searching for money in a grid world. The robot can stay in its current location or move to another square by going north, east, south, or west. When the robot tries to move to another square, it has a small chance of slipping into a square to the left or right of its current square because one of its wheels can get stuck sometimes. In Morality.js, we can define a grid world agent using a multidimensional array where the symbol <kbd>O</kbd> represents an empty square, the symbol <kbd>W</kbd> represents a wall square, and the symbol <kbd>G</kbd> represents a goal square.</p>
+
+  <pre><code>
+  const agent = new GridWorldAgent([
+    ['O', 'O', 'W', 'W', 'O'],
+    ['O', 'O', 'W', 'W', 'O'],
+    ['O', 'O', 'O', 'O', 'G']
+  ]);
+  </code></pre>
+
+          <p>If we want our robot to reason ethically, we also have to specify an ethical system. Morality.js offers three ethical systems right out of the box: forbidden state ethics, norm-based ethics, and moral exemplar ethics. <strong>Forbidden state ethics</strong> is a simple ethical system that says that an agent shouldn't ever enter certain states of the world. In Morality.js, we can define forbidden state ethics by listing each forbidden state.</p>
+
+  <pre><code>
+  const ethics = new ForbiddenStateEthics([0, 4, 10]);
+  </code></pre>
+
+          <p><strong>Norm-based ethics</strong> is a more sophisticated ethical system that says that an agent shouldn't violate certain norms beyond some tolerance. To do this, we need a few components: a set of norms, a violation function, a penalty function, and a tolerance. First, the set of norms represent the rules that shouldn't be violated by the agent. Next, the violation function represents whether or not each state violates a norm. Moroever, the penalty function represents the cost of violating a norm given that the agent performed a specific action in a particular state. Finally, the tolerance represents the slack that is given to the agent. In Morality.js, we can define norm-based ethics by specifying each of these components.</p>
+
+  <pre><code>
+  const norms = ['Do Not Yell', 'Do Not Lie'];
+
+  const violationFunction = (state) => {
+    if (state == 55) {
+      return ['Do Not Yell', 'Do Not Lie'];
+    }
+    return [];
+  };
+
+  const penaltyFunction = (norm, state, action) => {
+    if (norm == 'Do Not Yell') {
+      return 1;
+    }
+    if (norm == 'Do Not Lie') {
+      return 10;
+    }
+    return 0;
+  };
+
+  const tolerance = 0.3;
+
+  const ethics = new NormBasedEthics(norms, violationFunction, penaltyFunction, tolerance);
+  </code></pre>
+
+          <p><strong>Moral exemplar ethics</strong> is an ethical system based on virtue ethics that says that an agent should strive to act like a moral exemplar. To put matters more simply, an agent should perform any action that would be performed by a moral exemplar. This means we need a list of trajectories that have been performed by moral exemplars. In Morality.js, we can define moral exemplar ethics by specifying this list.</p>
+
+  <pre><code>
+  const ethics = new MoralExemplarEthics([
+    [[0, 1], ['EAST', 'SOUTH']], 
+    [[5, 6], ['SOUTH'], ['EAST']]
+  ]);
+  </code></pre>
+
+          <p>Once we've defined an autonomous agent and an ethical system, we can use Morality.js to calculate a solution.</p>
+
+  <pre><code>
+  const solution = morality.solve(agent, ethics);
+  </code></pre>
+        
+          <p>A solution in Morality.js is just a map with a value function linking each state to its optimal value and a policy linking each state to its optimal action.</p>
+
+  <pre><code>
+  {
+    'values': {
+      '0': 84.9,
+      '1': 85.5,
+      ...
+    },
+    'policy': {
+      '0': 'SOUTH',
+      '1': 'EAST', 
+      ...
+    }
+  }
+  </code></pre>          
         </div>
       </div>
 
@@ -71,7 +163,7 @@
         <div class="container">
           <h2>Playground</h2>
 
-          <p>Suppose we have a robot searching for money hidden in a grid world. The robot can stay in its current location or move to another square by going north, east, south, or west. When the robot moves to another square, it has a small chance of slipping into a square to the left or right of its current square because one of its wheels can get stuck sometimes. More importantly, because we want our robot to be moral, we have to specify an ethical framework. While there are many ethical frameworks out there, we use two simple choices here: forbidden state ethics and norm-based ethics. Simply put, in forbidden state ethics, the robot has to avoid forbidden squares at all costs. In norm-based ethics, however, the robot has to avoid squares that break specific rules but is allowed some slack. The goal of the robot is to get as much money as possible while staying moral.</p>
+          <p>Curious? Play around with a simple grid world agent by switching between forbidden state ethics, norm-based ethics, and moral exemplar ethics.</p>
 
           <div id="root"></div>
         </div>
@@ -85,5 +177,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>
