@@ -85,11 +85,15 @@
           <p>Suppose we have a robot searching for money in a grid world. The robot can stay in its current location or move to another square by going north, east, south, or west. When the robot tries to move to another square, it has a small chance of slipping into a square to the left or right of its current square because one of its wheels can get stuck sometimes. In Morality.js, we can define a grid world agent using a multidimensional array where the symbol <kbd>O</kbd> represents an empty square, the symbol <kbd>W</kbd> represents a wall square, and the symbol <kbd>G</kbd> represents a goal square.</p>
 
   <pre><code>
-  const agent = new GridWorldAgent([
-    ['O', 'O', 'W', 'W', 'O'],
-    ['O', 'O', 'W', 'W', 'O'],
-    ['O', 'O', 'O', 'O', 'G']
-  ]);
+  const agent = new GridWorldAgent({
+    "width": 5,
+    "height": 3,
+    "grid": [
+      ['O', 'O', 'W', 'W', 'O'],
+      ['O', 'O', 'W', 'W', 'O'],
+      ['O', 'O', 'O', 'O', 'G']
+    ]
+  });
   </code></pre>
 
           <p>If we want our robot to reason ethically, we also have to specify an ethical system. Morality.js offers three ethical systems right out of the box: forbidden state ethics, norm-based ethics, and moral exemplar ethics. <strong>Forbidden state ethics</strong> is a simple ethical system that says that an agent shouldn't ever enter certain states of the world. In Morality.js, we can define forbidden state ethics by listing each forbidden state.</p>
