@@ -35,9 +35,10 @@ export default class SquareEditor extends React.Component {
       return <Form.Check key={norm} type="checkbox" label={norm} checked={checked} onChange={() => this.props.onNormChange(norm)} />;
     });
 
+    // TODO Fix this inconsistency
     return (
       <Form.Group>
-        <Form.Label>Norm-Based Ethics</Form.Label>
+        <Form.Label>Prima Facie Duty Ethics</Form.Label>
         {checkboxes}
       </Form.Group>
     );

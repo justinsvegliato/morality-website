@@ -1,13 +1,16 @@
 import { CLEAR, TOGGLE_NORM, UPDATE_TOLERANCE } from '../actions';
 
 const INITIAL_NORM_BASED_ETHICS = {
-  'norms': ['Do Not Yell', 'Do Not Lie'],
+  'norms': ['Quiet Operation', 'Personal Space'],
   'violationFunction': {
-    55: ['Do Not Yell', 'Do Not Lie']
+    54: ['Quiet Operation'],
+    55: ['Quiet Operation', 'Personal Space'],
+    56: ['Quiet Operation', 'Personal Space'],
+    57: ['Personal Space']
   },
   'penaltyFunction': {
-    'Do Not Yell': 1,
-    'Do Not Lie': 5
+    'Quiet Operation': 1,
+    'Personal Space': 5
   },
   'tolerance': 0.3
 };

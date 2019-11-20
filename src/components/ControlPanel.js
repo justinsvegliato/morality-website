@@ -56,11 +56,12 @@ export default class ControlPanel extends React.Component {
   getEthicsSelector() {
     const onChange = (event) => this.props.updateEthics(event.target.value);
 
+    // TODO Fix this inconsistency
     return (
       <Form>
         <Form.Control id="ethics-selector" as="select" value={this.props.settings.ethics} onChange={onChange}>
           <option value="forbiddenStateEthics">Forbidden State Ethics</option>
-          <option value="normBasedEthics">Norm-Based Ethics</option>
+          <option value="normBasedEthics">Prima Facie Duty Ethics</option>
           <option value="moralExemplarEthics">Moral Exemplar Ethics</option>
         </Form.Control>
       </Form>
@@ -227,9 +228,10 @@ export default class ControlPanel extends React.Component {
       );
     });
 
+    // TODO Fix this inconsistency
     return (
       <>
-        <Row noGutters className="text-primary"><strong>Norm-Based Ethics</strong></Row>
+        <Row noGutters className="text-primary"><strong>Prima Facie Duty Ethics</strong></Row>
         {normSquareCountRows}
         {normPenaltyRows}
         <Row noGutters>

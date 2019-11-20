@@ -34,7 +34,7 @@ footer {
 }
 
 .tooltip-inner {
-  max-width: 270px;
+  width: 200px;
 }
 
 .badge {
@@ -116,6 +116,10 @@ footer {
   cursor: pointer;
 }
 
+#control-panel svg {
+  margin-top: -5px;
+}
+
 #help-button, #info-button {
   padding-top: 0px;
   padding-bottom: 0px;
@@ -151,7 +155,8 @@ footer {
 }
 
 #grid-world .card {
-  padding: 5px;
+  padding: 2px;
+  padding-top: 5px;
   height: 99%;
   width: 99%;
   text-align: center;

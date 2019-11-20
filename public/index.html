@@ -96,29 +96,29 @@
   });
   </code></pre>
 
-          <p>If we want our robot to reason ethically, we also have to specify an ethical system. Morality.js offers three ethical systems right out of the box: forbidden state ethics, norm-based ethics, and moral exemplar ethics. <strong>Forbidden state ethics</strong> is a simple ethical system that says that an agent shouldn't ever enter certain states of the world. In Morality.js, we can define forbidden state ethics by listing each forbidden state.</p>
+          <p>If we want our robot to reason ethically, we also have to specify an ethical system. Morality.js offers three ethical systems right out of the box: forbidden state ethics, prima facie duty ethics, and moral exemplar ethics. <strong>Forbidden state ethics</strong> is a simple ethical system that says that an agent shouldn't ever enter certain states of the world. In Morality.js, we can define forbidden state ethics by listing each forbidden state.</p>
 
   <pre><code>
   const ethics = new ForbiddenStateEthics([0, 4, 10]);
   </code></pre>
 
-          <p><strong>Norm-based ethics</strong> is a more sophisticated ethical system that says that an agent shouldn't violate certain norms beyond some tolerance. To do this, we need a few components: a set of norms, a violation function, a penalty function, and a tolerance. First, the set of norms represent the rules that shouldn't be violated by the agent. Next, the violation function represents whether or not each state violates a norm. Moroever, the penalty function represents the cost of violating a norm given that the agent performed a specific action in a particular state. Finally, the tolerance represents the slack that is given to the agent. In Morality.js, we can define norm-based ethics by specifying each of these components.</p>
+          <p><strong>Prima Facie Duty Ethics</strong> is a more sophisticated ethical system that says that an agent should follow duties. To do this, we need a few components: a set of duties, a violation function, a penalty function, and a tolerance. First, the set of duties represent the principles that shouldn't be neglected by the agent. Next, the violation function represents whether or not each state neglects a duty. Moroever, the penalty function represents the cost of neglecting a duty given that the agent performed a specific action in a particular state. Finally, the tolerance represents the slack that is given to the agent. In Morality.js, we can define prima-facie duty ethics by specifying each of these components.</p>
 
   <pre><code>
-  const norms = ['Do Not Yell', 'Do Not Lie'];
+  const duties = ['Quiet Operation', 'Personal Space'];
 
   const violationFunction = (state) => {
     if (state == 55) {
-      return ['Do Not Yell', 'Do Not Lie'];
+      return ['Quiet Operation', 'Personal Space'];
     }
     return [];
   };
 
-  const penaltyFunction = (norm, state, action) => {
-    if (norm == 'Do Not Yell') {
+  const penaltyFunction = (duty, state, action) => {
+    if (duty == 'Quiet Operation') {
       return 1;
     }
-    if (norm == 'Do Not Lie') {
+    if (duty == 'Personal Space') {
       return 10;
     }
     return 0;
@@ -126,7 +126,7 @@
 
   const tolerance = 0.3;
 
-  const ethics = new NormBasedEthics(norms, violationFunction, penaltyFunction, tolerance);
+  const ethics = new PrimaFacieDutyEthics(duties, violationFunction, penaltyFunction, tolerance);
   </code></pre>
 
           <p><strong>Moral exemplar ethics</strong> is an ethical system based on virtue ethics that says that an agent should strive to act like a moral exemplar. To put matters more simply, an agent should perform any action that would be performed by a moral exemplar. This means we need a list of trajectories that have been performed by moral exemplars. In Morality.js, we can define moral exemplar ethics by specifying this list.</p>
@@ -167,7 +167,7 @@
         <div class="container">
           <h2>Playground</h2>
 
-          <p>Curious? Play around with a simple grid world agent by switching between forbidden state ethics, norm-based ethics, and moral exemplar ethics.</p>
+          <p>Curious? Play around with a simple grid world agent by switching between forbidden state ethics, prima facie duty ethics, and moral exemplar ethics.</p>
 
           <div id="root"></div>
         </div>
