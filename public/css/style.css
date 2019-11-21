@@ -161,7 +161,7 @@ footer {
 
 #grid-world .card {
   padding: 2px;
-  padding-top: 5px;
+  padding-top: 2px;
   height: 99%;
   width: 99%;
   text-align: center;
@@ -207,11 +207,11 @@ footer {
 
 #grid-world .card-body {
   margin-top: -12px;
-  margin-left: 1px;
+  margin-left: 3px;
 }
 
 #grid-world .card-body .row {
-  height: 20px;
+  height: 22px;
 }
 
 #grid-world .badge-danger {
