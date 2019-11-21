@@ -219,3 +219,17 @@ footer {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+@media (max-width: 990px) {
+  #playground {
+    display: none;
+  }
+
+  #overview .col-md-4 {
+    margin-bottom: 25px;
+  }
+
+  #overview .col-md-4:last-child {
+    margin-bottom: 0px;
+  }
+}
