@@ -53,6 +53,11 @@ footer {
   background-color: #00546F !important;
 }
 
+#version {
+  color: #ffffffb3;
+  font-family: monospace;
+}
+
 #icon {
   height: 40px;
 }
