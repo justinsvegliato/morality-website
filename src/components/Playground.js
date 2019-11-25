@@ -3,21 +3,19 @@ import PropTypes from 'prop-types';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import * as morality from 'morality';
-import * as GridWorldAgent from 'morality/src/agents/grid-world-agent.js';
-import * as ForbiddenStateEthics from 'morality/src/ethics/forbidden-state-ethics.js';
-import * as NormBasedEthics from 'morality/src/ethics/norm-based-ethics.js';
-import * as MoralExemplarEthics from 'morality/src/ethics/moral-exemplar-ethics.js';
+import morality from 'morality';
+import agents from 'morality/agents';
+import ethics from 'morality/ethics';
 import ControlPanel from './ControlPanel';
 import Square from './Square';
 
 export default class Playground extends React.Component {
   getAgent() {
-    return new GridWorldAgent(this.props.gridWorld);
+    return new agents.GridWorldAgent(this.props.gridWorld);
   }
 
   getForbiddenStateEthics() {
-    return new ForbiddenStateEthics(this.props.forbiddenStateEthics);
+    return new ethics.ForbiddenStateEthics(this.props.forbiddenStateEthics);
   }
 
   getNormBasedEthics() {
@@ -33,7 +31,7 @@ export default class Playground extends React.Component {
     };
     const tolerance = this.props.normBasedEthics.tolerance;
 
-    return new NormBasedEthics(norms, violationFunction, penaltyFunction, tolerance);
+    return new ethics.NormBasedEthics(norms, violationFunction, penaltyFunction, tolerance);
   }
 
   getMoralExemplarEthics() {
@@ -48,7 +46,7 @@ export default class Playground extends React.Component {
       }
     }
 
-    return new MoralExemplarEthics(exemplarTrajectories);
+    return new ethics.MoralExemplarEthics(exemplarTrajectories);
   }
 
   getEthics() {
