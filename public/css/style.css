@@ -2,7 +2,6 @@ p {
   margin-top: 16px;
   font-weight: 300;
   font-size: 1rem;
-  text-align: justify;
 }
 
 li {
@@ -78,18 +77,32 @@ footer {
   text-align: center;
 }
 
+#external-site-container {
+  margin-top: 25px;
+}
+
+#external-site-container button:first-child {
+  margin-right: 5px;
+}
+
 #overview {
   padding-top: 4em;
   padding-bottom: 4em;
 }
 
-#getting-started, #playground {
+#tutorial, #playground {
   padding-top: 2em;
   padding-bottom: 2em;
 }
 
-#getting-started {
+#tutorial {
   background-color: #eee;
+}
+
+.separator {
+  height: 2px;
+  margin-top: 20px;
+  background-color: #2e8cba;
 }
 
 #root {
