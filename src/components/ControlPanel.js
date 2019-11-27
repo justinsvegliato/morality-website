@@ -151,7 +151,7 @@ export default class ControlPanel extends React.Component {
 
   getGridWorldInformation() {
     const squareCounts = {};
-    for (const row of this.props.gridWorld.grid) {
+    for (const row of this.props.gridWorld) {
       for (const value of row) {
         if (!(value in squareCounts)) {
           squareCounts[value] = 0;

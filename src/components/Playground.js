@@ -82,9 +82,9 @@ export default class Playground extends React.Component {
   }
 
   getGridWorld(amoralSolution, moralSolution) {
-    const content = this.props.gridWorld.grid.map((squares, rowId) => {
+    const content = this.props.gridWorld.map((squares, rowId) => {
       const row = squares.map((square, columnId) => {
-        const id = this.props.gridWorld.width * rowId + columnId;
+        const id = squares.length * rowId + columnId;
         return (
           <Col key={columnId} xs={1}>
             <Square

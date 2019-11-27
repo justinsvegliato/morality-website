@@ -1,34 +1,26 @@
 import { CLEAR, UPDATE_GRID_WORLD } from '../actions';
 
-const INITIAL_GRID_WORLD = {
-  'width': 12,
-  'height': 6,
-  'grid': [
-    ['O', 'O', 'W', 'W', 'O', 'O', 'O', 'W', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'W', 'W', 'O', 'W', 'O', 'W', 'O', 'W', 'O', 'O'],
-    ['O', 'O', 'W', 'W', 'O', 'W', 'O', 'O', 'O', 'W', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'W', 'W', 'W', 'W', 'W', 'O', 'O'],
-    ['O', 'O', 'W', 'W', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
-    ['O', 'O', 'O', 'O', 'O', 'W', 'W', 'W', 'W', 'W', 'G', 'O']
-  ]
-};
+const INITIAL_GRID_WORLD = [
+  ['O', 'O', 'W', 'W', 'O', 'O', 'O', 'W', 'O', 'O', 'O', 'O'],
+  ['O', 'O', 'W', 'W', 'O', 'W', 'O', 'W', 'O', 'W', 'O', 'O'],
+  ['O', 'O', 'W', 'W', 'O', 'W', 'O', 'O', 'O', 'W', 'O', 'O'],
+  ['O', 'O', 'O', 'O', 'O', 'W', 'W', 'W', 'W', 'W', 'O', 'O'],
+  ['O', 'O', 'W', 'W', 'O', 'O', 'O', 'O', 'O', 'O', 'O', 'O'],
+  ['O', 'O', 'O', 'O', 'O', 'W', 'W', 'W', 'W', 'W', 'G', 'O']
+];
 
 function getEmptyState(state) {
-  return Object.assign({}, state, {
-    grid: state.grid.map((row) => {
-      return Array(state.width).fill('O');
-    })
+  return state.map((row, rowId) => {
+    return Array(state[rowId].length).fill('O');
   });
 }
 
 function getNewState(state, action) {
-  return Object.assign({}, state, {
-    grid: state.grid.map((row, rowId) => {
-      if (action.rowId === rowId) {
-        return [...row.slice(0, action.columnId), action.value, ...row.slice(action.columnId + 1)];
-      }
-      return row;
-    })
+  return state.map((row, rowId) => {
+    if (action.rowId === rowId) {
+      return [...row.slice(0, action.columnId), action.value, ...row.slice(action.columnId + 1)];
+    }
+    return row;
   });
 }
 

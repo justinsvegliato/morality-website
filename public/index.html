@@ -93,18 +93,14 @@
 
           <div class="separator"></div>
 
-          <p>First, we have to build an autonomous agent. Suppose we have a robot searching for money in a grid world. The robot can stay in its current square or move to another square by going north, east, south, or west. However, when the robot tries to move to another square, it has a small chance of slipping into a square to the left or the right of its current square because one of its wheels can get stuck at times. In Morality.js, we can define a grid world agent using an object that has the width of the grid world, the height of the grid world, and a multidimensional array that represents the grid world where the symbol <kbd>O</kbd> represents an empty square, the symbol <kbd>W</kbd> represents a wall square, and the symbol <kbd>G</kbd> represents a goal square.</p>
+          <p>First, we have to build an autonomous agent. Suppose we have a robot searching for money in a grid world. The robot can stay in its current square or move to another square by going north, east, south, or west. However, when the robot tries to move to another square, it has a small chance of slipping into a square to the left or the right of its current square because one of its wheels can get stuck at times. In Morality.js, we can define a grid world agent using an array where the symbol <kbd>O</kbd> represents an empty square, the symbol <kbd>W</kbd> represents a wall square, and the symbol <kbd>G</kbd> represents a goal square.</p>
 
   <pre><code>
-  const agent = new GridWorldAgent({
-    "width": 5,
-    "height": 3,
-    "grid": [
-      ['O', 'O', 'W', 'W', 'O'],
-      ['O', 'O', 'W', 'W', 'O'],
-      ['O', 'O', 'O', 'O', 'G']
-    ]
-  });
+  const agent = new GridWorldAgent([
+    ['O', 'O', 'W', 'W', 'O'],
+    ['O', 'O', 'W', 'W', 'O'],
+    ['O', 'O', 'O', 'O', 'G']
+  ]);
   </code></pre>
 
           <div class="separator"></div>
