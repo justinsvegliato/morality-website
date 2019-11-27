@@ -28,7 +28,7 @@ class App extends React.Component {
 
 App.propTypes = {
   settings: PropTypes.object.isRequired,
-  gridWorld: PropTypes.object.isRequired,
+  gridWorld: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
   moralExemplarEthics: PropTypes.object.isRequired,

@@ -361,7 +361,7 @@ export default class ControlPanel extends React.Component {
 
 ControlPanel.propTypes = {
   settings: PropTypes.object.isRequired,
-  gridWorld: PropTypes.object.isRequired,
+  gridWorld: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
   forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
   normBasedEthics: PropTypes.object.isRequired,
   moralExemplarEthics: PropTypes.object.isRequired,
