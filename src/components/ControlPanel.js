@@ -74,10 +74,9 @@ export default class ControlPanel extends React.Component {
       return (
         <Form>
           <Form.Control id="tolerance-selector" as="select" value={this.props.primaFacieDuties.tolerance} onChange={onChange}>
-            <option value="0">No Tolerance</option>
             <option value="0.3">Low Tolerance</option>
             <option value="0.7">Medium Tolerance</option>
-            <option value="1">High Tolerance</option>
+            <option value="1.2">High Tolerance</option>
           </Form.Control>
         </Form>
       );
