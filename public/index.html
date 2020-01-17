@@ -105,13 +105,13 @@
 
           <div class="separator"></div>
 
-          <p>Next, if we want our robot to reason ethically, we have to choose an ethical system. Morality.js offers a few ethical systems right out of the box: forbidden state ethics, prima facie duty ethics, and moral exemplar ethics. <strong>Forbidden state ethics</strong> is a simple ethical system that says that an agent should never enter certain states of the world. In Morality.js, we can define forbidden state ethics by listing each forbidden state.</p>
+          <p>Next, if we want our robot to reason ethically, we have to choose an ethical system. Morality.js offers a few ethical systems right out of the box: divine command theory, prima facie duties, and virtue ethics. <strong>Divine command theory</strong> is a simple ethical system that says that an agent should do whatever is commanded or forbade by a divine entity. In other words, the agent can't enter certain states of the world. In Morality.js, we can define divine command theory by listing each forbidden state.</p>
 
   <pre><code>
-  const ethics = new ForbiddenStateEthics([0, 4, 10]);
+  const ethics = new DivineCommandTheory([0, 4, 10]);
   </code></pre>
 
-          <p><strong>Prima Facie Duty Ethics</strong> is a more sophisticated ethical system that says that an agent should follow duties. To do this, we need a few components: a set of duties, a violation function, a penalty function, and a tolerance. First, the set of duties represents the duties that must be followed by the agent. Next, the violation function represents whether or not each state neglects a duty. Moreover, the penalty function represents the cost of neglecting a duty given that the agent performed a specific action in a particular state. Finally, the tolerance represents the slack that is given to the agent. In Morality.js, we can define prima facie duty ethics by specifying each of these components.</p>
+          <p><strong>Prima Facie Duties</strong> is a more sophisticated ethical system that says that an agent should follow duties. To do this, we need a few components: a set of duties, a violation function, a penalty function, and a tolerance. First, the set of duties represents the duties that must be followed by the agent. Next, the violation function represents whether or not each state neglects a duty. Moreover, the penalty function represents the cost of neglecting a duty given that the agent performed a specific action in a particular state. Finally, the tolerance represents the slack that is given to the agent. In Morality.js, we can define prima facie duties by specifying each of these components.</p>
 
   <pre><code>
   const duties = ['Quiet Operation', 'Personal Space'];
@@ -123,7 +123,7 @@
     return [];
   };
 
-  const penaltyFunction = (duty, state, action) => {
+  const penaltyFunction = (duty, state) => {
     if (duty == 'Quiet Operation') {
       return 1;
     }
@@ -135,13 +135,13 @@
 
   const tolerance = 0.3;
 
-  const ethics = new PrimaFacieDutyEthics(duties, violationFunction, penaltyFunction, tolerance);
+  const ethics = new PrimaFacieDuties(duties, violationFunction, penaltyFunction, tolerance);
   </code></pre>
 
-          <p><strong>Moral exemplar ethics</strong> is an ethical system based on virtue ethics that says that an agent should strive to behave like a moral exemplar. To do this, the agent should perform any action that would be performed by a moral exemplar in a specific state. This means we need a list of trajectories that have been experienced by moral exemplars. Each trajectory has a list of the states that have been encountered and a list of actions that have been performed by a moral exemplar. In Morality.js, we can define moral exemplar ethics by specifying this list.</p>
+          <p><strong>Virtue ethics</strong> is an ethical system that says that an agent should strive to behave like a moral exemplar. To do this, the agent should perform any action that would be performed by a moral exemplar in a specific state. This means we need a list of trajectories that have been experienced by moral exemplars. Each trajectory has a list of the states that have been encountered and a list of actions that have been performed by a moral exemplar. In Morality.js, we can define virtue ethics by specifying this list.</p>
 
   <pre><code>
-  const ethics = new MoralExemplarEthics([
+  const ethics = new VirtueEthics([
     [[0, 1], ['EAST', 'SOUTH']], 
     [[5, 6], ['SOUTH'], ['EAST']]
   ]);

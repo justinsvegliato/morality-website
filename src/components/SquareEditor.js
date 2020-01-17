@@ -35,7 +35,6 @@ export default class SquareEditor extends React.Component {
       return <Form.Check key={duty} type="checkbox" label={duty} checked={checked} onChange={() => this.props.onDutyChange(duty)} />;
     });
 
-    // TODO Fix this inconsistency
     return (
       <Form.Group>
         <Form.Label>Prima Facie Duties</Form.Label>

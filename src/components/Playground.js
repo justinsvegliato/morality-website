@@ -121,8 +121,6 @@ export default class Playground extends React.Component {
     const amoralSolution = morality.solve(agent);
     const moralSolution = morality.solve(agent, ethics);
 
-    // alert(JSON.stringify(moralSolution));
-
     return (
       <>
         {this.getControlPanel(amoralSolution, moralSolution)}
