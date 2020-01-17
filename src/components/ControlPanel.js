@@ -90,7 +90,7 @@ export default class ControlPanel extends React.Component {
       <Form>
         <Form.Control id="view-selector" as="select" value={this.props.view} onChange={onChange}>
           <option value="actions">Actions</option>
-          <option value="values">Values</option>
+          <option value="costs">Costs</option>
         </Form.Control>
       </Form>
     );
@@ -100,21 +100,21 @@ export default class ControlPanel extends React.Component {
     const percentage = this.props.amoralObjective === 0 ? 100 : (this.props.moralObjective / this.props.amoralObjective) * 100;
     const negatedPercentage = 100 - percentage;
 
-    const percentageText = percentage.toFixed(1);
-    const negatedPercentageText = negatedPercentage.toFixed(1);
+    const percentageText = Math.abs(percentage.toFixed(1));
+    const negatedPercentageText = Math.abs(negatedPercentage.toFixed(1));
 
-    const amoralObjectiveText = this.props.amoralObjective.toFixed(1);
-    const moralObjectiveText = this.props.moralObjective.toFixed(1);
+    const amoralObjectiveText = Math.abs(this.props.amoralObjective.toFixed(1));
+    const moralObjectiveText = Math.abs(this.props.moralObjective.toFixed(1));
 
     const priceOfMorality = this.props.amoralObjective - this.props.moralObjective;
-    const priceOfMoralityText = priceOfMorality.toFixed(1);
+    const priceOfMoralityText = Math.abs(priceOfMorality.toFixed(1));
 
     const tooltip = (
       <Tooltip>
-        <Row noGutters className="text-success">
-          <Col xs={7} className="text-left">Moral Policy Value</Col>
-          <Col xs={2} className="text-right">{moralObjectiveText}</Col>
-          <Col xs={3} className="text-right">{percentageText}%</Col>
+        <Row noGutters className="text-info">
+          <Col xs={7} className="text-left">Amoral Policy Costs</Col>
+          <Col xs={2} className="text-right">{amoralObjectiveText}</Col>
+          <Col xs={3} className="text-right">100%</Col>
         </Row>
 
         <Row noGutters className="text-danger">
@@ -123,25 +123,28 @@ export default class ControlPanel extends React.Component {
           <Col xs={3} className="text-right">{negatedPercentageText}%</Col>
         </Row>
 
-        <Row noGutters className="text-info">
-          <Col xs={7} className="text-left">Amoral Policy Value</Col>
-          <Col xs={2} className="text-right">{amoralObjectiveText}</Col>
-          <Col xs={3} className="text-right">100%</Col>
+        <Row noGutters className="text-success">
+          <Col xs={7} className="text-left">Moral Policy Costs</Col>
+          <Col xs={2} className="text-right">{moralObjectiveText}</Col>
+          <Col xs={3} className="text-right">{percentageText}%</Col>
         </Row>
 
-        <Badge variant="success">{moralObjectiveText}</Badge>
+        <Badge variant="info">{amoralObjectiveText}</Badge>
         <Badge variant="secondary">+</Badge>
         <Badge variant="danger">{priceOfMoralityText}</Badge>
         <Badge variant="secondary">=</Badge>
-        <Badge variant="info">{amoralObjectiveText}</Badge>
+        <Badge variant="success">{moralObjectiveText}</Badge>
       </Tooltip>
     );
+
+    const barPercentage = (this.props.amoralObjective / this.props.moralObjective) * 100;
+    const negatedBarPercentage = 100 - barPercentage;
 
     return (
       <OverlayTrigger placement="bottom" overlay={tooltip}>
         <ProgressBar>
-          <ProgressBar striped variant="success" label={moralObjectiveText} now={percentage} key={1} />
-          <ProgressBar striped variant="danger" label={priceOfMoralityText} now={negatedPercentage} key={2} />
+          <ProgressBar striped variant="info" label={amoralObjectiveText} now={barPercentage} key={1} />
+          <ProgressBar striped variant="danger" label={priceOfMoralityText} now={negatedBarPercentage} key={2} />
         </ProgressBar>
       </OverlayTrigger>
     );
@@ -316,7 +319,7 @@ export default class ControlPanel extends React.Component {
             <h5>Control Panel</h5>
             <ul>
               <li>Click the <Badge pill variant="danger">red</Badge> trash can button to clear the grid world.</li>
-              <li>Select from the <Badge pill variant="primary">blue</Badge> dropdown to change whether to see the action or value of each square.</li>
+              <li>Select from the <Badge pill variant="primary">blue</Badge> dropdown to change whether to see the action or cost of each square.</li>
               <li>Select from the <Badge pill variant="danger">red</Badge> dropdown to change the ethical context.</li>
               <li>The <Badge pill variant="success">green</Badge> part of the bar is the value of the moral policy.</li>
               <li>The <Badge pill variant="danger">red</Badge> part of the bar is the price of morality.</li>

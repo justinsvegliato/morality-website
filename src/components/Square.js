@@ -48,12 +48,12 @@ export default class Square extends React.Component {
       return null;
     }
 
-    const amoralResult = this.props.settings.view === 'values'
-      ? this.props.amoralValue.toFixed(1)
+    const amoralResult = this.props.settings.view === 'costs'
+      ? Math.abs(this.props.amoralValue.toFixed(1))
       : ICON_MAP[this.props.amoralAction];
 
-    const moralResult = this.props.settings.view === 'values'
-      ? this.props.moralValue.toFixed(1)
+    const moralResult = this.props.settings.view === 'costs'
+      ? Math.abs(this.props.moralValue.toFixed(1))
       : ICON_MAP[this.props.moralAction];
 
     const className = amoralResult !== moralResult ? 'highlight' : 0;
