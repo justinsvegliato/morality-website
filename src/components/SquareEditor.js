@@ -16,63 +16,63 @@ export default class SquareEditor extends React.Component {
     );
   }
 
-  getForbiddenStateEthicsEditor() {
-    const checked = this.props.forbiddenStateEthics.includes(this.props.id);
+  getDivineCommandTheoryEditor() {
+    const checked = this.props.divineCommandTheory.includes(this.props.id);
 
     return (
       <Form.Group>
-        <Form.Label>Forbidden Static Ethics</Form.Label>
+        <Form.Label>Divine Command Theory</Form.Label>
         <Form.Check type="checkbox" label="Forbidden" checked={checked} onChange={this.props.onForbiddenStateChange} />
       </Form.Group>
     );
   }
 
-  getNormBasedEthicsEditor() {
-    const checkboxes = this.props.normBasedEthics.norms.map((norm) => {
-      const isActive = this.props.id in this.props.normBasedEthics.violationFunction;
-      const checked = isActive && this.props.normBasedEthics.violationFunction[this.props.id].includes(norm);
+  getPrimaFacieDutiesEditor() {
+    const checkboxes = this.props.primaFacieDuties.duties.map((duty) => {
+      const isActive = this.props.id in this.props.primaFacieDuties.violationFunction;
+      const checked = isActive && this.props.primaFacieDuties.violationFunction[this.props.id].includes(duty);
 
-      return <Form.Check key={norm} type="checkbox" label={norm} checked={checked} onChange={() => this.props.onNormChange(norm)} />;
+      return <Form.Check key={duty} type="checkbox" label={duty} checked={checked} onChange={() => this.props.onDutyChange(duty)} />;
     });
 
     // TODO Fix this inconsistency
     return (
       <Form.Group>
-        <Form.Label>Prima Facie Duty Ethics</Form.Label>
+        <Form.Label>Prima Facie Duties</Form.Label>
         {checkboxes}
       </Form.Group>
     );
   }
 
-  getMoralExemplarEthicsEditor() {
+  getVirtueEthicsEditor() {
     const checkboxes = ['North', 'East', 'South', 'West', 'Stay'].map((action) => {
       const moralExample = action.toUpperCase();
 
-      const isActive = this.props.id in this.props.moralExemplarEthics;
-      const checked = isActive && this.props.moralExemplarEthics[this.props.id].includes(moralExample);
+      const isActive = this.props.id in this.props.virtueEthics;
+      const checked = isActive && this.props.virtueEthics[this.props.id].includes(moralExample);
 
       return <Form.Check key={moralExample} type="checkbox" label={action} checked={checked} onChange={() => this.props.onMoralExampleChange(moralExample)} />;
     });
 
     return (
       <Form.Group>
-        <Form.Label>Moral Exemplar Ethics</Form.Label>
+        <Form.Label>Virtue Ethics</Form.Label>
         {checkboxes}
       </Form.Group>
     );
   }
 
   getEthicsEditor() {
-    if (this.props.settings.ethics === 'forbiddenStateEthics') {
-      return this.getForbiddenStateEthicsEditor();
+    if (this.props.settings.ethics === 'divineCommandTheory') {
+      return this.getDivineCommandTheoryEditor();
     }
 
-    if (this.props.settings.ethics === 'normBasedEthics') {
-      return this.getNormBasedEthicsEditor();
+    if (this.props.settings.ethics === 'primaFacieDuties') {
+      return this.getPrimaFacieDutiesEditor();
     }
 
-    if (this.props.settings.ethics === 'moralExemplarEthics') {
-      return this.getMoralExemplarEthicsEditor();
+    if (this.props.settings.ethics === 'virtueEthics') {
+      return this.getVirtueEthicsEditor();
     }
   }
 
@@ -99,11 +99,11 @@ SquareEditor.propTypes = {
   settings: PropTypes.object.isRequired,
   id: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
-  forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
-  normBasedEthics: PropTypes.object.isRequired,
-  moralExemplarEthics: PropTypes.object.isRequired,
+  divineCommandTheory: PropTypes.arrayOf(PropTypes.number).isRequired,
+  primaFacieDuties: PropTypes.object.isRequired,
+  virtueEthics: PropTypes.object.isRequired,
   onGridWorldChange: PropTypes.func.isRequired,
   onForbiddenStateChange: PropTypes.func.isRequired,
-  onNormChange: PropTypes.func.isRequired,
+  onDutyChange: PropTypes.func.isRequired,
   onMoralExampleChange: PropTypes.func.isRequired
 };

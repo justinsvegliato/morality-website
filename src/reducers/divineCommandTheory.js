@@ -1,6 +1,6 @@
 import { CLEAR, TOGGLE_FORBIDDEN_STATE } from '../actions';
 
-const INITIAL_FORBIDDEN_STATE_ETHICS = [55];
+const INITIAL_DIVINE_COMMAND_THEORY = [55];
 
 function getEmptyState(state) {
   return [];
@@ -15,7 +15,7 @@ function getNewState(state, action) {
   }
 }
 
-export default function forbiddenStateEthics(state = INITIAL_FORBIDDEN_STATE_ETHICS, action) {
+export default function divineCommandTheory(state = INITIAL_DIVINE_COMMAND_THEORY, action) {
   switch (action.type) {
     case CLEAR:
       return getEmptyState(state);

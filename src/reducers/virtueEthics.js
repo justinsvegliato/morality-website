@@ -1,6 +1,6 @@
 import { CLEAR, TOGGLE_MORAL_EXAMPLE } from '../actions';
 
-const INITIAL_MORAL_EXEMPLAR_ETHICS = {
+const INITIAL_VIRTUE_ETHICS = {
   55: ['NORTH', 'WEST']
 };
 
@@ -25,7 +25,7 @@ function getNewState(state, action) {
   return generateNewState(state, action.id, [action.moralExample]);
 }
 
-export default function forbiddenStateEthics(state = INITIAL_MORAL_EXEMPLAR_ETHICS, action) {
+export default function virtueEthics(state = INITIAL_VIRTUE_ETHICS, action) {
   switch (action.type) {
     case CLEAR:
       return getEmptyState(state);

@@ -56,13 +56,12 @@ export default class ControlPanel extends React.Component {
   getEthicsSelector() {
     const onChange = (event) => this.props.updateEthics(event.target.value);
 
-    // TODO Fix this inconsistency
     return (
       <Form>
         <Form.Control id="ethics-selector" as="select" value={this.props.settings.ethics} onChange={onChange}>
-          <option value="forbiddenStateEthics">Forbidden State Ethics</option>
-          <option value="normBasedEthics">Prima Facie Duty Ethics</option>
-          <option value="moralExemplarEthics">Moral Exemplar Ethics</option>
+          <option value="divineCommandTheory">Divine Command Theory</option>
+          <option value="primaFacieDuties">Prima Facie Duties</option>
+          <option value="virtueEthics">Virtue Ethics</option>
         </Form.Control>
       </Form>
     );
@@ -71,10 +70,10 @@ export default class ControlPanel extends React.Component {
   getToleranceSelector() {
     const onChange = (event) => this.props.updateTolerance(event.target.value);
 
-    if (this.props.settings.ethics === 'normBasedEthics') {
+    if (this.props.settings.ethics === 'primaFacieDuties') {
       return (
         <Form>
-          <Form.Control id="tolerance-selector" as="select" value={this.props.normBasedEthics.tolerance} onChange={onChange}>
+          <Form.Control id="tolerance-selector" as="select" value={this.props.primaFacieDuties.tolerance} onChange={onChange}>
             <option value="0">No Tolerance</option>
             <option value="0.3">Low Tolerance</option>
             <option value="0.7">Medium Tolerance</option>
@@ -178,78 +177,77 @@ export default class ControlPanel extends React.Component {
     );
   }
 
-  getForbiddenStateEthicsInformation() {
-    if (this.props.settings.ethics !== 'forbiddenStateEthics') {
+  getDivineCommandTheoryInformation() {
+    if (this.props.settings.ethics !== 'divineCommandTheory') {
       return null;
     }
 
     return (
       <>
-        <Row noGutters className="text-primary"><strong>Forbidden State Ethics</strong></Row>
+        <Row noGutters className="text-primary"><strong>Divine Command Theory</strong></Row>
         <Row noGutters>
           <Col xs={10} className="text-left">Forbidden Squares</Col>
-          <Col xs={2} className="text-right">{this.props.forbiddenStateEthics.length}</Col>
+          <Col xs={2} className="text-right">{this.props.divineCommandTheory.length}</Col>
         </Row>
       </>
     );
   }
 
-  getNormBasedEthicsInformation() {
-    if (this.props.settings.ethics !== 'normBasedEthics') {
+  getPrimaFacieDutiesInformation() {
+    if (this.props.settings.ethics !== 'primaFacieDuties') {
       return null;
     }
 
-    const normSquareCounts = {};
-    for (const state in this.props.normBasedEthics.violationFunction) {
-      for (const norm of this.props.normBasedEthics.violationFunction[state]) {
-        if (!(norm in normSquareCounts)) {
-          normSquareCounts[norm] = 0;
+    const dutySquareCounts = {};
+    for (const state in this.props.primaFacieDuties.violationFunction) {
+      for (const duty of this.props.primaFacieDuties.violationFunction[state]) {
+        if (!(duty in dutySquareCounts)) {
+          dutySquareCounts[duty] = 0;
         }
-        normSquareCounts[norm]++;
+        dutySquareCounts[duty]++;
       }
     }
 
-    const normSquareCountRows = this.props.normBasedEthics.norms.map((norm) => {
-      const content = norm in normSquareCounts ? normSquareCounts[norm] : 0;
+    const dutySquareCountRows = this.props.primaFacieDuties.duties.map((duty) => {
+      const content = duty in dutySquareCounts ? dutySquareCounts[duty] : 0;
       return (
-        <Row key={norm} noGutters>
-          <Col xs={10} className="text-left">{norm} Squares</Col>
+        <Row key={duty} noGutters>
+          <Col xs={10} className="text-left">{duty} Squares</Col>
           <Col xs={2} className="text-right">{content}</Col>
         </Row>
       );
     });
 
-    const normPenaltyRows = this.props.normBasedEthics.norms.map((norm) => {
+    const dutyPenaltyRows = this.props.primaFacieDuties.duties.map((duty) => {
       return (
-        <Row key={norm} noGutters>
-          <Col xs={10} className="text-left">{norm} Penalty</Col>
-          <Col xs={2} className="text-right">{this.props.normBasedEthics.penaltyFunction[norm]}</Col>
+        <Row key={duty} noGutters>
+          <Col xs={10} className="text-left">{duty} Penalty</Col>
+          <Col xs={2} className="text-right">{this.props.primaFacieDuties.penaltyFunction[duty]}</Col>
         </Row>
       );
     });
 
-    // TODO Fix this inconsistency
     return (
       <>
-        <Row noGutters className="text-primary"><strong>Prima Facie Duty Ethics</strong></Row>
-        {normSquareCountRows}
-        {normPenaltyRows}
+        <Row noGutters className="text-primary"><strong>Prima Facie Duties</strong></Row>
+        {dutySquareCountRows}
+        {dutyPenaltyRows}
         <Row noGutters>
           <Col xs={10} className="text-left">Tolerance</Col>
-          <Col xs={2} className="text-right">{this.props.normBasedEthics.tolerance}</Col>
+          <Col xs={2} className="text-right">{this.props.primaFacieDuties.tolerance}</Col>
         </Row>
       </>
     );
   }
 
-  getMoralExemplarEthicsInformation() {
-    if (this.props.settings.ethics !== 'moralExemplarEthics') {
+  getVirtueEthicsInformation() {
+    if (this.props.settings.ethics !== 'virtueEthics') {
       return null;
     }
 
     const moralExampleSquareCounts = {};
-    for (const state in this.props.moralExemplarEthics) {
-      for (const moralExample of this.props.moralExemplarEthics[state]) {
+    for (const state in this.props.virtueEthics) {
+      for (const moralExample of this.props.virtueEthics[state]) {
         if (!(moralExample in moralExampleSquareCounts)) {
           moralExampleSquareCounts[moralExample] = 0;
         }
@@ -270,7 +268,7 @@ export default class ControlPanel extends React.Component {
 
     return (
       <>
-        <Row noGutters className="text-primary"><strong>Moral Exemplar Ethics</strong></Row>
+        <Row noGutters className="text-primary"><strong>Virtue Ethics</strong></Row>
         {moralExampleSquareCountRows}
       </>
     );
@@ -278,16 +276,16 @@ export default class ControlPanel extends React.Component {
 
   getInformationWindow() {
     const gridWorldInformation = this.getGridWorldInformation();
-    const forbiddenStateEthicsInformation = this.getForbiddenStateEthicsInformation();
-    const normBasedEthicsInformation = this.getNormBasedEthicsInformation();
-    const moralExemplarEthicsInformation = this.getMoralExemplarEthicsInformation();
+    const divineCommandTheoryInformation = this.getDivineCommandTheoryInformation();
+    const primaFacieDutiesInformation = this.getPrimaFacieDutiesInformation();
+    const virtueEthicsInformation = this.getVirtueEthicsInformation();
 
     const tooltip = (
       <Tooltip>
         {gridWorldInformation}
-        {forbiddenStateEthicsInformation}
-        {normBasedEthicsInformation}
-        {moralExemplarEthicsInformation}
+        {divineCommandTheoryInformation}
+        {primaFacieDutiesInformation}
+        {virtueEthicsInformation}
       </Tooltip>
     );
 
@@ -362,9 +360,9 @@ export default class ControlPanel extends React.Component {
 ControlPanel.propTypes = {
   settings: PropTypes.object.isRequired,
   gridWorld: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)).isRequired,
-  forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
-  normBasedEthics: PropTypes.object.isRequired,
-  moralExemplarEthics: PropTypes.object.isRequired,
+  divineCommandTheory: PropTypes.arrayOf(PropTypes.number).isRequired,
+  primaFacieDuties: PropTypes.object.isRequired,
+  virtueEthics: PropTypes.object.isRequired,
   amoralObjective: PropTypes.number.isRequired,
   moralObjective: PropTypes.number.isRequired,
   clear: PropTypes.func.isRequired,

@@ -33,8 +33,8 @@ export default class Square extends React.Component {
     overlay.hide();
   }
 
-  onNormChange(onChange, id, norm, overlay) {
-    onChange(id, norm);
+  onDutyChange(onChange, id, duty, overlay) {
+    onChange(id, duty);
     overlay.hide();
   }
 
@@ -67,22 +67,22 @@ export default class Square extends React.Component {
   }
 
   getCardBody() {
-    if (this.props.settings.ethics === 'forbiddenStateEthics' && this.props.forbiddenStateEthics.includes(this.props.id)) {
+    if (this.props.settings.ethics === 'divineCommandTheory' && this.props.divineCommandTheory.includes(this.props.id)) {
       return <Badge variant="danger">Forbidden</Badge>;
     }
 
-    if (this.props.settings.ethics === 'normBasedEthics' && this.props.id in this.props.normBasedEthics.violationFunction) {
-      return this.props.normBasedEthics.violationFunction[this.props.id].map((norm) => {
-        return <Badge key={norm} variant="danger">{norm}</Badge>;
+    if (this.props.settings.ethics === 'primaFacieDuties' && this.props.id in this.props.primaFacieDuties.violationFunction) {
+      return this.props.primaFacieDuties.violationFunction[this.props.id].map((duty) => {
+        return <Badge key={duty} variant="danger">{duty}</Badge>;
       });
     }
 
-    if (this.props.settings.ethics === 'moralExemplarEthics' && this.props.id in this.props.moralExemplarEthics && this.props.moralExemplarEthics[this.props.id].length > 0) {
-      const northVariant = this.props.moralExemplarEthics[this.props.id].includes('NORTH') ? 'primary' : 'info';
-      const eastVariant = this.props.moralExemplarEthics[this.props.id].includes('EAST') ? 'primary' : 'info';
-      const southVariant = this.props.moralExemplarEthics[this.props.id].includes('SOUTH') ? 'primary' : 'info';
-      const westVariant = this.props.moralExemplarEthics[this.props.id].includes('WEST') ? 'primary' : 'info';
-      const stayVariant = this.props.moralExemplarEthics[this.props.id].includes('STAY') ? 'primary' : 'info';
+    if (this.props.settings.ethics === 'virtueEthics' && this.props.id in this.props.virtueEthics && this.props.virtueEthics[this.props.id].length > 0) {
+      const northVariant = this.props.virtueEthics[this.props.id].includes('NORTH') ? 'primary' : 'info';
+      const eastVariant = this.props.virtueEthics[this.props.id].includes('EAST') ? 'primary' : 'info';
+      const southVariant = this.props.virtueEthics[this.props.id].includes('SOUTH') ? 'primary' : 'info';
+      const westVariant = this.props.virtueEthics[this.props.id].includes('WEST') ? 'primary' : 'info';
+      const stayVariant = this.props.virtueEthics[this.props.id].includes('STAY') ? 'primary' : 'info';
 
       return (
         <Card.Body>
@@ -105,7 +105,7 @@ export default class Square extends React.Component {
   getSquareEditor() {
     const onGridWorldChange = (event) => this.onGridWorldChange(this.props.updateGridWorld, this.props.rowId, this.props.columnId, event.target.value, this.refs.overlay);
     const onForbiddenStateChange = () => this.onForbiddenStateChange(this.props.toggleForbiddenState, this.props.id, this.refs.overlay);
-    const onNormChange = (norm) => this.onNormChange(this.props.toggleNorm, this.props.id, norm, this.refs.overlay);
+    const onDutyChange = (duty) => this.onDutyChange(this.props.toggleDuty, this.props.id, duty, this.refs.overlay);
     const onMoralExampleChange = (moralExample) => this.onMoralExampleChange(this.props.toggleMoralExample, this.props.id, moralExample, this.refs.overlay);
 
     return (
@@ -113,12 +113,12 @@ export default class Square extends React.Component {
         settings={this.props.settings}
         id={this.props.id}
         value={this.props.value}
-        forbiddenStateEthics={this.props.forbiddenStateEthics}
-        normBasedEthics={this.props.normBasedEthics}
-        moralExemplarEthics={this.props.moralExemplarEthics}
+        divineCommandTheory={this.props.divineCommandTheory}
+        primaFacieDuties={this.props.primaFacieDuties}
+        virtueEthics={this.props.virtueEthics}
         onGridWorldChange={onGridWorldChange}
         onForbiddenStateChange={onForbiddenStateChange}
-        onNormChange={onNormChange}
+        onDutyChange={onDutyChange}
         onMoralExampleChange={onMoralExampleChange}
       />
     );
@@ -142,15 +142,15 @@ Square.propTypes = {
   rowId: PropTypes.number.isRequired,
   columnId: PropTypes.number.isRequired,
   value: PropTypes.string.isRequired,
-  forbiddenStateEthics: PropTypes.arrayOf(PropTypes.number).isRequired,
-  normBasedEthics: PropTypes.object.isRequired,
-  moralExemplarEthics: PropTypes.object.isRequired,
+  divineCommandTheory: PropTypes.arrayOf(PropTypes.number).isRequired,
+  primaFacieDuties: PropTypes.object.isRequired,
+  virtueEthics: PropTypes.object.isRequired,
   amoralAction: PropTypes.string.isRequired,
   moralAction: PropTypes.string.isRequired,
   amoralValue: PropTypes.number.isRequired,
   moralValue: PropTypes.number.isRequired,
   updateGridWorld: PropTypes.func.isRequired,
   toggleForbiddenState: PropTypes.func.isRequired,
-  toggleNorm: PropTypes.func.isRequired,
+  toggleDuty: PropTypes.func.isRequired,
   toggleMoralExample: PropTypes.func.isRequired
 };

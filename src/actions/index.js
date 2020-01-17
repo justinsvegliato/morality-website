@@ -3,7 +3,7 @@ export const UPDATE_ETHICS = 'UPDATE_ETHICS';
 export const UPDATE_VIEW = 'UPDATE_VIEW';
 export const UPDATE_GRID_WORLD = 'UPDATE_GRID_WORLD';
 export const TOGGLE_FORBIDDEN_STATE = 'TOGGLE_FORBIDDEN_STATE';
-export const TOGGLE_NORM = 'TOGGLE_NORM';
+export const TOGGLE_DUTY = 'TOGGLE_DUTY';
 export const UPDATE_TOLERANCE = 'UPDATE_TOLERANCE';
 export const TOGGLE_MORAL_EXAMPLE = 'TOGGLE_MORAL_EXAMPLE';
 
@@ -43,11 +43,11 @@ export function toggleForbiddenState(id) {
   };
 }
 
-export function toggleNorm(id, norm) {
+export function toggleDuty(id, duty) {
   return {
-    type: TOGGLE_NORM,
+    type: TOGGLE_DUTY,
     id,
-    norm
+    duty
   };
 }
 
