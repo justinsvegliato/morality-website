@@ -7,7 +7,7 @@
     <meta name="author" content="[Redacted]">
     <meta name="generator" content="Jekyll v3.8.5">
         
-    <title>Morality.js – A library for building autonomous agents that reason ethically</title>
+    <title>Morality.js – A library for building autonomous agents that comply with ethical theories</title>
 
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -50,10 +50,11 @@
     <main role="main">
       <div id="banner" class="jumbotron bg-primary">
         <img id="logo" src="img/logo.png"/>
-        <p id="slogan" class="lead">A library for building autonomous agents that reason ethically</p>
+        <p id="slogan" class="lead">A library for building autonomous agents that comply with ethical theories</p>
         <div id="external-site-container">
-          <button type="button" class="btn btn-info btn-lg" disabled><i class="fab fa-npm fa-lg"></i></button>
-          <button type="button" class="btn btn-info btn-lg" disabled><i class="fab fa-github fa-lg"></i></button>
+          <a href="https://www.npmjs.com/package/morality" type="button" class="btn btn-info btn-lg"><i class="fab fa-npm fa-lg"></i></a>
+          <a href="https://github.com/justinsvegliato/morality" type="button" class="btn btn-info btn-lg"><i class="fab fa-github fa-lg"></i></a>          
+          <button type="button" class="btn btn-info btn-lg" disabled><i class="far fa-file-pdf fa-lg"></i></button>
         </div>
       </div>
     
@@ -80,12 +81,25 @@
           </div>
         </div>
       </div>
+
+      <div id="citation">
+        <div class="container">
+          <h3>Citation</h3>
+          <p>Please cite the following paper if you use Morality.js in your own research.</p>
+          <ul>
+            <li><span class="text-danger">Ethically Compliant Sequential Decision Making</span></li>
+            <li><span class="text-primary">Justin Svegliato &#8212; Samer B. Nashed &#8212; Shlomo Zilberstein</span></li>
+            <li><span class="text-muted">Proceedings of the 35th Conference on Artificial Intelligence (AAAI)</span></li>
+            <li><span class="text-muted">Expected March 2021</span></li>
+          </ul>
+        </div>
+      </div>
       
       <div id="tutorial">
         <div class="container">
           <h3>Tutorial</h3>
 
-          <p>Morality.js is a library for building autonomous agents that reason ethically. Let's go through an example on how to build a simple grid world agent that follows different ethical systems with Morality.js. You can add Morality.js to your node project like any other npm package by running the command below.</p>
+          <p>Morality.js is a library for building autonomous agents that comply with ethical theories. Let's go through an example on how to build a simple grid world agent that follows different ethical systems with Morality.js. You can add Morality.js to your node project like any other npm package by running the command below.</p>
 
   <pre><code>
   npm install --save morality
@@ -105,7 +119,7 @@
 
           <div class="separator"></div>
 
-          <p>Next, if we want our robot to reason ethically, we have to choose an ethical system. Morality.js offers a few ethical systems right out of the box: divine command theory, prima facie duties, and virtue ethics. <strong>Divine command theory</strong> is a simple ethical system that says that an agent should do whatever is commanded or forbade by a divine entity. In other words, the agent can't enter certain states of the world. In Morality.js, we can define divine command theory by listing each forbidden state.</p>
+          <p>Next, if we want our robot to comply with an ethical theory, we have to choose an ethical system. Morality.js offers a few ethical systems right out of the box: divine command theory, prima facie duties, and virtue ethics. <strong>Divine command theory</strong> is a simple ethical system that says that an agent should do whatever is commanded or forbade by a divine entity. In other words, the agent can't enter certain states of the world. In Morality.js, we can define divine command theory by listing each forbidden state.</p>
 
   <pre><code>
   const ethics = new DivineCommandTheory([0, 4, 10]);
@@ -188,7 +202,7 @@
     </main>
 
     <footer>
-      <p class="text-center">&copy; [Redacted]</p>
+      <p class="text-center">&copy; UMass Amherst</p>
     </footer>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

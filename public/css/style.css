@@ -82,8 +82,17 @@ footer {
   margin-top: 25px;
 }
 
-#external-site-container button:first-child {
-  margin-right: 5px;
+#external-site-container .btn {
+  width: 60px;
+}
+
+#external-site-container .btn {
+  margin-right: 10px;
+  color: #fff;
+}
+
+#external-site-container .btn:last-child {
+  margin-right: 0px;
 }
 
 #overview {
@@ -91,12 +100,12 @@ footer {
   padding-bottom: 4em;
 }
 
-#tutorial, #playground {
+#tutorial, #playground, #citation {
   padding-top: 2em;
   padding-bottom: 2em;
 }
 
-#tutorial {
+#citation, #playground {
   background-color: #eee;
 }
 
