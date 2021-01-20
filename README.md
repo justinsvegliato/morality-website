@@ -4,7 +4,7 @@ This is the website of the Morality.js library for building autonomous agents th
 
 ## Library
 
-If you would like to use the Morality.js library, please go to [this](https://github.com/justinsvegliato/morality) repository.
+If you would like to use the Morality.js library, please go to [this](https://github.com/justinsvegliato/morality repository).
 
 ## Citation
 
